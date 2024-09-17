@@ -1,3 +1,3 @@
 export function ReviewCard() {
-    return <div></div>
+  return <div></div>;
 }

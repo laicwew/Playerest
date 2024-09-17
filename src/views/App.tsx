@@ -1,8 +1,5 @@
 import "../App.css";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login } from "./login";
 import { Search } from "./search";
 import { Create } from "./create";
@@ -19,7 +16,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element:<Create />,
+    element: <Create />,
   },
   {
     path: "/details:id",

@@ -8,7 +8,14 @@ function SearchBarDropDown({
   onClickRecentSearch: (searchTerm: string) => void;
 }) {
   return (
-    <div className="dropdown-menu show" style={{ marginTop: "42px",  borderRadius: "0.25rem", border: "1px solid rgba(0, 0, 0, 0.15)"}}>
+    <div
+      className="dropdown-menu show"
+      style={{
+        marginTop: "42px",
+        borderRadius: "0.25rem",
+        border: "1px solid rgba(0, 0, 0, 0.15)",
+      }}
+    >
       {recentSearches.length > 0 ? (
         recentSearches.map((search) => (
           <button
@@ -38,14 +45,14 @@ export function SearchBar() {
 
   const handleBlur = () => {
     setTimeout(() => {
-        setIsFocused(false);
-      }, 280);
+      setIsFocused(false);
+    }, 280);
   };
 
   const onClickRecentSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
     setIsFocused(false);
-  }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -83,7 +90,12 @@ export function SearchBar() {
         </button>
       </form>
 
-      {isFocused && <SearchBarDropDown recentSearches={recentSearches} onClickRecentSearch={onClickRecentSearch}/>}
+      {isFocused && (
+        <SearchBarDropDown
+          recentSearches={recentSearches}
+          onClickRecentSearch={onClickRecentSearch}
+        />
+      )}
     </div>
   );
 }

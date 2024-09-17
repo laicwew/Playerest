@@ -4,7 +4,7 @@ export function AppNavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/" style={{color: "green"}}>
+        <a className="navbar-brand" href="/" style={{ color: "green" }}>
           Playerest
         </a>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">

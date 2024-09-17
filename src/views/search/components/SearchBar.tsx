@@ -39,7 +39,7 @@ export function SearchBar() {
   const handleBlur = () => {
     setTimeout(() => {
         setIsFocused(false);
-      }, 100);
+      }, 280);
   };
 
   const onClickRecentSearch = (searchTerm: string) => {

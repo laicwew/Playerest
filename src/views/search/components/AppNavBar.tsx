@@ -46,7 +46,7 @@ export function AppNavBar() {
         </ul>
         <SearchBar />
         <div className="nav-item me-2">
-          <a className="nav-link active" aria-current="page" href="/">
+          <a className="nav-link active" aria-current="page" href="/create">
             Create
           </a>
         </div>

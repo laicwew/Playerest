@@ -1,6 +1,5 @@
 import { AppNavBar } from "../search/components/AppNavBar";
 import CreateFrom from "./components/CreateFrom";
-import UploadImage from "./components/UploadImage";
 
 export function Create() {
   return (
@@ -13,7 +12,6 @@ export function Create() {
         }}
       >
         <AppNavBar />
-        <UploadImage />
         <CreateFrom />
       </div>
     </>

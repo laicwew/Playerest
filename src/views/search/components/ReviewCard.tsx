@@ -12,11 +12,10 @@ export function ReviewCard({ id, imgPath, title }: imgProps) {
 
   return (
     <Card
-      className="bg-dark text-white position-relative d-flex px-1 py-1"
+      className="bg-dark text-white position-relative d-flex justify-content-center px-1 py-1"
       style={{
         width: "15rem",
         height: `${imgPath && title ? "" : "10rem"}`,
-        justifyContent: "center",
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}
@@ -35,13 +34,13 @@ export function ReviewCard({ id, imgPath, title }: imgProps) {
         >
           <Button variant="outline-light position-absolute top-0 end-0 my-4 mx-3 ">
             Like
-          </Button>{" "}
+          </Button>
           <Button variant="outline-light position-absolute bottom-0 start-0 my-4 mx-3">
             Share
-          </Button>{" "}
+          </Button>
           <Button variant="outline-light position-absolute bottom-0 end-0 my-4 mx-3">
             Save
-          </Button>{" "}
+          </Button>
         </Card.ImgOverlay>
       )}
     </Card>

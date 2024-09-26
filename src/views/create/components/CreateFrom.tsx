@@ -33,21 +33,15 @@ const CreateFrom = () => {
   });
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "30rem" }}>
-      {" "}
-      <img src={imgURL} style={{ width: "20rem", height: "auto" }} />
+    <div>
+      <img src={imgURL} />
       <button
         className="bg-success border-0 text-white"
         onClick={handleImageUpload}
       >
-        {" "}
-        Upload Image{" "}
+        Upload Image
       </button>
-      <form
-        onSubmit={formik.handleSubmit}
-        style={{ display: "flex", flexDirection: "column", width: "30rem" }}
-      >
-        <label htmlFor="reviewPic">Picture</label>
+      <form onSubmit={formik.handleSubmit}>
         <input
           id="reviewPic"
           name="reviewPic"

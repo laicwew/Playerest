@@ -24,6 +24,9 @@ export function Search() {
 
   return (
     <>
+    <div className="bg" />
+    <div className="bg bg2" />
+    <div className="bg bg2 bg3" />
       <div
         className="container-fluid"
         style={{

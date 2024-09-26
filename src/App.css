@@ -1,12 +1,70 @@
 #root {
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 
 /* Adjust navbar width and centering */
 .navbar {
-  width: 100%; /* Full width of the viewport */
-  margin: 0 auto;
+  width: 100vw;
+  margin: 0 0 0 0;
+  background-color: #fcfafa;
+  margin-left: -12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.navbar-expand-lg {
+  flex-wrap: nowrap; /* Ensure no wrapping */
+}
+.navbar-nav {
+  display: inline-block;
+}
+
+.nav-icon {
+  margin-right: 8px;
+}
+
+.nav-text {
+  display: inline;
+  font-family: -moz-initial;
+}
+/* Responsive styles: hide text on screens smaller than 768px */
+@media (max-width: 768px) {
+  .nav-text {
+    font-size: small;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .navbar-nav .nav-item {
+    text-align: center;
+  }
+
+  button {
+    scale: 0.85;
+  }
+}
+/* Responsive styles: hide text on screens smaller than 768px */
+@media (max-width: 480px) {
+  .nav-text {
+    visibility: hidden;
+  }
+  .btn-nav {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.625rem;
+    background: transparent;
+  }
+  .btn-nav:hover {
+    background-color: transparent;
+  }
+  .nav-icon {
+    color: #a84a54;
+  }
 }
 
 .logo {

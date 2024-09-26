@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useIsSmallScreen } from "../../../helpers/hooks/useIsSmallScreen";
 
 function SearchBarDropDown({
   recentSearches,
@@ -34,10 +35,16 @@ function SearchBarDropDown({
   );
 }
 
-export function SearchBar() {
+export function SearchBar({
+  onToggleNavItems,
+}: {
+  onToggleNavItems: (show: boolean) => void;
+}) {
   const [isFocused, setIsFocused] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const isSmallScreen = useIsSmallScreen();
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -46,6 +53,10 @@ export function SearchBar() {
   const handleBlur = () => {
     setTimeout(() => {
       setIsFocused(false);
+      if (!searchTerm) {
+        setShowSearchBar(false);
+        onToggleNavItems(true);  // Show other nav items
+      }
     }, 280);
   };
 
@@ -67,6 +78,20 @@ export function SearchBar() {
       setIsFocused(false);
     }
   };
+  // If it's mobile and the search bar should be hidden, show just the search icon
+  if (isSmallScreen && !showSearchBar) {
+    return (
+      <button
+        className="btn-search fas fa-search nav-icon"
+        style={{border: "none" }}
+        onClick={() => {
+          setShowSearchBar(true);
+          setIsFocused(true);
+          onToggleNavItems(false); // Hide other nav items when opening the search bar
+        }}
+      />
+    );
+  }
 
   return (
     <div className="d-flex flex-grow-1">
@@ -76,18 +101,24 @@ export function SearchBar() {
         onSubmit={handleSubmit}
       >
         <input
-          className="form-control me-2 flex-grow-1"
+          className="form-control me-2 flex-grow-1 search-bar"
           type="search"
           placeholder="Search"
           aria-label="Search"
           value={searchTerm}
+          autoFocus
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        <button className="btn btn-outline-success me-2" type="submit">
-          Search
-        </button>
+        <button
+          className="btn-search me-2 fas fa-search nav-icon"
+          type="submit"
+          style={{
+            alignItems: "center",
+            margin: "0",
+          }}
+        />
       </form>
 
       {isFocused && (

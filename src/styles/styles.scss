@@ -1,0 +1,32 @@
+.create-form{
+    width: 50rem;
+    height: 40rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+    gap: 5rem;
+  
+    border: 2px solid blue;
+
+    &__image-upload{
+       display:flex; align-items: center;
+       justify-content: center;
+       
+    }
+    &__image{
+        width: 25rem;
+        height: auto;
+    }
+    &__upload-button{
+        &:hover{
+            border: none;
+            background-color: greenyellow;
+        }
+    }
+    &__fields{
+        display: grid;
+        grid:auto-flow/ 1fr 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+    }
+}

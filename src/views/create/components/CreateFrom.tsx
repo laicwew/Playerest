@@ -34,56 +34,59 @@ const CreateFrom = () => {
   });
 
   return (
-    <div className="create-form">
-      <div className="create-form__image-upload">
-        <button
-          className="create-form__upload-button"
-          onClick={handleImageUpload}
-        >
-          <img src={imgURL} className="create-form__image" />
-        </button>
+    <>
+      <div className="create-form__draft-list">DraftList</div>
+      <div className="create-form">
+        <div className="create-form__image-upload">
+          <button
+            className="create-form__upload-button"
+            onClick={handleImageUpload}
+          >
+            <img src={imgURL} className="create-form__image" />
+          </button>
+        </div>
+        <div className="create-form__fields">
+          <form onSubmit={formik.handleSubmit}>
+            <input
+              id="reviewPic"
+              name="reviewPic"
+              type="file"
+              ref={fileUploadedRef}
+              onChange={uploadImageDisplay}
+              value={formik.values.reviewPic}
+              hidden
+            />
+            <label htmlFor="reviewGame">Game</label>
+            <input
+              id="reviewGame"
+              name="reviewGame"
+              type="text"
+              placeholder="Game Name"
+              onChange={formik.handleChange}
+              value={formik.values.reviewGame}
+            />
+            <label htmlFor="reviewTilte">Title</label>
+            <input
+              id="reviewTitle"
+              name="reviewTitle"
+              type="text"
+              placeholder="Game Review Title"
+              onChange={formik.handleChange}
+              value={formik.values.reviewTitle}
+            />
+            <label htmlFor="reviewMessage">Review</label>
+            <textarea
+              id="reviewMessage"
+              name="reviewMessage"
+              placeholder="Review"
+              onChange={formik.handleChange}
+              value={formik.values.reviewMessage}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
-      <div className="create-form__fields">
-        <form onSubmit={formik.handleSubmit} className="create-form__form">
-          <input
-            id="reviewPic"
-            name="reviewPic"
-            type="file"
-            ref={fileUploadedRef}
-            onChange={uploadImageDisplay}
-            value={formik.values.reviewPic}
-            hidden
-          />
-          <label htmlFor="reviewGame">Game</label>
-          <input
-            id="reviewGame"
-            name="reviewGame"
-            type="text"
-            placeholder="Game Name"
-            onChange={formik.handleChange}
-            value={formik.values.reviewGame}
-          />
-          <label htmlFor="reviewTilte">Title</label>
-          <input
-            id="reviewTitle"
-            name="reviewTitle"
-            type="text"
-            placeholder="Game Review Title"
-            onChange={formik.handleChange}
-            value={formik.values.reviewTitle}
-          />
-          <label htmlFor="reviewMessage">Review</label>
-          <textarea
-            id="reviewMessage"
-            name="reviewMessage"
-            placeholder="Review"
-            onChange={formik.handleChange}
-            value={formik.values.reviewMessage}
-          />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
+    </>
   );
 };
 

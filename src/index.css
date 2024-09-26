@@ -44,15 +44,6 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-.btn {
-  border: none;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 1.325rem;
-}
-.btn:hover {
-  background-color: #ead3d3;
-}
 
 .btn-search {
   border: none;

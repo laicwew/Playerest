@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import "../../../styles/styles.scss";
 
 const CreateFrom = () => {
-  const [imgURL, setImgURL] = useState("src/assets/placeholder/1.jpeg");
+  const [imgURL, setImgURL] = useState("src/assets/defaultImage.png");
   const fileUploadedRef = useRef<HTMLInputElement | null>(null);
 
   const handleImageUpload = (event: React.MouseEvent) => {

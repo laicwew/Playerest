@@ -1,0 +1,74 @@
+.create-form{
+    width: 50rem;
+    height: 40rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__image-upload{
+       width: 22rem;
+       height: 36rem;
+       display:flex; 
+       flex-direction: column;
+       align-items: center;
+       padding-top: 5px;
+       border-radius: 5%;
+       background-color: rgb(0,0,0, .3);
+    }
+    &__image{
+        width: 20rem;
+        height: auto;
+    }
+    &__upload-button{
+        background-color:  rgb(0,0,0);
+        color: whitesmoke;
+        margin-top: 2rem;
+        &:hover{
+            background-color: rgb(0,0,0, .5);
+            color:whitesmoke;
+        }
+    }
+    &__fields {
+        display: flex;
+        flex-direction: column;
+        margin-top: 3rem;
+        margin-left: 3rem;
+    
+        &--1, &--2, &--3 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between; 
+            margin-bottom: 3rem;
+    
+            &-label {
+                font-weight: bold;
+                flex: 1; 
+                text-align: left; 
+            }
+    
+            &-input {
+                width: 20rem;
+                flex: 2; 
+                text-align: left;
+            }
+        }
+    
+        &--3  {
+            &-input{ 
+                height: 17rem;
+            }
+        }
+    }
+    &__submit-btn, &__save-btn{
+        background-color:  rgb(0,0,0);
+        color: whitesmoke;
+        margin-right: 2rem;
+        &:hover{
+            background-color: rgb(0,0,0, .5);
+            color:whitesmoke;
+        }
+    }
+
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useIsSmallScreen } from "../../../helpers/hooks/useIsSmallScreen";
+import { useIsSmallScreen } from "../../helpers/hooks/useIsSmallScreen";
 
 function SearchBarDropDown({
   recentSearches,

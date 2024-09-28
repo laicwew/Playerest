@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useIsMobile } from "../../../helpers/hooks/useIsMobile";
+import { useIsMobile } from "../../helpers/hooks/useIsMobile";
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 

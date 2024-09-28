@@ -30,15 +30,12 @@ const router = createBrowserRouter([
         path: "/details:id",
         element: <Details />,
       },
-    ]
+    ],
   },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider
-      router={router}
-      fallbackElement={<p>Loading...</p>}
-    />
+    <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
   </StrictMode>
 );

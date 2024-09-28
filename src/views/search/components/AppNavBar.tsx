@@ -63,10 +63,11 @@ export function AppNavBar() {
           </>
         )}
 
-        <SearchBar onToggleNavItems={(show) => setShowNavItems(show)}/>
+        <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
 
         {/* TODO: add login status judge logic */}
-          {showNavItems && <div className="nav navbar-nav navbar-right">
+        {showNavItems && (
+          <div className="nav navbar-nav navbar-right">
             <button className="btn-nav me-2">
               <span className="fa-solid fa-pen-nib nav-icon" />
               <span className="nav-text"> Create</span>
@@ -75,7 +76,8 @@ export function AppNavBar() {
               <span className="fas fa-user nav-icon" />
               <span className="nav-text"> Login</span>
             </button>
-          </div>}
+          </div>
+        )}
       </div>
     </nav>
   );

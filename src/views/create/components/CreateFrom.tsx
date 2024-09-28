@@ -42,21 +42,20 @@ const CreateFrom = () => {
   return (
     <div className="create-form">
       <div className="create-form__image-upload">
-        <img src={imgURL} className="create-form__image" />
+        <img alt="create-img" src={imgURL} className="create-form__image" />
         {imgURL === defaultImage ? (
           <button
             className="create-form__upload-button"
             onClick={handleImageUpload}
           >
-            <span className="fas fa-upload me-2" />
-            Upload
+            <span className="fas fa-upload me-2" /> Upload
           </button>
         ) : (
           <button
             className="create-form__upload-button"
             onClick={handleImageDelete}
           >
-            <span className="fas fa-trash" /> Delete
+            <span className="fas fa-trash me-2" /> Delete
           </button>
         )}
       </div>

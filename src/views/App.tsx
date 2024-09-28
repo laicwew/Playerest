@@ -1,35 +1,21 @@
+import { Outlet } from "react-router-dom";
 import "../App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login } from "./login";
-import { Search } from "./search";
-import { Create } from "./create";
-import { Details } from "./details";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Search />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/create",
-    element: <Create />,
-  },
-  {
-    path: "/details:id",
-    element: <Details />,
-  },
-]);
+import { AppNavBar } from "./search/components/AppNavBar";
 
 function App() {
   return (
-    <RouterProvider
-      router={router}
-      fallbackElement={<p>Loading...</p>}
-    ></RouterProvider>
+    <div
+      className="container-fluid"
+      style={{
+        height: "100vh", // Full height of the viewport
+        width: "100vw", // Full width of the viewport
+      }}
+    >
+      <AppNavBar />
+      <main>
+        <Outlet />
+      </main>
+    </div>
   );
 }
 export default App;

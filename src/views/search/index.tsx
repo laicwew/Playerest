@@ -1,4 +1,3 @@
-import { AppNavBar } from "./components/AppNavBar";
 import { ReviewCard } from "./components/ReviewCard";
 import Masonry from "react-layout-masonry";
 
@@ -23,23 +22,16 @@ export function Search() {
   ];
 
   return (
-    <div
-        className="container-fluid"
-        style={{
-          height: "100vh", // Full height of the viewport
-          width: "100vw", // Full width of the viewport
-        }}
+    <div>
+      <Masonry
+        columns={{ 300: 2, 640: 3, 768: 4, 1024: 5, 1280: 6 }}
+        gap={2}
+        columnProps={{ style: { marginTop: "2rem" } }}
       >
-        <AppNavBar />
-        <Masonry
-          columns={{ 300: 2, 640: 3, 768: 4, 1024: 5, 1280: 6 }}
-          gap={2}
-          columnProps={{ style: { marginTop: "2rem" } }}
-        >
-          {imgPath.map((obj) => (
-            <ReviewCard id={obj.id} imgPath={obj.src} title={obj.title} />
-          ))}
-        </Masonry>
-      </div>
+        {imgPath.map((obj) => (
+          <ReviewCard id={obj.id} imgPath={obj.src} title={obj.title} />
+        ))}
+      </Masonry>
+    </div>
   );
 }

@@ -23,11 +23,7 @@ export function Search() {
   ];
 
   return (
-    <>
-      <div className="bg" />
-      <div className="bg bg2" />
-      <div className="bg bg2 bg3" />
-      <div
+    <div
         className="container-fluid"
         style={{
           height: "100vh", // Full height of the viewport
@@ -45,6 +41,5 @@ export function Search() {
           ))}
         </Masonry>
       </div>
-    </>
   );
 }

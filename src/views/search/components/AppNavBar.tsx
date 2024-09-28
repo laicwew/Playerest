@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { useIsMobile } from "../../../helpers/hooks/useIsMobile";
+import { useNavigate } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 
 export function AppNavBar() {
   const types = ["Type1", "Type2", "Something else here"];
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const [showNavItems, setShowNavItems] = useState(true);
+
+  const navigateToPage = (path: string)=> {
+    if(window.location.pathname !== path)
+      navigate(path);
+  }
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -47,7 +54,7 @@ export function AppNavBar() {
               <ul className="dropdown-menu">
                 {types.map((value) => {
                   return (
-                    <li>
+                    <li key={value}>
                       <a
                         className="dropdown-item"
                         href="# "
@@ -68,11 +75,11 @@ export function AppNavBar() {
         {/* TODO: add login status judge logic */}
         {showNavItems && (
           <div className="nav navbar-nav navbar-right">
-            <button className="btn-nav me-2">
+            <button className="btn-nav me-2" onClick={()=>navigateToPage("/create")}>
               <span className="fa-solid fa-pen-nib nav-icon" />
               <span className="nav-text"> Create</span>
             </button>
-            <button className="btn-nav me-2">
+            <button className="btn-nav me-2" onClick={()=>navigateToPage("/login")}>
               <span className="fas fa-user nav-icon" />
               <span className="nav-text"> Login</span>
             </button>

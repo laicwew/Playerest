@@ -73,6 +73,58 @@
 
 }
 
+.register{
+    width: 30rem;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #a84a54;;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6rem;
+    color:white;
+
+    &__header{
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem;
+
+      &_username, &_password{
+        display: flex;
+        flex-direction: row;
+        margin-left: 5rem;
+        margin-bottom: 4rem;
+        margin-right: 2rem;
+
+        &-label{
+            flex:1;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        &-input{
+            width:15rem;
+        }
+      }
+
+      &_btn{
+          width: 6rem;
+          margin-left: auto;
+          margin-right: auto;
+      }
+
+      &_link{
+        margin-top:1rem;
+        margin-bottom: 2rem;
+      }
+    }
+        
+}
+
 @media (max-width: 800px) {
     .create-form{
         width: 30rem;

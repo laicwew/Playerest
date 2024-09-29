@@ -241,14 +241,13 @@ button:focus-visible {
 }
 
 .register{
-    width: 30rem;
+    width: 32rem;
     height:auto;
     display: flex;
     flex-direction: column;
-    background-color: #a84a54;;
+    background-color:  #a84a54;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 6rem;
     color:white;
 
     &__header{
@@ -279,9 +278,14 @@ button:focus-visible {
       }
 
       &_btn{
+        background-color: #963d43;
+         
           width: 6rem;
           margin-left: auto;
           margin-right: auto;
+          &:hover{
+            background-color: #ab6767;
+          }
       }
 
       &_link{

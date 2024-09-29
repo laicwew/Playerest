@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useIsMobile } from "../../helpers/hooks/useIsMobile";
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
+import { LoginModal } from "./LoginModal";
 
 export function AppNavBar() {
   const types = ["Type1", "Type2", "Something else here"];
@@ -9,10 +10,14 @@ export function AppNavBar() {
   const navigate = useNavigate();
   const [showNavItems, setShowNavItems] = useState(true);
 
-  const navigateToPage = (path: string)=> {
-    if(window.location.pathname !== path)
-      navigate(path);
-  }
+  const navigateToPage = (path: string) => {
+    if (window.location.pathname !== path) navigate(path);
+  };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -75,16 +80,28 @@ export function AppNavBar() {
         {/* TODO: add login status judge logic */}
         {showNavItems && (
           <div className="nav navbar-nav navbar-right">
-            <button className="btn-nav me-2" onClick={()=>navigateToPage("/create")}>
+            <button
+              className="btn-nav me-2"
+              onClick={() => navigateToPage("/create")}
+            >
               <span className="fa-solid fa-pen-nib nav-icon" />
               <span className="nav-text"> Create</span>
             </button>
-            <button className="btn-nav me-2" onClick={()=>navigateToPage("/login")}>
+            <button
+              className="btn-nav me-2"
+              onClick={() => navigateToPage("/login")}
+            >
               <span className="fas fa-user nav-icon" />
-              <span className="nav-text"> Login</span>
+              <span className="nav-text">Profile</span>
             </button>
           </div>
         )}
+
+        <button className="btn-nav me-2" onClick={handleShow}>
+          <span className="fas fa-sign-in-alt nav-icon" />
+          <span className="nav-text">Login</span>
+        </button>
+        <LoginModal show={show} handleClose={handleClose} />
       </div>
     </nav>
   );

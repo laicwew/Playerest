@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./views/App.tsx";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login } from "./views/login";
+import { Profile } from "./views/profile/index.tsx";
 import { Search } from "./views/search";
 import { Create } from "./views/create";
 import { Details } from "./views/details";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <Profile />,
       },
       {
         path: "/create",

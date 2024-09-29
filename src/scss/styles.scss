@@ -245,9 +245,8 @@ button:focus-visible {
     height:auto;
     display: flex;
     flex-direction: column;
+    margin: auto;
     background-color:  #a84a54;
-    margin-left: auto;
-    margin-right: auto;
     color:white;
 
     &__header{
@@ -348,6 +347,29 @@ button:focus-visible {
         &-input {
           height: 8rem;
         }
+      }
+    }
+  }
+
+  .register{
+    width: 22rem;
+    &__header{
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    &__form{
+        margin-bottom: 1rem;
+
+      &_username, &_password{
+        margin-bottom: 2rem;
+
+        &-input{
+            width:10rem;
+        }
+      }
+      &_link{
+        margin-top:1rem;
+        margin-bottom: 2rem;
       }
     }
   }

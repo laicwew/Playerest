@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
-import "../App.css";
 import { AppNavBar } from "./components/AppNavBar";
 
 function App() {
   return (
+    /** TODO: light and dark theme */
     <div
-      className="container-fluid"
+      className="container-fluid light-theme"
       style={{
-        height: "100vh", // Full height of the viewport
-        width: "100vw", // Full width of the viewport
+        height: "100vh",
+        width: "100vw",
       }}
     >
       <AppNavBar />

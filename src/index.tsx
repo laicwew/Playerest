@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./views/App.tsx";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login } from "./views/login";
 import { Search } from "./views/search";

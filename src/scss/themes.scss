@@ -1,0 +1,40 @@
+@import "_vars";
+
+$themes: (
+  light: (
+    primary: $primaryColorLight,
+    secondary: $secondaryColorLight,
+    hint: $hintColorLight,
+    searchBarBg: $searchBarBgLight,
+    text: #333333,
+    bg: $backgroundColorLight,
+    navBg: $navBarBgLight,
+    navBtnBg: $navBtnBgLight,
+    searchBtnBg: $searchIconLight,
+    btnFocus: $btnFocusColorLight,
+  ),
+  dark: (
+    primary: $primaryColorDark,
+    secondary: $secondaryColorDark,
+    hint: $hintColorDark,
+    searchBarBg: $searchBarBgDark,
+    text: #ffffff,
+    bg: $backgroundColorDark,
+    navBg: $navBarBgDark,
+    navBtnBg: $navBtnBgDark,
+    searchBtnBg: $searchIconDark,
+    btnFocus: $btnFocusColorDark,
+  ),
+);
+
+@mixin themify($themes) {
+  @each $name, $values in $themes {
+    .#{$name}-theme {
+      $theme-map: $values !global;
+      @content;
+    }
+  }
+}
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

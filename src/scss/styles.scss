@@ -64,10 +64,12 @@ button {
 @include themify($themes) {
   .navbar {
     background-color: themed("navBg");
+    color:themed("text");
   }
 
   button {
     background-color: themed("primary");
+    color:themed("btnText")
   }
 
   .btn:hover {
@@ -117,42 +119,6 @@ button {
   display: inline;
   font-family: -moz-initial;
 }
-/* Responsive styles: hide text on screens smaller than 768px */
-@media (max-width: 768px) {
-  .nav-text {
-    font-size: small;
-  }
-
-  .navbar-brand {
-    font-size: 1.5rem;
-  }
-
-  .navbar-nav .nav-item {
-    text-align: center;
-  }
-
-  button {
-    scale: 0.85;
-  }
-}
-/* Responsive styles: hide text on screens smaller than 768px */
-@media (max-width: 480px) {
-  .nav-text {
-    visibility: hidden;
-  }
-  .btn-nav {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.625rem;
-    background: transparent;
-  }
-  .btn-nav:hover {
-    background-color: transparent;
-  }
-  .nav-icon {
-    color: #a84a54;
-  }
-}
 
 .btn {
   border-radius: 1.325rem;
@@ -171,6 +137,31 @@ button:focus-visible {
   margin-top: 5%;
   margin-left: auto;
   margin-right: auto;
+  @include themify($themes) {
+
+    &__image-upload{
+      background-color: themes("bg");
+    }
+
+    &upload__button{
+      background-color:themed("primary");
+      color: themed("text");
+      &:hover {
+        background-color:themed("secondary");
+        color: themed("text");
+      }
+    }
+
+    &__submit-btn,
+    &__save-btn {
+      background-color: themed("primary");
+      color: themed("text");
+      &:hover {
+        background-color: themed("secondary");
+        color: themed("text");
+      }
+    }
+  }
 
   &__image-upload {
     width: 22rem;
@@ -180,20 +171,14 @@ button:focus-visible {
     align-items: center;
     padding-top: 5px;
     border-radius: 5%;
-    background-color: rgb(0, 0, 0, 0.3);
+
   }
   &__image {
     width: 20rem;
     height: auto;
   }
   &__upload-button {
-    background-color: rgb(0, 0, 0);
-    color: whitesmoke;
     margin-top: 2rem;
-    &:hover {
-      background-color: rgb(0, 0, 0, 0.5);
-      color: whitesmoke;
-    }
   }
   &__fields {
     display: flex;
@@ -230,13 +215,7 @@ button:focus-visible {
   }
   &__submit-btn,
   &__save-btn {
-    background-color: rgb(0, 0, 0);
-    color: whitesmoke;
     margin-right: 2rem;
-    &:hover {
-      background-color: rgb(0, 0, 0, 0.5);
-      color: whitesmoke;
-    }
   }
 }
 
@@ -246,8 +225,17 @@ button:focus-visible {
     display: flex;
     flex-direction: column;
     margin: auto;
-    background-color:  #a84a54;
-    color:white;
+    @include themify($themes){
+      background-color: themed("bg");
+      color:themed("text");
+
+      &_btn{
+        background-color: themed("primary");
+          &:hover{
+            background-color: themed("secondary");
+          }
+      }
+    }
 
     &__header{
         margin-top: 1rem;
@@ -277,14 +265,9 @@ button:focus-visible {
       }
 
       &_btn{
-        background-color: #963d43;
-         
           width: 6rem;
           margin-left: auto;
           margin-right: auto;
-          &:hover{
-            background-color: #ab6767;
-          }
       }
 
       &_link{
@@ -295,7 +278,24 @@ button:focus-visible {
         
 }
 
-@media (max-width: 800px) {
+/* Responsive styles: hide text on screens smaller than 768px */
+@media (max-width: 768px) {
+  .nav-text {
+    font-size: small;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .navbar-nav .nav-item {
+    text-align: center;
+  }
+
+  button {
+    scale: 0.85;
+  }
+
   .create-form {
     width: 30rem;
     height: auto;
@@ -320,7 +320,23 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 450px) {
+/* Responsive styles: hide text on screens smaller than 768px */
+@media (max-width: 480px) {
+  .nav-text {
+    visibility: hidden;
+  }
+  .btn-nav {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.625rem;
+    background: transparent;
+  }
+  .btn-nav:hover {
+    background-color: transparent;
+  }
+  .nav-icon {
+    color: #a84a54;
+  }
   .create-form {
     width: 10rem;
     height: auto;

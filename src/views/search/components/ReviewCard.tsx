@@ -26,7 +26,7 @@ export function ReviewCard({ id, imgPath, title }: imgProps) {
       {imgPath ? (
         <Card.Img src={imgPath} alt={title} />
       ) : (
-        <CardTitle>{title}</CardTitle>
+        <CardTitle style={{ color: "black" }}>{title}</CardTitle>
       )}
       {showBtn && (
         <Card.ImgOverlay

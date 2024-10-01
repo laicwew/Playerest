@@ -12,10 +12,12 @@ export function ReviewCard({ id, imgPath, title }: imgProps) {
 
   return (
     <Card
-      className="bg-dark text-white position-relative d-flex justify-content-center px-1 py-1"
+      className="text-white position-relative d-flex justify-content-center"
       style={{
         width: "15rem",
         height: `${imgPath && title ? "" : "10rem"}`,
+        borderRadius: "5%",
+        marginBottom: "0.5rem",
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}

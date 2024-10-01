@@ -37,9 +37,6 @@ export function ReviewCard({ id, imgPath, title }: imgProps) {
           <Button variant="outline-light position-absolute top-0 end-0 my-4 mx-3 ">
             Like
           </Button>
-          <Button variant="outline-light position-absolute bottom-0 start-0 my-4 mx-3">
-            Share
-          </Button>
           <Button variant="outline-light position-absolute bottom-0 end-0 my-4 mx-3">
             Save
           </Button>

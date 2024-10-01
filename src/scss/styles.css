@@ -65,7 +65,7 @@ button {
 }
 .light-theme button {
   background-color: #a84a54;
-  color: black;
+  color: white;
 }
 .light-theme .btn:hover {
   background-color: #ead3d3;
@@ -244,7 +244,7 @@ button:focus-visible {
 }
 
 .register {
-  width: 32rem;
+  width: 30rem;
   height: auto;
   display: flex;
   flex-direction: column;

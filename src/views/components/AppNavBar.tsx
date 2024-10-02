@@ -8,16 +8,17 @@ export function AppNavBar() {
   const types = ["Type1", "Type2", "Something else here"];
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const [showNavItems, setShowNavItems] = useState(true);
 
   const navigateToPage = (path: string) => {
     if (window.location.pathname !== path) navigate(path);
   };
 
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
   };
@@ -78,10 +79,10 @@ export function AppNavBar() {
           </>
         )}
 
-        <SearchBar onToggleNavItems={(show) => setShow(show)} />
+        <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
 
         {/* TODO: add login status judge logic */}
-        {isLoggedIn ? (
+        {showNavItems && isLoggedIn ? (
           <div className="nav navbar-nav navbar-right">
             <button
               className="btn-nav me-2"
@@ -105,7 +106,7 @@ export function AppNavBar() {
           </button>
         )}
         <LoginModal
-          show={show}
+          show={showModal}
           handleClose={handleClose}
           handleLogin={handleLoginSuccess}
         />

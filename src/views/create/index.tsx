@@ -43,7 +43,14 @@ export function Create() {
   return (
     <div className="create-form">
       <div className="create-form__image-upload">
-        <img alt="create-img" src={imgURL} className="create-form__image" />
+        <div className="create-form__image">
+          <img
+            alt="create-img"
+            src={imgURL}
+            className="create-form__image_uploadImage"
+          />
+        </div>
+
         {imgURL === defaultImage ? (
           <button
             className="create-form__upload-button"
@@ -105,9 +112,6 @@ export function Create() {
         </div>
         <button type="submit" className="create-form__submit-btn">
           Publish
-        </button>
-        <button type="submit" className="create-form__save-btn">
-          Save
         </button>
       </form>
     </div>

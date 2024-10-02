@@ -6,9 +6,10 @@ import Modal from "react-bootstrap/Modal";
 interface loginProps {
   show: boolean;
   handleClose: () => void;
+  handleLogin: () => void;
 }
 
-export function LoginModal({ show, handleClose }: loginProps) {
+export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
   const [signup, setSignup] = useState(false);
 
   const signupHandler = (event: React.MouseEvent) => {
@@ -23,6 +24,8 @@ export function LoginModal({ show, handleClose }: loginProps) {
     },
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+
+      handleClose();
     },
   });
   return (
@@ -31,7 +34,7 @@ export function LoginModal({ show, handleClose }: loginProps) {
         <div className="register">
           <Modal.Header closeButton />
           <h1 className="register__header"> {!signup ? "Login" : "Sign up"}</h1>
-          <form className="register__form">
+          <form className="register__form" onSubmit={formik.handleSubmit}>
             <FormField
               className="register__form_username"
               id="email"
@@ -66,7 +69,11 @@ export function LoginModal({ show, handleClose }: loginProps) {
               />
             )}
 
-            <button type="submit" className="register__form_btn">
+            <button
+              type="submit"
+              className="register__form_btn"
+              onClick={handleLogin}
+            >
               {!signup ? "Login" : "Signup"}
             </button>
           </form>

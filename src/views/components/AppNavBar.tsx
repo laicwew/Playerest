@@ -8,16 +8,19 @@ export function AppNavBar() {
   const types = ["Type1", "Type2", "Something else here"];
   const isMobile = useIsMobile();
   const navigate = useNavigate();
-  const [showNavItems, setShowNavItems] = useState(true);
 
   const navigateToPage = (path: string) => {
     if (window.location.pathname !== path) navigate(path);
   };
 
   const [show, setShow] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -75,10 +78,10 @@ export function AppNavBar() {
           </>
         )}
 
-        <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
+        <SearchBar onToggleNavItems={(show) => setShow(show)} />
 
         {/* TODO: add login status judge logic */}
-        {showNavItems && (
+        {isLoggedIn ? (
           <div className="nav navbar-nav navbar-right">
             <button
               className="btn-nav me-2"
@@ -95,13 +98,17 @@ export function AppNavBar() {
               <span className="nav-text">Profile</span>
             </button>
           </div>
+        ) : (
+          <button className="btn-nav me-2" onClick={handleShow}>
+            <span className="fas fa-sign-in-alt nav-icon" />
+            <span className="nav-text">Login</span>
+          </button>
         )}
-
-        <button className="btn-nav me-2" onClick={handleShow}>
-          <span className="fas fa-sign-in-alt nav-icon" />
-          <span className="nav-text">Login</span>
-        </button>
-        <LoginModal show={show} handleClose={handleClose} />
+        <LoginModal
+          show={show}
+          handleClose={handleClose}
+          handleLogin={handleLoginSuccess}
+        />
       </div>
     </nav>
   );

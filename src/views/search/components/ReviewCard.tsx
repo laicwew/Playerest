@@ -1,13 +1,20 @@
-import { Card, Button, CardTitle } from "react-bootstrap";
+import { Card, CardBody, CardFooter, CardTitle } from "react-bootstrap";
+import BtnGrupp from "../../components/BtnGrupp";
 import { useState } from "react";
 
 interface imgProps {
   id: number;
   imgPath?: string;
   title?: string;
+  username?: string;
 }
 
-export function ReviewCard({ id, imgPath, title }: imgProps) {
+export function ReviewCard({
+  id,
+  imgPath,
+  title,
+  username = "whom",
+}: imgProps) {
   const [showBtn, setShowBtn] = useState(false);
 
   return (
@@ -34,12 +41,13 @@ export function ReviewCard({ id, imgPath, title }: imgProps) {
             background: " rgba(0, 0, 0, .5) ",
           }}
         >
-          <Button variant="outline-light position-absolute top-0 end-0 my-4 mx-3 ">
-            Like
-          </Button>
-          <Button variant="outline-light position-absolute bottom-0 end-0 my-4 mx-3">
-            Save
-          </Button>
+          <BtnGrupp />
+          {imgPath && title && (
+            <CardBody>
+              {title}
+              <CardFooter>By {username}</CardFooter>
+            </CardBody>
+          )}
         </Card.ImgOverlay>
       )}
     </Card>

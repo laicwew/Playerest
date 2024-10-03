@@ -43,24 +43,24 @@ export function Create() {
   return (
     <div className="create-form">
       <div className="create-form__image-upload">
-        <div className="create-form__image">
+        <div className="create-form__image-container">
           <img
             alt="create-img"
             src={imgURL}
-            className="create-form__image_uploadImage"
+            className="create-form__image-container__img"
           />
         </div>
 
         {imgURL === defaultImage ? (
           <button
-            className="create-form__upload-button"
+            className="create-form__btn--upload"
             onClick={handleImageUpload}
           >
             <span className="fas fa-upload me-2" /> Upload
           </button>
         ) : (
           <button
-            className="create-form__upload-button"
+            className="create-form__btn--delete"
             onClick={handleImageDelete}
           >
             <span className="fas fa-trash me-2" /> Delete
@@ -80,7 +80,7 @@ export function Create() {
         />
         <div className="create-form__fields">
           <FormField
-            className="create-form__fields--1"
+            className="create-form__fields--game"
             id="reviewGame"
             name="reviewGame"
             type="input"
@@ -90,7 +90,7 @@ export function Create() {
             placeholder="Game Name"
           />
           <FormField
-            className="create-form__fields--2"
+            className="create-form__fields--title"
             id="reviewTitle"
             name="reviewTitle"
             type="input"
@@ -100,7 +100,7 @@ export function Create() {
             placeholder="Review Title"
           />
           <FormField
-            className="create-form__fields--3"
+            className="create-form__fields--text"
             id="reviewText"
             name="reviewText"
             type="textarea"
@@ -110,7 +110,7 @@ export function Create() {
             placeholder="Review"
           />
         </div>
-        <button type="submit" className="create-form__submit-btn">
+        <button type="submit" className="create-form__btn--submit">
           Publish
         </button>
       </form>

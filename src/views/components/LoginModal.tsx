@@ -36,7 +36,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
           <h1 className="register__header"> {!signup ? "Login" : "Sign up"}</h1>
           <form className="register__form" onSubmit={formik.handleSubmit}>
             <FormField
-              className="register__form_username"
+              className="register__form--username"
               id="email"
               name="email"
               type="email"
@@ -46,7 +46,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
               placeholder="Enter email"
             />
             <FormField
-              className="register__form_password"
+              className="register__form--password"
               id="password"
               name="password"
               type="password"
@@ -58,7 +58,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
 
             {signup && (
               <FormField
-                className="register__form_password"
+                className="register__form--confirmedPassword"
                 id="comfirmedPassword"
                 name="comfirmedPassword"
                 type="password"
@@ -71,13 +71,17 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
 
             <button
               type="submit"
-              className="register__form_btn"
+              className="register__form_btn--login"
               onClick={handleLogin}
             >
               {!signup ? "Login" : "Signup"}
             </button>
           </form>
-          <a href="" className="register__form_link" onClick={signupHandler}>
+          <a
+            href=""
+            className="register__form_link--action"
+            onClick={signupHandler}
+          >
             {!signup ? "Not user yet? Signup Here" : "Already user? Login Here"}
           </a>
         </div>

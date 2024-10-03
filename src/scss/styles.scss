@@ -61,49 +61,6 @@ button {
   transition: border-color 0.25s;
 }
 
-@include themify($themes) {
-  .navbar {
-    background-color: themed("navBg");
-    color:themed("text");
-  }
-
-  button {
-    background-color: themed("primary");
-    color:themed("btnText")
-  }
-
-  .btn:hover {
-    background-color: themed("hint");
-  }
-
-  .btn-search {
-    background-color: themed("navBtnBg");
-    color: themed("searchBtnBg");
-  }
-  
-  .btn-search:hover {
-    background-color: themed("hint");
-  }
-
-  .search-bar {
-    background-color: themed("searchBarBg");
-    border-color: themed("secondary");
-  }
-  
-  .search-bar:focus {
-    border-color: themed("secondary");
-    box-shadow: none;
-  }
-  
-  .btn-nav:hover {
-    background-color: themed("btnFocus");
-  }
-  
-  button:hover {
-    background-color: themed("btnFocus");
-  }
-}
-
 .navbar-expand-lg {
   flex-wrap: nowrap; /* Ensure no wrapping */
 }
@@ -147,14 +104,15 @@ button:focus-visible {
     padding-top: 5px;
     border-radius: 5%;
   }
-  &__image {
+  &__image-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20rem;
     height: 30rem;
     margin-top: 1rem;
-    &_uploadImage{
+
+    &__img{
       max-width: 100%;
       max-height: 100%;
       display: block;
@@ -162,45 +120,46 @@ button:focus-visible {
     }
   }
 
-  &__upload-button {
+  &__btn--upload, &__btn--delete {
     margin-top: 2rem;
   }
+
   &__fields {
-    display: flex;
-    flex-direction: column;
-    margin-top: 3rem;
-    margin-left: 3rem;
-
-    &--1,
-    &--2,
-    &--3 {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-bottom: 3rem;
-
-      &-label {
-        font-weight: bold;
-        flex: 1;
-        text-align: left;
+      flex-direction: column;
+      margin-top: 3rem;
+      margin-left: 3rem;
+      &--game,
+      &--title,
+      &--text {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 3rem;
+  
+        &-label {
+          font-weight: bold;
+          flex: 1;
+          text-align: left;
+        }
+  
+        &-input {
+          width: 20rem;
+          flex: 2;
+          text-align: left;
+        }
       }
-
-      &-input {
-        width: 20rem;
-        flex: 2;
-        text-align: left;
+  
+      &--text {
+        &-input {
+          height: 17rem;
+        }
       }
-    }
-
-    &--3 {
-      &-input {
-        height: 17rem;
-      }
-    }
   }
-  &__submit-btn{
-    margin-top:0.5rem;
-    float:right;
+  
+  &__btn--submit {
+    margin-top: 0.5rem;
+    float: right;
   }
 }
 
@@ -219,7 +178,7 @@ button:focus-visible {
         flex-direction: column;
         margin-bottom: 2rem;
 
-      &_username, &_password{
+      &--username, &--password, &--confirmedPassword{
         display: flex;
         flex-direction: row;
         margin-left: 5rem;
@@ -237,13 +196,13 @@ button:focus-visible {
         }
       }
 
-      &_btn{
+      &_btn--login{
           width: 6rem;
           margin-left: auto;
           margin-right: auto;
       }
 
-      &_link{
+      &_link--action{
         margin-top:1rem;
         margin-bottom: 2rem;
       }
@@ -272,20 +231,21 @@ button:focus-visible {
 
   .create-form {
     width: 30rem;
-    height: 20rem;
+    height: auto;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    &__image-upload {
-      width: 15rem;
-      height: auto;
+    &__image-upload{
+      width: 20rem;
+      height: 30rem;
     }
-    &__image {
-      width: 15rem;
+    &__image-container {
+      width: 20rem;
+      height: 25rem;
     }
 
     &__fields {
-      &--3 {
+      &--text {
         &-input {
           height: 10rem;
         }
@@ -312,28 +272,29 @@ button:focus-visible {
     color: #a84a54;
   }
   .create-form {
-    width: 10rem;
+    width: 18rem;
     height: auto;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    &__image-upload {
+    &__image-upload{
       width: 15rem;
-      height: auto;
+      height: 20rem;
     }
-    &__image {
-      width: 10rem;
+    &__image-container {
+      width: 15rem;
+      height: 15rem;
     }
 
+
     &__fields {
-      &--1,
-      &--2,
-      &--3 {
+      &--game,
+      &--title {
         &-input {
-          width: 10rem;
+          width: 8rem;
         }
       }
-      &--3 {
+      &--text {
         &-input {
           height: 8rem;
         }
@@ -350,17 +311,71 @@ button:focus-visible {
     &__form{
         margin-bottom: 1rem;
 
-      &_username, &_password{
+      &--username, &--password{
         margin-bottom: 2rem;
 
         &-input{
             width:10rem;
         }
       }
-      &_link{
+      &_link--active{
         margin-top:1rem;
         margin-bottom: 2rem;
       }
     }
+  }
+}
+
+.input, .label{
+  border-radius: 25px;
+  background-color: white;
+  padding-left:1rem;
+  font-family:inherit;
+}
+
+.input{
+  border:solid 2px black;
+}
+
+@include themify($themes) {
+  .navbar {
+    background-color: themed("navBg");
+    color:themed("text");
+  }
+
+  button {
+    background-color: themed("primary");
+    color:themed("btnText")
+  }
+
+  .btn:hover {
+    background-color: themed("hint");
+  }
+
+  .btn-search {
+    background-color: themed("navBtnBg");
+    color: themed("searchBtnBg");
+  }
+  
+  .btn-search:hover {
+    background-color: themed("hint");
+  }
+
+  .search-bar {
+    background-color: themed("searchBarBg");
+    border-color: themed("secondary");
+  }
+  
+  .search-bar:focus {
+    border-color: themed("secondary");
+    box-shadow: none;
+  }
+  
+  .btn-nav:hover {
+    background-color: themed("btnFocus");
+  }
+  
+  button:hover {
+    background-color: themed("btnFocus");
   }
 }

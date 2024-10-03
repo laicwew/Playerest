@@ -23,7 +23,7 @@ const FormField = ({
 }: FormFieldProps) => {
   return (
     <div className={className}>
-      <label htmlFor={id} className={`${className}-label`}>
+      <label htmlFor={id} className={`${className}-label label`}>
         {label}
       </label>
       {type !== "textarea" ? (
@@ -34,7 +34,7 @@ const FormField = ({
           placeholder={placeholder}
           onChange={onChange}
           value={value}
-          className={`${className}-input`}
+          className={`${className}-input input`}
         />
       ) : (
         <textarea
@@ -43,7 +43,7 @@ const FormField = ({
           placeholder={placeholder}
           onChange={onChange}
           value={value}
-          className={`${className}-input`}
+          className={`${className}-input input`}
         />
       )}
     </div>

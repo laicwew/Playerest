@@ -17,6 +17,15 @@ export function ReviewCard({
 }: imgProps) {
   const [showBtn, setShowBtn] = useState(false);
 
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const handleLiked = () => {
+    setLiked((prevState) => !prevState);
+  };
+  const handleSaved = () => {
+    setSaved((prevState) => !prevState);
+  };
+
   return (
     <Card
       className="text-white position-relative d-flex justify-content-center"
@@ -41,7 +50,12 @@ export function ReviewCard({
             background: " rgba(0, 0, 0, .5) ",
           }}
         >
-          <BtnGrupp />
+          <BtnGrupp
+            liked={liked}
+            saved={saved}
+            handleLiked={handleLiked}
+            handleSaved={handleSaved}
+          />
           {imgPath && title && (
             <CardBody>
               {title}

@@ -1,14 +1,16 @@
-import { useState } from "react";
+interface btnStateProps {
+  liked: boolean;
+  saved: boolean;
+  handleSaved: () => void;
+  handleLiked: () => void;
+}
 
-const BtnGrupp = () => {
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const handleLiked = () => {
-    setLiked((prevState) => !prevState);
-  };
-  const handleSaved = () => {
-    setSaved((prevState) => !prevState);
-  };
+const BtnGrupp = ({
+  liked,
+  saved,
+  handleSaved,
+  handleLiked,
+}: btnStateProps) => {
   return (
     <div className="btn-group">
       <button onClick={handleSaved} className="btn-group__saveBtn">

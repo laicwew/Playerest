@@ -326,6 +326,8 @@ button:focus-visible {
   }
 }
 
+/* Consistent style setting */
+
 .input, .label{
   border-radius: 25px;
   background-color: white;
@@ -335,6 +337,23 @@ button:focus-visible {
 
 .input{
   border:solid 2px black;
+}
+
+.btn-group {
+  display: flex; 
+  gap: 10px; 
+}
+
+.btn-group button {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 10px; 
+  border-radius: 50%;
+}
+
+.btn-group span {
+  font-size: 15px;
 }
 
 @include themify($themes) {

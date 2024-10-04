@@ -1,5 +1,5 @@
 import { Card, CardBody, CardFooter, CardTitle } from "react-bootstrap";
-import BtnGrupp from "../../components/BtnGrupp";
+import BtnGrupp from "../../components/BtnGroup";
 import { useState } from "react";
 
 interface imgProps {
@@ -47,7 +47,7 @@ export function ReviewCard({
       {showBtn && (
         <Card.ImgOverlay
           style={{
-            background: " rgba(0, 0, 0, .5) ",
+            background: "rgba(0, 0, 0, .5) ",
           }}
         >
           <BtnGrupp
@@ -55,13 +55,14 @@ export function ReviewCard({
             saved={saved}
             handleLiked={handleLiked}
             handleSaved={handleSaved}
+            className="position-absolute top-2 end-0 mx-3"
           />
-          {imgPath && title && (
-            <CardBody>
-              {title}
-              <CardFooter>By {username}</CardFooter>
-            </CardBody>
-          )}
+          <CardBody className="position-absolute bottom-0 start-0">
+            {imgPath && title ? `${title}` : ""}
+            <CardFooter className="border-0 bg-transparent">
+              By {username}
+            </CardFooter>
+          </CardBody>
         </Card.ImgOverlay>
       )}
     </Card>

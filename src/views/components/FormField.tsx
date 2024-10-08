@@ -34,7 +34,7 @@ const FormField = ({
           placeholder={placeholder}
           onChange={onChange}
           value={value}
-          className={`${className}-input input`}
+          className={`${className}-input input p-2`}
         />
       ) : (
         <textarea
@@ -43,7 +43,7 @@ const FormField = ({
           placeholder={placeholder}
           onChange={onChange}
           value={value}
-          className={`${className}-input input`}
+          className={`${className}-input input p-2`}
         />
       )}
     </div>

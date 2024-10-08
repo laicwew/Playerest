@@ -1,8 +1,18 @@
 export interface Review {
     id: number
-    image: string
+    imageUrl?: string // image url
     author: string
     title: string
     content: string
-    comments: string[]
-  }
+    comments?: Comment[]
+    rate?: number //maybe 0~5
+    like?: number //the number of likes
+}
+
+export interface Comment {
+  id: string,
+  user: string,
+  content: string,
+  like?: number
+}
+

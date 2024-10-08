@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Profile } from "./views/profile/index.tsx";
 import { Search } from "./views/search";
 import { Create } from "./views/create";
-import { Details } from "./views/details";
+import { ReviewDetailPage } from "./views/details";
 
 const router = createBrowserRouter([
   {
@@ -26,8 +26,8 @@ const router = createBrowserRouter([
         element: <Create />,
       },
       {
-        path: "/details:id",
-        element: <Details />,
+        path: "/details/:id",
+        element: <ReviewDetailPage  />,
       },
     ],
   },

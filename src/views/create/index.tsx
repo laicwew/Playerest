@@ -10,10 +10,13 @@ export function Create() {
     { id: number; title: string; imgURL?: string; createdDate: string }[]
   >([]);
   const [isFormModified, setIsFormModified] = useState(false);
+  const [currentDraftId, setCurrentDraftId] = useState<number | null>(null);
 
   const [imgURL, setImgURL] = useState(defaultImage);
   const fileUploadedRef = useRef<HTMLInputElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const generateUniqueId = () => Math.floor(Math.random() * 1000000);
 
   const handleDraftListOpen = () => {
     setIsOpen(!isOpen);
@@ -50,7 +53,7 @@ export function Create() {
     onSubmit: (values) => {
       const submissionValues = {
         ...values,
-        reviewPic: imgURL === defaultImage ? "" : imgURL, // If imgURL is not default, include it
+        reviewPic: imgURL === defaultImage ? "" : imgURL,
       };
       alert(JSON.stringify(submissionValues, null, 2));
     },
@@ -58,31 +61,35 @@ export function Create() {
 
   useEffect(() => {
     if (
-      formik.values.reviewTitle ||
+      (isFormModified && formik.values.reviewTitle) ||
       formik.values.reviewText ||
       formik.values.reviewGame ||
       imgURL !== defaultImage
     ) {
+      const draftId = currentDraftId || generateUniqueId();
       const newDraft = {
-        id: draftList.length + 1,
-        title: formik.values.reviewTitle || "Untitled Draft",
-        imgURL: imgURL === defaultImage ? undefined : imgURL,
+        id: draftId,
+        title: formik.values.reviewTitle,
+        imgURL: imgURL === defaultImage ? defaultImage : imgURL,
         createdDate: new Date().toISOString().split("T")[0],
       };
 
       setDraftList((prevDrafts) => {
         const draftIndex = prevDrafts.findIndex(
-          (draft) => draft.title === newDraft.title
+          (draft) => draft.id === draftId
         );
         if (draftIndex >= 0) {
           const updatedDrafts = [...prevDrafts];
           updatedDrafts[draftIndex] = newDraft;
           return updatedDrafts;
         }
+
         return [...prevDrafts, newDraft];
       });
+
+      setCurrentDraftId(draftId);
     }
-  }, [formik.values, imgURL, draftList]);
+  }, [formik.values, imgURL, currentDraftId, isFormModified]);
 
   const handleFieldChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -103,9 +110,15 @@ export function Create() {
       reviewGame: "",
       reviewPic: draft.imgURL || "",
     });
-    setImgURL(draft.imgURL || defaultImage);
+    setImgURL(draft.imgURL || "");
     setIsFormModified(true);
-    setIsOpen(false);
+  };
+
+  const createNew = () => {
+    formik.resetForm();
+    setImgURL(defaultImage);
+    setCurrentDraftId(null);
+    setIsFormModified(false);
   };
 
   return (
@@ -115,6 +128,7 @@ export function Create() {
         setIsOpen={handleDraftListOpen}
         draftList={draftList}
         loadDraft={loadDraft}
+        createNew={createNew}
       />
       <div className="create-form">
         <div className="create-form__image-upload">

@@ -1,4 +1,3 @@
-import defaultImage from "../../../assets/defaultImage.png";
 interface savedDraftProps {
   isOpen: boolean;
   setIsOpen: () => void;
@@ -9,6 +8,7 @@ interface savedDraftProps {
     title?: string;
     createdDate?: string;
   }) => void;
+  createNew: () => void;
 }
 
 interface DraftList {
@@ -23,6 +23,7 @@ const SavedDraftSidebar = ({
   setIsOpen,
   draftList,
   loadDraft,
+  createNew,
 }: savedDraftProps) => {
   return (
     <div className="draft-sidebar">
@@ -33,6 +34,7 @@ const SavedDraftSidebar = ({
           <span className="fa-solid fa-arrow-right"></span>
         )}
       </button>
+      {isOpen && <button onClick={createNew}>Create New</button>}
       <div className={`draft-list ${isOpen ? "sideOpen" : "sideClose"}`}>
         <div>
           {draftList.map((item) => {
@@ -41,7 +43,7 @@ const SavedDraftSidebar = ({
                 <div className="list-item">
                   <div className="list-item__img-container">
                     <img
-                      src={`${item.imgURL ? item.imgURL : defaultImage}`}
+                      src={item.imgURL}
                       alt="picture"
                       className="list-item__img-container__img"
                     />

@@ -7,7 +7,7 @@ export function ReviewDetailPage() {
   //TODO: getReviewDetail(params.id)
   const review = {
     id: 1,
-    imageUrl: "../../../../src/assets/placeholder/1.jpeg",
+    imageUrl: "../../../src/assets/placeholder/2.jpeg",
     author: "AmiyaSX",
     title: "This game is just so good",
     content: "balabala bala bababab lalalal",

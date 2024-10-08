@@ -9,7 +9,7 @@ export function RecommendReviews() {
         { id: 4, title: "Nice to meet you!" },
       ];
     return (<div>
-        <h1>Similar Game Reviews</h1>
+        <h2>Similar Game Reviews</h2>
         <div className="row gap-3 align-items-center">
         {reviews.map((obj) => (
           <ReviewCard key={obj.id} id={obj.id} imgPath={obj.src} title={obj.title} />

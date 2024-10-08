@@ -8,11 +8,12 @@ export function ReviewDetailPage() {
   const review = {
     id: 1,
     imageUrl: "src/assets/placeholder/1.jpeg",
-    author: "aa",
-    title: "aaa",
-    content: "as",
+    author: "AmiyaSX",
+    title: "This game is just so good",
+    content: "balabala bala bababab lalalal",
     comments: [],
-    rate: 4,
+    gameAvgRating: 7,
+    authorRating: 8,
     like: 10
   } as Review;
 

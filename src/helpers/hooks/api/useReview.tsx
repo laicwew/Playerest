@@ -5,12 +5,13 @@ export interface Review {
     title: string
     content: string
     comments?: Comment[]
-    rate?: number //maybe 0~5
+    gameAvgRating?: number //maybe 0~10
+    authorRating?: number // 0~10
     like?: number //the number of likes
 }
 
 export interface Comment {
-  id: string,
+  id: number,
   user: string,
   content: string,
   like?: number

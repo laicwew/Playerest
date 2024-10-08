@@ -5,7 +5,10 @@ import { RecommendReviews } from "./RecommendReviews";
 export default function ReviewDetails({ review }: { review: Review }) {
   return (
     <div className="col-md-12 text-md-start text-center">
-      <div className="row mt-4 align-items-center" style={{ maxHeight: "80vh" }}>
+      <div
+        className="row mt-4 align-items-center"
+        style={{ maxHeight: "80vh" }}
+      >
         {/* TODO: conditional judge if comment column is open */}
         <div className="col-md-2"></div>
 
@@ -19,15 +22,18 @@ export default function ReviewDetails({ review }: { review: Review }) {
         </div>
 
         {/* Text content on the right */}
-        <div className="col-md-4 d-flex flex-column justify-content-between" style={{ height: "40vh" }}>
-            <div className="container">
-              {/* This ensures space is below the author */}
-              {review.author}
+        <div
+          className="col-md-4 d-flex flex-column justify-content-between"
+          style={{ height: "40vh" }}
+        >
+           <div className="author-box rounded">
+              <span className="fas fa-at me-2" />
+              <span>{review.author}</span>
             </div>
-            <div className="container mt-auto">
-              <h2>{review.title}</h2>
-              <p>{review.content}</p>
-            </div>
+          <div className="container mt-auto">
+            <h2>{review.title}</h2>
+            <p>{review.content}</p>
+          </div>
         </div>
         {/* TODO: conditional judge if comment column is open */}
         <div className="col-md-2"></div>

@@ -36,7 +36,8 @@ export function ReviewCard({
         height: `${imgPath && title ? "" : "10rem"}`,
         borderRadius: "5%",
         marginBottom: "0.5rem",
-        cursor: "pointer"
+        cursor: "pointer",
+        padding: "0"
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}
@@ -46,9 +47,9 @@ export function ReviewCard({
       }}
     >
       {imgPath ? (
-        <Card.Img src={imgPath} alt={title} />
+        <Card.Img src={imgPath} alt={title}/>
       ) : (
-        <CardTitle style={{ color: "black" }}>{title}</CardTitle>
+        <CardTitle style={{ color: "black", marginLeft: "12px" }}>{title}</CardTitle>
       )}
       {showBtn && (
         <Card.ImgOverlay

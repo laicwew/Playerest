@@ -21,6 +21,7 @@ export function ReviewDetailPage() {
     <div>
       <h1>Details: {id}</h1>
       <ReviewDetails review={review} />
+      <div style={{height: "12vh"}}></div> 
     </div>
   );
 }

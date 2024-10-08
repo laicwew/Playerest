@@ -9,7 +9,7 @@ interface imgProps {
   title?: string;
   username?: string;
 }
-
+// TODO: use Review interface refactor
 export function ReviewCard({
   id,
   imgPath,

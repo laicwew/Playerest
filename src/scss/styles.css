@@ -99,6 +99,7 @@ button:focus-visible {
   margin-top: 3%;
   margin-left: auto;
   margin-right: auto;
+  /* Remove border shadow when focused */
 }
 .create-form__image-upload {
   width: 22rem;
@@ -150,6 +151,10 @@ button:focus-visible {
 }
 .create-form__fields--text-input {
   height: 17rem;
+}
+.create-form__fields--game-input:focus, .create-form__fields--title-input:focus, .create-form__fields--text-input:focus {
+  box-shadow: none;
+  outline: none;
 }
 .create-form__btn--submit {
   margin-top: 0.5rem;
@@ -218,6 +223,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   margin: auto;
+  /* Remove border shadow when focused */
 }
 .register__header {
   margin-top: 1rem;
@@ -242,6 +248,7 @@ button:focus-visible {
 }
 .register__form--username-input, .register__form--password-input, .register__form--confirmedPassword-input {
   width: 15rem;
+  color: black;
 }
 .register__form_btn--login {
   width: 6rem;
@@ -251,6 +258,10 @@ button:focus-visible {
 .register__form_link--action {
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+.register__form--username-input:focus, .register__form--password-input:focus, .register__form--confirmedPassword-input:focus {
+  box-shadow: none; /* Removes shadow */
+  outline: none;
 }
 
 /* Responsive styles: hide text on screens smaller than 768px */
@@ -346,15 +357,12 @@ button:focus-visible {
   }
 }
 /* Consistent style setting */
-.input, .label {
-  border-radius: 25px;
+.input,
+.label {
+  border-radius: 16px;
   background-color: white;
   padding-left: 1rem;
   font-family: inherit;
-}
-
-.input {
-  border: solid 2px black;
 }
 
 .btn-group {
@@ -406,6 +414,10 @@ button:focus-visible {
 .light-theme button:hover {
   background-color: #963d43;
 }
+.light-theme .input {
+  color: black;
+  border: solid 2px black;
+}
 .light-theme .create-form {
   background-color: #d0e7f3;
 }
@@ -456,4 +468,8 @@ button:focus-visible {
 }
 .dark-theme .list-item {
   background-color: #0a050b;
+}
+.dark-theme .input {
+  color: white;
+  border: solid 2px black;
 }/*# sourceMappingURL=styles.css.map */

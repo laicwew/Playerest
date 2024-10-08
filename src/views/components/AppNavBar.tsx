@@ -100,10 +100,19 @@ export function AppNavBar() {
             </button>
           </div>
         ) : (
-          <button className="btn-nav me-2" onClick={handleShow}>
-            <span className="fas fa-sign-in-alt nav-icon" />
-            <span className="nav-text">Login</span>
-          </button>
+          <div className="nav navbar-nav navbar-right">
+            <button
+              className="btn-nav me-2"
+              onClick={() => navigateToPage("/create")}
+            >
+              <span className="fa-solid fa-pen-nib nav-icon" />
+              <span className="nav-text"> Create</span>
+            </button>
+            <button className="btn-nav me-2" onClick={handleShow}>
+              <span className="fas fa-sign-in-alt nav-icon" />
+              <span className="nav-text">Login</span>
+            </button>
+          </div>
         )}
         <LoginModal
           show={showModal}

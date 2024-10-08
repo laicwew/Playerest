@@ -15,10 +15,20 @@ const BtnGroup = ({
 }: btnStateProps) => {
   return (
     <div className={`${className} btn-group`}>
-      <button onClick={handleSaved}>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSaved();
+        }}
+      >
         <span className={`fa-${saved ? "solid" : "regular"} fa-star`}></span>
       </button>
-      <button onClick={handleLiked}>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleLiked();
+        }}
+      >
         <span className={`fa-${liked ? "solid" : "regular"} fa-heart`}></span>
       </button>
     </div>

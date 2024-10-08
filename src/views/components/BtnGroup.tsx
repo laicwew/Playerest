@@ -23,10 +23,12 @@ const BtnGroup = ({
       >
         <span className={`fa-${saved ? "solid" : "regular"} fa-star`}></span>
       </button>
-      <button onClick={(e) => {
+      <button
+        onClick={(e) => {
           e.stopPropagation();
           handleLiked();
-        }}>
+        }}
+      >
         <span className={`fa-${liked ? "solid" : "regular"} fa-heart`}></span>
       </button>
     </div>

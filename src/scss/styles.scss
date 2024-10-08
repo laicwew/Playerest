@@ -86,6 +86,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.create-page{
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;;
+}
+
 .create-form {
   width: 50rem;
   height: 40rem;
@@ -160,6 +166,60 @@ button:focus-visible {
   &__btn--submit {
     margin-top: 0.5rem;
     float: right;
+  }
+}
+
+.draft-sidebar{
+  position: relative;
+    &__btn--trigger button{
+    position:absolute;
+    top:0;
+    right:0;
+    margin:0;
+  }
+}
+
+.draft-list{
+  height:100vh;
+  width: 20rem;
+  padding:2%;
+  z-index:-1;
+  overflow: hidden;
+}
+
+.p{
+  position:relative;
+  top:20px;
+}
+
+.sideOpen{
+  width: 300px;
+}
+
+.sideClose{
+  width:0;
+}
+
+.list-item{
+  height:6rem;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  &__img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    &__img{
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -396,5 +456,17 @@ button:focus-visible {
   
   button:hover {
     background-color: themed("btnFocus");
+  }
+
+  .create-form{
+    background-color: themed("bg");
+  }
+
+  .draft-sidebar{
+    background-color: themed("secondary") ;
+  }
+
+  .list-item{
+    background-color: themed("hint");
   }
 }

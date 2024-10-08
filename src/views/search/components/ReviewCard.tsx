@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, CardTitle } from "react-bootstrap";
+import { Card, CardBody, CardTitle } from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
 import { useState } from "react";
 
@@ -57,11 +57,10 @@ export function ReviewCard({
             handleSaved={handleSaved}
             className="position-absolute top-2 end-0 mx-3"
           />
-          <CardBody className="position-absolute bottom-0 start-0">
+          <CardBody className="position-absolute bottom-0 start-0 text-start">
             {imgPath && title ? `${title}` : ""}
-            <CardFooter className="border-0 bg-transparent">
-              By {username}
-            </CardFooter>
+            <br></br>
+            By {username}
           </CardBody>
         </Card.ImgOverlay>
       )}

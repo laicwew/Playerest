@@ -24,7 +24,6 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
     },
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-
       handleClose();
     },
   });

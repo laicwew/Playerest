@@ -7,7 +7,7 @@ export function ReviewDetailPage() {
   //TODO: getReviewDetail(params.id)
   const review = {
     id: 1,
-    image: "a",
+    image: "src/assets/placeholder/1.jpeg",
     author: "aa",
     title: "aaa",
     content: "as",

@@ -1,6 +1,7 @@
 import { Card, CardBody, CardFooter, CardTitle } from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface imgProps {
   id: number;
@@ -16,6 +17,7 @@ export function ReviewCard({
   username = "whom",
 }: imgProps) {
   const [showBtn, setShowBtn] = useState(false);
+  const navigate = useNavigate();
 
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -34,10 +36,14 @@ export function ReviewCard({
         height: `${imgPath && title ? "" : "10rem"}`,
         borderRadius: "5%",
         marginBottom: "0.5rem",
+        cursor: "pointer"
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}
       key={id}
+      onClick={()=>{
+        navigate(`/details/${id}`)
+      }}
     >
       {imgPath ? (
         <Card.Img src={imgPath} alt={title} />

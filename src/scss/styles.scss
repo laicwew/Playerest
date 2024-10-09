@@ -81,15 +81,33 @@ button {
   border-radius: 1.325rem;
 }
 
+.author-box {
+  height: 50px;
+  padding-left: 4%;
+  padding-right: 4%;
+  text-align: start;
+  font-size: larger;
+  font-weight: 600;
+  cursor: pointer;
+  align-content: center;
+  max-width: fit-content;
+}
+
+.review-content-box {
+}
+
+.rating-box {
+}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.create-page{
+.create-page {
   display: flex;
   flex-direction: row;
-  margin-top: 1rem;;
+  margin-top: 1rem;
 }
 
 .create-form {
@@ -162,7 +180,6 @@ button:focus-visible {
         height: 17rem;
       }
     }
-
   }
   /* Remove border shadow when focused */
   &__fields--game-input:focus,
@@ -177,52 +194,52 @@ button:focus-visible {
   }
 }
 
-.draft-sidebar{
+.draft-sidebar {
   position: relative;
-    &__btn--trigger button{
-    position:absolute;
-    top:0;
-    right:0;
-    margin:0;
+  &__btn--trigger button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
   }
 }
 
-.draft-list{
-  height:100vh;
+.draft-list {
+  height: 100vh;
   width: 20rem;
-  padding:2%;
-  z-index:-1;
+  padding: 2%;
+  z-index: -1;
   overflow: hidden;
 }
 
-.p{
-  position:relative;
-  top:20px;
+.p {
+  position: relative;
+  top: 20px;
 }
 
-.sideOpen{
+.sideOpen {
   width: 300px;
 }
 
-.sideClose{
-  width:0;
+.sideClose {
+  width: 0;
 }
 
-.list-item{
-  height:6rem;
-  display:flex;
+.list-item {
+  height: 6rem;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  &__img-container{
+  &__img-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 5rem;
     height: 5rem;
-    &__img{
+    &__img {
       object-fit: cover;
       object-position: center;
       width: 100%;
@@ -515,15 +532,19 @@ button:focus-visible {
     border: solid 2px black;
   }
 
-  .create-form{
+  .create-form {
     background-color: themed("bg");
   }
 
-  .draft-sidebar{
-    background-color: themed("secondary") ;
+  .draft-sidebar {
+    background-color: themed("secondary");
   }
 
-  .list-item{
+  .list-item {
     background-color: themed("hint");
+  }
+
+  .author-box {
+    background-color: themed("secondary");
   }
 }

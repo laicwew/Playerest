@@ -80,6 +80,19 @@ button {
   border-radius: 1.325rem;
 }
 
+.author-box {
+  height: 50px;
+  padding-left: 4%;
+  padding-right: 4%;
+  text-align: start;
+  font-size: larger;
+  font-weight: 600;
+  cursor: pointer;
+  align-content: center;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -468,6 +481,9 @@ button:focus-visible {
 .light-theme .list-item {
   background-color: #ead3d3;
 }
+.light-theme .author-box {
+  background-color: #ab6767;
+}
 
 .dark-theme .navbar {
   background-color: #302a51;
@@ -505,6 +521,10 @@ button:focus-visible {
   color: white;
   border: solid 2px black;
 }
+.dark-theme .input {
+  color: white;
+  border: solid 2px black;
+}
 .dark-theme .create-form {
   background-color: #d0e7f3;
 }
@@ -513,4 +533,7 @@ button:focus-visible {
 }
 .dark-theme .list-item {
   background-color: #0a050b;
+}
+.dark-theme .author-box {
+  background-color: #2a1416;
 }/*# sourceMappingURL=styles.css.map */

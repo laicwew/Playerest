@@ -264,6 +264,47 @@ button:focus-visible {
   outline: none;
 }
 
+.comment-forum {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px red;
+  width: 25rem;
+  height: 100vh;
+}
+
+.comment-list {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+.comment-list__person {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 7rem;
+}
+.comment-list__img-container {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+.comment-list__img-container-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.comment-list__text {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10%;
+  width: 20rem;
+}
+
 /* Responsive styles: hide text on screens smaller than 768px */
 @media (max-width: 768px) {
   .nav-text {
@@ -460,6 +501,10 @@ button:focus-visible {
 .dark-theme button:hover {
   background-color: #0a050b;
 }
+.dark-theme .input {
+  color: white;
+  border: solid 2px black;
+}
 .dark-theme .create-form {
   background-color: #d0e7f3;
 }
@@ -468,8 +513,4 @@ button:focus-visible {
 }
 .dark-theme .list-item {
   background-color: #0a050b;
-}
-.dark-theme .input {
-  color: white;
-  border: solid 2px black;
 }/*# sourceMappingURL=styles.css.map */

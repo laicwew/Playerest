@@ -10,12 +10,7 @@ export function ReviewDetailPage() {
     author: "AmiyaSX",
     title: "This game is just so good",
     content: "balabala bala bababab lalalal",
-    comments: [
-      { id: 1, user: "ppl1", content: "Oh no, this review is awesome" },
-      { id: 2, user: "ppl2", content: "yes,that make sense" },
-    ],
-    gameAvgRating: 7,
-    authorRating: 8,
+    rate: 7,
     like: 10,
   } as Review;
 

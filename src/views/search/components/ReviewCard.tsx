@@ -2,20 +2,14 @@ import { Card, CardBody, CardTitle } from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Review } from "../../../helpers/hooks/api/useReview";
 
-interface imgProps {
-  id: number;
-  imgPath?: string;
-  title?: string;
-  username?: string;
-}
-// TODO: use Review interface refactor
+
 export function ReviewCard({
-  id,
-  imgPath,
-  title,
-  username = "whom",
-}: imgProps) {
+  review
+}: {
+  review: Review
+}) {
   const [showBtn, setShowBtn] = useState(false);
   const navigate = useNavigate();
 
@@ -28,12 +22,18 @@ export function ReviewCard({
     setSaved((prevState) => !prevState);
   };
 
+   // Fallbacks for imageUrl and title
+   const id = review?.id ?? "1"
+   const imageUrl = review?.imageUrl ?? null;
+   const title = review?.title ?? "No title";
+   const author = review?.author ?? "Unknown author";
+
   return (
     <Card
       className="text-white position-relative d-flex justify-content-center"
       style={{
         width: "15rem",
-        height: `${imgPath && title ? "" : "10rem"}`,
+        height: `${imageUrl && title ? "" : "10rem"}`,
         borderRadius: "5%",
         marginBottom: "0.5rem",
         cursor: "pointer",
@@ -46,8 +46,8 @@ export function ReviewCard({
         navigate(`/details/${id}`)
       }}
     >
-      {imgPath ? (
-        <Card.Img src={imgPath} alt={title}/>
+      {imageUrl ? (
+        <Card.Img src={imageUrl} alt={title}/>
       ) : (
         <CardTitle style={{ color: "black", marginLeft: "12px" }}>{title}</CardTitle>
       )}
@@ -65,9 +65,9 @@ export function ReviewCard({
             className="position-absolute top-2 end-0 mx-3"
           />
           <CardBody className="position-absolute bottom-0 start-0 text-start">
-            {imgPath && title ? `${title}` : ""}
+            {imageUrl && title ? `${title}` : ""}
             <br></br>
-            By {username}
+            By {author}
           </CardBody>
         </Card.ImgOverlay>
       )}

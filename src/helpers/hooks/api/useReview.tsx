@@ -10,7 +10,8 @@ export interface Review {
 
 export interface Comment {
   id: number,
-  user: string,
+  reviewId: number
+  author: string,
   content: string,
   like?: number
 }

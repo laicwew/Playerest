@@ -303,7 +303,6 @@ button:focus-visible {
 .review-page-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
   gap: 10px;
   margin-top: 2rem;
@@ -314,7 +313,7 @@ button:focus-visible {
   max-width: fit-content;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 64px;
   flex: 1;
 }
 

@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
-import { Review } from "../../../helpers/hooks/api/useReview";
+import { Comment, Review } from "../../../helpers/hooks/api/useReview";
 import FormField from "../../components/FormField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getReviewComments } from "../../../helpers/hooks/api/api";
 interface CommentForumProps {
   review: Review;
   setIsOpenComment: () => void;
@@ -9,6 +10,20 @@ interface CommentForumProps {
 
 const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
   const [updatedReview, setUpdatedReview] = useState(review);
+  const [comments, setComments] = useState([] as Comment[]);
+
+  useEffect(() => {
+    const getComments = async () => {
+      const fetchedComments = await getReviewComments(review.id);
+      console.log(review.id);
+      console.log(fetchedComments);
+      if (fetchedComments) {
+        setComments(fetchedComments);
+      }
+    };
+    getComments();
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       comment: "",
@@ -16,11 +31,11 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
 
     onSubmit: (values) => {
       const newComment = {
-        id: (updatedReview.comments?.length || 0) + 1,
+        id: (comments?.length || 0) + 1,
         user: "Anonymous",
         content: values.comment,
       };
-      const newComments = [...(updatedReview.comments || []), newComment];
+      const newComments = [...(comments || []), newComment];
 
       setUpdatedReview((prevReview) => ({
         ...prevReview,
@@ -36,8 +51,8 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
         <button onClick={setIsOpenComment}>X</button>
       </div>
       <div className="comment-list">
-        {updatedReview.comments?.map((item) => (
-          <div className="comment-card" key={item.id}>
+        {comments?.map((comment) => (
+          <div className="comment-card" key={comment.id}>
             <div className="comment-card__person">
               <div className="comment-card__img-container">
                 <img
@@ -46,10 +61,10 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
                   alt="profile"
                 />
               </div>
-              <p>{item.user}</p>
+              <p>{comment.author}</p>
               {/* <span>Achievement Badges</span> */}
             </div>
-            <div className="comment-card__text">{item.content}</div>
+            <div className="comment-card__text">{comment.content}</div>
           </div>
         ))}
       </div>

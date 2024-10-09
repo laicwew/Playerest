@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { ReviewCard } from "./components/ReviewCard";
 import Masonry from "react-layout-masonry";
 import { Review } from "../../helpers/hooks/api/useReview";
-import { fetchRecommendReviews } from "../../helpers/hooks/api/api";
+import { getRecommendReviews } from "../../helpers/hooks/api/api";
 
 export function Search() {
   const [reviews, setReviews] = useState([] as Review[]);
   
    useEffect(() => {
     const getReviews = async () => {
-      const fetchedReviews = await fetchRecommendReviews(); // Fetch reviews
+      const fetchedReviews = await getRecommendReviews(); // Fetch reviews
       if (fetchedReviews) {
         setReviews(fetchedReviews); // Update state with fetched reviews
       }

@@ -277,33 +277,53 @@ button:focus-visible {
   outline: none;
 }
 
+.review-page-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.comment-forum-container {
+  margin-right: 5rem;
+}
+
 .comment-forum {
   display: flex;
   flex-direction: column;
-  border: solid 2px red;
-  width: 25rem;
+  width: 26rem;
   height: 100vh;
+  border-radius: 25px;
 }
 
 .comment-list {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 60rem;
+  padding-top: 1rem;
+}
+
+.comment-card {
   display: flex;
   flex-direction: row;
+  margin-bottom: 1rem;
 }
-.comment-list__person {
+.comment-card__person {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 7rem;
 }
-.comment-list__img-container {
+.comment-card__img-container {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
 }
-.comment-list__img-container-img {
+.comment-card__img-container--img {
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
@@ -312,10 +332,28 @@ button:focus-visible {
   height: 100%;
   border-radius: 50%;
 }
-.comment-list__text {
+.comment-card__text {
   background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 10%;
-  width: 20rem;
+  border-radius: 15px;
+  width: 18rem;
+  height: 5rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.comment-send {
+  width: 25rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.comment-send-input {
+  width: 18rem;
+  margin-right: 1rem;
 }
 
 /* Responsive styles: hide text on screens smaller than 768px */
@@ -484,6 +522,12 @@ button:focus-visible {
 .light-theme .author-box {
   background-color: #ab6767;
 }
+.light-theme .comment-forum {
+  background-color: #ab6767;
+}
+.light-theme .comment-list {
+  background-color: #ead3d3;
+}
 
 .dark-theme .navbar {
   background-color: #302a51;
@@ -521,10 +565,6 @@ button:focus-visible {
   color: white;
   border: solid 2px black;
 }
-.dark-theme .input {
-  color: white;
-  border: solid 2px black;
-}
 .dark-theme .create-form {
   background-color: #d0e7f3;
 }
@@ -536,4 +576,10 @@ button:focus-visible {
 }
 .dark-theme .author-box {
   background-color: #2a1416;
+}
+.dark-theme .comment-forum {
+  background-color: #2a1416;
+}
+.dark-theme .comment-list {
+  background-color: #0a050b;
 }/*# sourceMappingURL=styles.css.map */

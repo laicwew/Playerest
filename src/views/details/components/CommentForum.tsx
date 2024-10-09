@@ -1,28 +1,45 @@
 import { Review } from "../../../helpers/hooks/api/useReview";
+import FormField from "../../components/FormField";
+interface CommentForumProps {
+  review: Review;
+  setIsOpenComment: () => void;
+}
 
-const CommentForum = ({ review }: { review: Review }) => {
+const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
   return (
     <div className="comment-forum">
-      <h2>Comment Forum</h2>
-      {review.comments?.map((item) => (
-        <div className="comment-list" key={item.id}>
-          <div className="comment-list__person">
-            <div className="comment-list__img-container">
-              <img
-                className="comment-list__img-container-img"
-                src={review.imageUrl}
-                alt="profile"
-              />
+      <div className="d-flex flex-row p-2 justify-content-around">
+        <h2 style={{ color: "white" }}>Comment Forum</h2>
+        <button onClick={setIsOpenComment}>X</button>
+      </div>
+      <div className="comment-list">
+        {review.comments?.map((item) => (
+          <div className="comment-card" key={item.id}>
+            <div className="comment-card__person">
+              <div className="comment-card__img-container">
+                <img
+                  className="comment-card__img-container--img"
+                  src={review.imageUrl}
+                  alt="profile"
+                />
+              </div>
+              <p>{item.user}</p>
+              {/* <span>Achievement Badges</span> */}
             </div>
-            <p>{item.user}</p>
-            <span>Achievement signs</span>
+            <div className="comment-card__text">{item.content}</div>
           </div>
-          <div className="comment-list__text">
-            <h5>Comment id</h5>
-            <span>{item.content}</span>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div className="comment-send">
+        <FormField
+          className="comment-send"
+          id="1"
+          name="comment"
+          type="input"
+          label=" "
+        />
+        <button>send</button>
+      </div>
     </div>
   );
 };

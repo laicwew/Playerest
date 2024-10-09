@@ -1,5 +1,4 @@
 import { Review } from "../../helpers/hooks/api/useReview";
-import CommentForum from "./components/CommentForum";
 import ReviewDetails from "./components/ReviewDetails";
 import { useParams } from "react-router-dom";
 
@@ -24,7 +23,6 @@ export function ReviewDetailPage() {
   return (
     <div>
       <h1>Details: {id}</h1>
-      <CommentForum review={review} />
       <ReviewDetails review={review} />
       <div style={{ height: "12vh" }}></div>
     </div>

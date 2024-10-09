@@ -1,12 +1,12 @@
 interface FormFieldProps {
   className: string;
   id: string;
-  name: string;
-  type: string;
-  label: string;
-  value: string;
+  name?: string;
+  type?: string;
+  label?: string;
+  value?: string;
   placeholder?: string;
-  onChange: (
+  onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }

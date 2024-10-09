@@ -8,9 +8,9 @@ export function RecommendReviews() {
         { id: 3, title: "Nice to meet you!", src: "../../../src/assets/placeholder/2.jpeg" },
         { id: 4, title: "Nice to meet you!" },
       ];
-    return (<div>
-        <h2>Similar Game Reviews</h2>
-        <div className="row gap-3 align-items-center">
+    return (<div className="text-center">
+        <h2>Similar Reviews</h2>
+        <div className="recommend-reviews row gap-3 align-items-center">
         {reviews.map((obj) => (
           <ReviewCard key={obj.id} id={obj.id} imgPath={obj.src} title={obj.title} />
         ))}

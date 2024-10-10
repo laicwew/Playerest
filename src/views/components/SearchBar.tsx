@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useIsSmallScreen } from "../../helpers/hooks/useIsSmallScreen";
+import { searchReviews } from "../../helpers/hooks/api/api";
 
 function SearchBarDropDown({
   recentSearches,
@@ -65,8 +66,14 @@ export function SearchBar({
     setIsFocused(false);
   };
 
+  const search = async () => {
+    const reviews = await searchReviews(searchTerm);
+    console.log(reviews);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    search()
     if (searchTerm.trim()) {
       setRecentSearches((prevSearches) => {
         if (!prevSearches.includes(searchTerm.trim())) {
@@ -78,6 +85,8 @@ export function SearchBar({
       setIsFocused(false);
     }
   };
+
+
   // If it's mobile and the search bar should be hidden, show just the search icon
   if (isSmallScreen && !showSearchBar) {
     return (
@@ -114,6 +123,7 @@ export function SearchBar({
         <button
           className="btn-search me-2 fas fa-search nav-icon"
           type="submit"
+          onClick={() => handleSubmit}
           style={{
             alignItems: "center",
             margin: "0",

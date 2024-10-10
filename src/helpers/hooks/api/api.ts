@@ -34,3 +34,22 @@ export const getReviewComments = async (reviewId: number) => {
   }
 };
 
+export const searchReviews = async (query: string) => {
+    try {
+      const response = await fetch(`${ROOT_URL}/api/reviews/search`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }), // Send reviewId in the body
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch reviews");
+      }
+      const reviews = (await response.json()) as Review[];
+      return reviews;
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
+  

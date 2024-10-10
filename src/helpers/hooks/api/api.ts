@@ -8,7 +8,7 @@ export const getRecommendReviews = async () => {
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }
-    const reviews = (await response.json()) as Review[]; // Assuming the backend returns JSON
+    const reviews = (await response.json()) as Review[];
     return reviews;
   } catch (error) {
     console.error("Error fetching reviews:", error);
@@ -22,7 +22,7 @@ export const getReviewComments = async (reviewId: number) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ reviewId }), // Send reviewId in the body
+      body: JSON.stringify({ reviewId }),
     });
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
@@ -41,7 +41,7 @@ export const searchReviews = async (query: string) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ query }), // Send reviewId in the body
+      body: JSON.stringify({ query }),
     });
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");

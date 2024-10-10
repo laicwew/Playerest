@@ -43,7 +43,10 @@ export default function ReviewDetails({ review }: { review: Review }) {
                 <p>{review.content}</p>
               </div>
               <div className="flex d-flex justify-content-end">
-                <button className="w-20" onClick={() => setIsOpenComment(!isOpenComment)}>
+                <button
+                  className="w-20"
+                  onClick={() => setIsOpenComment(!isOpenComment)}
+                >
                   <i className="fas fa-comment-dots"></i>
                 </button>
               </div>

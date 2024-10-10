@@ -6,8 +6,8 @@ import { Review } from "../../model/review";
 
 export function Search() {
   const [reviews, setReviews] = useState([] as Review[]);
-  
-   useEffect(() => {
+
+  useEffect(() => {
     const getReviews = async () => {
       const fetchedReviews = await getRecommendReviews(); // Fetch reviews
       if (fetchedReviews) {
@@ -26,7 +26,7 @@ export function Search() {
         columnProps={{ style: { marginTop: "2rem" } }}
       >
         {reviews.map((review) => (
-          <ReviewCard review={review}/>
+          <ReviewCard review={review} />
         ))}
       </Masonry>
     </div>

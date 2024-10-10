@@ -4,12 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Review } from "../../../model/review";
 
-
-export function ReviewCard({
-  review
-}: {
-  review: Review
-}) {
+export function ReviewCard({ review }: { review: Review }) {
   const [showBtn, setShowBtn] = useState(false);
   const navigate = useNavigate();
 
@@ -22,11 +17,11 @@ export function ReviewCard({
     setSaved((prevState) => !prevState);
   };
 
-   // Fallbacks for imageUrl and title
-   const id = review?.id ?? "1"
-   const imageUrl = review?.imageUrl ?? null;
-   const title = review?.title ?? "No title";
-   const author = review?.author ?? "Unknown author";
+  // Fallbacks for imageUrl and title
+  const id = review?.id ?? "1";
+  const imageUrl = review?.imageUrl ?? null;
+  const title = review?.title ?? "No title";
+  const author = review?.author ?? "Unknown author";
 
   return (
     <Card
@@ -37,19 +32,21 @@ export function ReviewCard({
         borderRadius: "5%",
         marginBottom: "0.5rem",
         cursor: "pointer",
-        padding: "0"
+        padding: "0",
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}
       key={id}
-      onClick={()=>{
-        navigate(`/details/${id}`)
+      onClick={() => {
+        navigate(`/details/${id}`);
       }}
     >
       {imageUrl ? (
-        <Card.Img src={imageUrl} alt={title}/>
+        <Card.Img src={imageUrl} alt={title} />
       ) : (
-        <CardTitle style={{ color: "black", marginLeft: "12px" }}>{title}</CardTitle>
+        <CardTitle style={{ color: "black", marginLeft: "12px" }}>
+          {title}
+        </CardTitle>
       )}
       {showBtn && (
         <Card.ImgOverlay

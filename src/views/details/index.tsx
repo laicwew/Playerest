@@ -1,4 +1,4 @@
-import { Review } from "../../helpers/hooks/api/useReview";
+import { Review } from "../../model/review";
 import ReviewDetails from "./components/ReviewDetails";
 
 export function ReviewDetailPage() {

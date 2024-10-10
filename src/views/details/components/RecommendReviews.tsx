@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ReviewCard } from "../../search/components/ReviewCard";
-import { Review } from "../../../helpers/hooks/api/useReview";
 import { getRecommendReviews } from "../../../helpers/hooks/api/api";
+import { Review } from "../../../model/review";
 
 export function RecommendReviews() {
   const [reviews, setReviews] = useState([] as Review[]);

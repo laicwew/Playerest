@@ -2,7 +2,7 @@ import { Card, CardBody, CardTitle } from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Review } from "../../../helpers/hooks/api/useReview";
+import { Review } from "../../../model/review";
 
 
 export function ReviewCard({

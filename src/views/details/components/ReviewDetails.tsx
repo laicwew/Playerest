@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Review } from "../../../helpers/hooks/api/useReview";
 import CommentForum from "./CommentForum";
 import { RecommendReviews } from "./RecommendReviews";
+import { Review } from "../../../model/review";
 
 //TODO: responsiveness
 export default function ReviewDetails({ review }: { review: Review }) {
@@ -43,7 +43,7 @@ export default function ReviewDetails({ review }: { review: Review }) {
                 <p>{review.content}</p>
               </div>
               <div className="flex d-flex justify-content-end">
-                <button className="w-20" onClick={() => setIsOpenComment(true)}>
+                <button className="w-20" onClick={() => setIsOpenComment(!isOpenComment)}>
                   <i className="fas fa-comment-dots"></i>
                 </button>
               </div>

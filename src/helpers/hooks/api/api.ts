@@ -1,4 +1,4 @@
-import { Comment, Review } from "./useReview";
+import { Review, Comment } from "../../../model/review";
 
 export const ROOT_URL = "http://localhost:3000";
 
@@ -27,9 +27,10 @@ export const getReviewComments = async (reviewId: number) => {
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }
-    const comments = await response.json() as Comment[]; 
+    const comments = (await response.json()) as Comment[];
     return comments;
   } catch (error) {
     console.error("Error fetching comments:", error);
   }
 };
+

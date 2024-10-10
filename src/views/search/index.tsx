@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ReviewCard } from "./components/ReviewCard";
 import Masonry from "react-layout-masonry";
-import { Review } from "../../helpers/hooks/api/useReview";
 import { getRecommendReviews } from "../../helpers/hooks/api/api";
+import { Review } from "../../model/review";
 
 export function Search() {
   const [reviews, setReviews] = useState([] as Review[]);

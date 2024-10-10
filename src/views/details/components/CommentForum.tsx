@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
-import { Comment, Review } from "../../../helpers/hooks/api/useReview";
 import FormField from "../../components/FormField";
 import { useEffect, useState } from "react";
 import { getReviewComments } from "../../../helpers/hooks/api/api";
+import { Review, Comment } from "../../../model/review";
 interface CommentForumProps {
   review: Review;
   setIsOpenComment: () => void;

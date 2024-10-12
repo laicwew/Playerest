@@ -4,7 +4,7 @@ export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 
 export const getRecommendReviews = async () => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/reviews`, { mode: 'no-cors'});
+    const response = await fetch(`${ROOT_URL}/api/reviews`);
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }

@@ -8,7 +8,10 @@
  */
 
 import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
+import * as admin from "firebase-admin";
+import * as dotenv from "dotenv";
+import app from "./app";
+
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -17,3 +20,9 @@ import * as logger from "firebase-functions/logger";
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+admin.initializeApp();
+dotenv.config();
+export const api = onRequest((req, res) => {
+  app(req, res); // repost request to app
+});

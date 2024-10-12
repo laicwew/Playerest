@@ -28,7 +28,7 @@ dotenv.config();
 
 const corsMiddleware = cors({origin: [
   "http://localhost:5173",
-  "https://main.d1zjx5qj46wizn.amplifyapp.com/",
+  "https://main.d1zjx5qj46wizn.amplifyapp.com",
 ]});
 
 export const api = onRequest((req, res) => {

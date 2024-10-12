@@ -27,6 +27,8 @@ const SavedDraftSidebar = ({
 }: savedDraftProps) => {
   return (
     <div className="draft-sidebar">
+      <div className="draft-sidebar__btn-group">
+      {isOpen && <button onClick={createNew} className="draft-sidebar__btn--create">Create New</button>}
       <button className="draft-sidebar__btn--trigger" onClick={setIsOpen}>
         {isOpen ? (
           <span className="fa-solid fa-xmark"></span>
@@ -34,7 +36,7 @@ const SavedDraftSidebar = ({
           <span className="fa-solid fa-arrow-right"></span>
         )}
       </button>
-      {isOpen && <button onClick={createNew}>Create New</button>}
+      </div>
       <div className={`draft-list ${isOpen ? "sideOpen" : "sideClose"}`}>
         <div>
           {draftList.map((item) => {

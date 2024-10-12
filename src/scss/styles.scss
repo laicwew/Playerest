@@ -111,8 +111,8 @@ button {
   max-height: 300px;
 }
 
-.rating-box {
-}
+/* .rating-box {
+} */
 
 .recommend-reviews {
   display: flex;
@@ -132,13 +132,17 @@ button:focus-visible {
 }
 
 .create-form {
-  width: 50rem;
-  height: 40rem;
+  width: 60rem;
+  height: 88vh;
   display: flex;
   flex-direction: row;
-  margin-top: 3%;
+  justify-content: space-around;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-radius: 10px;
+  gap: 2rem;
 
   &__image-upload {
     width: 22rem;
@@ -146,8 +150,7 @@ button:focus-visible {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 5px;
-    border-radius: 5%;
+    gap: 2rem;
   }
   &__image-container {
     display: flex;
@@ -155,8 +158,6 @@ button:focus-visible {
     align-items: center;
     width: 20rem;
     height: 30rem;
-    margin-top: 1rem;
-
     &__img {
       max-width: 100%;
       max-height: 100%;
@@ -165,43 +166,43 @@ button:focus-visible {
     }
   }
 
-  &__btn--upload,
-  &__btn--delete {
-    margin-top: 2rem;
-  }
-
   &__fields {
     display: flex;
     flex-direction: column;
-    margin-top: 3rem;
-    margin-left: 3rem;
+    border-radius: 5px;
+    padding-top: 1rem;
+    gap: 3rem;
     &--game,
     &--title,
     &--text {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-bottom: 3rem;
+      gap: 2rem;
 
       &-label {
         font-weight: bold;
-        flex: 1;
         text-align: left;
       }
 
       &-input {
         width: 20rem;
-        flex: 2;
         text-align: left;
       }
     }
 
     &--text {
       &-input {
-        height: 17rem;
+        height: 10rem;
       }
     }
   }
+
+  &__btn--submit {
+    float: right;
+    margin-top: 3.5rem;
+  }
+
   /* Remove border shadow when focused */
   &__fields--game-input:focus,
   &__fields--title-input:focus,
@@ -209,14 +210,38 @@ button:focus-visible {
     box-shadow: none;
     outline: none;
   }
-  &__btn--submit {
-    margin-top: 0.5rem;
-    float: right;
-  }
+}
+
+.score-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  font-weight: bold;
+  height: 3rem;
+  align-items: center;
+}
+
+.score {
+  width: 3rem;
+  height: 2rem;
+  border-radius: 20%;
+  font-weight: bold;
+}
+
+.max-score {
+  font-weight: bold;
+  font-size: large;
 }
 
 .draft-sidebar {
   position: relative;
+  border-radius: 10px;
+  &__btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1rem;
+  }
   &__btn--trigger button {
     position: absolute;
     top: 0;
@@ -226,7 +251,7 @@ button:focus-visible {
 }
 
 .draft-list {
-  height: 100vh;
+  height: 80vh;
   width: 20rem;
   padding: 2%;
   z-index: -1;
@@ -408,8 +433,8 @@ button:focus-visible {
   }
 }
 
-/* Responsive styles: hide text on screens smaller than 768px */
-@media (max-width: 768px) {
+/* Responsive styles: hide text on screens smaller than 830px */
+@media (max-width: 830px) {
   .nav-text {
     font-size: small;
   }
@@ -449,10 +474,26 @@ button:focus-visible {
       }
     }
   }
+
+  .card-container {
+    flex-direction: column;
+  }
+
+  .review-content-box {
+    max-height: 200px;
+  }
+
+  .recommend-reviews .card {
+    flex: 1 1 45%;
+  }
+
+  .draft-sidebar {
+    display: none;
+  }
 }
 
-/* Responsive styles: hide text on screens smaller than 768px */
-@media (max-width: 480px) {
+/* Responsive styles: hide text on screens smaller than 576px */
+@media (max-width: 576px) {
   .nav-text {
     visibility: hidden;
   }
@@ -484,6 +525,7 @@ button:focus-visible {
     }
 
     &__fields {
+      width: 16rem;
       &--game,
       &--title {
         &-input {
@@ -521,12 +563,22 @@ button:focus-visible {
       }
     }
   }
+
+  .recommend-reviews .card {
+    flex: 1 1 100%;
+  }
+
+  .review-content-box {
+    max-height: 150px;
+  }
+  .draft-sidebar {
+    display: none;
+  }
 }
 
 /* Consistent style setting */
 
-.input,
-.label {
+.input {
   border-radius: 16px;
   background-color: white;
   padding-left: 1rem;
@@ -548,31 +600,6 @@ button:focus-visible {
 
 .btn-group span {
   font-size: 15px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .card-container {
-    flex-direction: column;
-  }
-
-  .review-content-box {
-    max-height: 200px;
-  }
-
-  .recommend-reviews .card {
-    flex: 1 1 45%;
-  }
-}
-
-@media (max-width: 576px) {
-  .recommend-reviews .card {
-    flex: 1 1 100%;
-  }
-
-  .review-content-box {
-    max-height: 150px;
-  }
 }
 
 @include themify($themes) {
@@ -623,11 +650,16 @@ button:focus-visible {
   }
 
   .create-form {
-    background-color: themed("bg");
+    background-color: themed("hint");
+    &__fields {
+      &-label {
+        background-color: themed("hint");
+      }
+    }
   }
 
   .draft-sidebar {
-    background-color: themed("secondary");
+    background-color: themed("hint");
   }
 
   .list-item {

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "storage": {
+      "playerestdynamodb": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

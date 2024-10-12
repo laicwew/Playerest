@@ -5,7 +5,6 @@ import { SearchBar } from "./SearchBar";
 import { LoginModal } from "./LoginModal";
 
 export function AppNavBar() {
-  const types = ["Type1", "Type2", "Something else here"];
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [showNavItems, setShowNavItems] = useState(true);
@@ -38,7 +37,7 @@ export function AppNavBar() {
           Playerest
         </a>
         {/* Explore Menu */}
-        {!isMobile && (
+        {!isMobile ? (
           <>
             <div className="nav-item me-2">
               <a
@@ -50,47 +49,35 @@ export function AppNavBar() {
                 Explore
               </a>
             </div>
-            <div className="nav-item dropdown me-2">
+
+            <div className="nav-item me-2 mx-2">
               <a
-                className="nav-link dropdown-toggle"
-                href="# "
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                className="nav-link active p-0"
+                aria-current="page"
+                href="/create"
                 style={{ fontFamily: "-moz-initial" }}
               >
-                Categories
+                <span className="nav-text"> Create</span>
               </a>
-              <ul className="dropdown-menu">
-                {types.map((value) => {
-                  return (
-                    <li key={value}>
-                      <a
-                        className="dropdown-item"
-                        href="# "
-                        style={{ fontFamily: "-moz-initial" }}
-                      >
-                        {value}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
           </>
-        )}
+        ) : 
+        <div className="nav-item me-2 mx-2">
+          <a
+            className="nav-link active p-0"
+            aria-current="page"
+            href="/create"
+            style={{ fontFamily: "-moz-initial" }}
+          >
+            <span className="fa-solid fa-pen-nib nav-icon p-0" />
+          </a>
+        </div>}
 
         <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
 
         {/* TODO: add login status judge logic */}
         {showNavItems && isLoggedIn ? (
           <div className="nav navbar-nav navbar-right">
-            <button
-              className="btn-nav me-2"
-              onClick={() => navigateToPage("/create")}
-            >
-              <span className="fa-solid fa-pen-nib nav-icon" />
-              <span className="nav-text"> Create</span>
-            </button>
             <button
               className="btn-nav me-2"
               onClick={() => navigateToPage("/login")}
@@ -101,13 +88,6 @@ export function AppNavBar() {
           </div>
         ) : (
           <div className="nav navbar-nav navbar-right">
-            <button
-              className="btn-nav me-2"
-              onClick={() => navigateToPage("/create")}
-            >
-              <span className="fa-solid fa-pen-nib nav-icon" />
-              <span className="nav-text"> Create</span>
-            </button>
             <button className="btn-nav me-2" onClick={handleShow}>
               <span className="fas fa-sign-in-alt nav-icon" />
               <span className="nav-text">Login</span>

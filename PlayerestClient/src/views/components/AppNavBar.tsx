@@ -81,26 +81,25 @@ export function AppNavBar({
         )}
 
         <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
-        <div className="nav navbar-nav navbar-right">
-          <div className="nav-item me-2">
-            <i
-              onClick={changeTheme}
-              className={`fa fa-toggle-${isDarkTheme ? "on" : "off"}`}
-              style={{ fontSize: "2rem" }}
-            ></i>
-          </div>
+        <div className="nav navbar-nav navbar-right d-flex flex-row align-content-center">
+          <i
+            onClick={changeTheme}
+            className={`fa fa-toggle-${isDarkTheme ? "on" : "off"} me-2 align-content-center`}
+            style={{ fontSize: "2.5rem"}}
+          ></i>
+          <span className="align-content-center me-4 fw-bold">Theme</span>
 
           {/* TODO: add login status judge logic */}
           {showNavItems && isLoggedIn ? (
             <button
-              className="btn-nav me-2"
+              className="nav-item btn-nav me-2"
               onClick={() => navigateToPage("/login")}
             >
               <span className="fas fa-user nav-icon" />
               <span className="nav-text">Profile</span>
             </button>
           ) : (
-            <button className="btn-nav me-2" onClick={handleShow}>
+            <button className="nav-item btn-nav me-2" onClick={handleShow}>
               <span className="fas fa-sign-in-alt nav-icon" />
               <span className="nav-text">Login</span>
             </button>

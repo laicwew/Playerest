@@ -264,6 +264,7 @@ button:focus-visible {
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border-radius: 10px;
 }
 .list-item__img-container {
   display: flex;
@@ -412,6 +413,47 @@ button:focus-visible {
 .comment-send-input {
   width: 18rem;
   margin-right: 1rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-top: 4rem;
+}
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.profile__container_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+.profile__container_image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 50%;
+}
+.profile__folder_tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.profile__folder_files {
+  margin-top: 2rem;
 }
 
 /* Responsive styles: hide text on screens smaller than 830px */
@@ -601,7 +643,7 @@ button:focus-visible {
   background-color: #ead3d3;
 }
 .light-theme .list-item {
-  background-color: #ead3d3;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .light-theme .author-box {
   background-color: #ab6767;
@@ -662,7 +704,7 @@ button:focus-visible {
   background-color: #0a050b;
 }
 .dark-theme .list-item {
-  background-color: #0a050b;
+  background-color: #d0e7f3;
 }
 .dark-theme .author-box {
   background-color: #2a1416;

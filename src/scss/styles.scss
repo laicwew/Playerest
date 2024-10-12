@@ -279,6 +279,7 @@ button:focus-visible {
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border-radius: 10px;
   &__img-container {
     display: flex;
     justify-content: center;
@@ -430,6 +431,48 @@ button:focus-visible {
   &-input {
     width: 18rem;
     margin-right: 1rem;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-top: 4rem;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    &_img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+    }
+    &_image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+    }
+  }
+  &__folder {
+    &_tab {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    &_files {
+      margin-top: 2rem;
+    }
   }
 }
 
@@ -663,7 +706,7 @@ button:focus-visible {
   }
 
   .list-item {
-    background-color: themed("hint");
+    background-color: themed("bg");
   }
 
   .author-box {

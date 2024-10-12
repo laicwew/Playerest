@@ -2,15 +2,14 @@ $primaryColorLight: #a84a54;
 $secondaryColorLight: #ab6767;
 $hintColorLight: #ead3d3;
 $btnFocusColorLight: #963d43;
-$backgroundColorLight: #d0e7f3;
+$backgroundColorLight: rgb(0, 0, 0, 0.1);
 $searchBarBgLight: #fef1f2;
 $searchIconLight: #a84a54;
 $navBarBgLight: #fcfafa;
 $navBtnBgLight: #fcfafa;
 $navBtnIconLight: #fcfafa;
-$textColorLight:black;
-$btnTextColorLight:white;
-
+$textColorLight: black;
+$btnTextColorLight: white;
 
 $primaryColorDark: #200f28;
 $secondaryColorDark: #2a1416;
@@ -23,5 +22,5 @@ $navBarBgDark: #302a51;
 $navBtnBgDark: #200f28;
 $navBtnDark: #020202;
 $navBtnIconDark: #7b01e5;
-$textColorDark:white;
-$btnTextColorDark:white;
+$textColorDark: white;
+$btnTextColorDark: white;

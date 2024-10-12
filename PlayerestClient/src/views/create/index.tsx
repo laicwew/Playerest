@@ -4,6 +4,7 @@ import "../../scss/styles.scss";
 import defaultImage from "../../assets/defaultImage.png";
 import FormField from "../components/FormField";
 import SavedDraftSidebar from "./components/SavedDraftSidebar";
+import { Rating } from "react-simple-star-rating";
 
 export function Create() {
   const [draftList, setDraftList] = useState<
@@ -48,7 +49,6 @@ export function Create() {
       reviewText: "",
       reviewGame: "",
       reviewPic: "",
-      reviewScore: "",
     },
 
     onSubmit: (values) => {
@@ -57,6 +57,7 @@ export function Create() {
         reviewPic: imgURL === defaultImage ? "" : imgURL,
       };
       alert(JSON.stringify(submissionValues, null, 2));
+      alert(rating * 2);
     },
   });
 
@@ -110,7 +111,6 @@ export function Create() {
       reviewText: "",
       reviewGame: "",
       reviewPic: draft.imgURL || "",
-      reviewScore: " ",
     });
     setImgURL(draft.imgURL || "");
     setIsFormModified(true);
@@ -121,6 +121,12 @@ export function Create() {
     setImgURL(defaultImage);
     setCurrentDraftId(null);
     setIsFormModified(false);
+  };
+
+  const [rating, setRating] = useState(0);
+
+  const handleRating = (rate: number) => {
+    setRating(rate);
   };
 
   return (
@@ -172,15 +178,7 @@ export function Create() {
           <div className="create-form__fields">
             <div className="score-container">
               <label className="score-label">Score</label>
-              <input
-                id="reviewScore"
-                name="reviewScore"
-                type="number"
-                value={formik.values.reviewScore}
-                onChange={handleFieldChange}
-                className="score"
-              />
-              <div className="max-score">/ 10</div>
+              <Rating onClick={handleRating} />
             </div>
             <FormField
               className="create-form__fields--game"

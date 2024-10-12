@@ -4,21 +4,28 @@ This is the backend for Playerest, which is built using Node JS and TypeScript.
 
 ## Local Development
 
+    cd functions
+
 Add AWS credentials
 
     Create .env file in root, then add credentials
 
 Install all project dependencies
 
-    pnpm install
+    npm install
 
 Run a local webserver to test functions
 
-    pnpm run dev
+    npm run dev
 
 Run script
 
     pnpm ts-node fileName.ts
+
+## Deployed API
+
+    https://api-ttvkb2gtia-uc.a.run.app
+    replacing: http://localhost:3000
 
 ## Local API
 

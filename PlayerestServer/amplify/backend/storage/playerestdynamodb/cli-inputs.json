@@ -1,0 +1,10 @@
+{
+  "resourceName": "playerestdynamodb",
+  "tableName": "review",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

@@ -1,3 +1,5 @@
+import { Amplify } from "aws-amplify";
+import awsmobile from "./aws-exports.ts"
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./views/App.tsx";
@@ -8,6 +10,7 @@ import { Search } from "./views/search";
 import { Create } from "./views/create";
 import { ReviewDetailPage } from "./views/details";
 
+Amplify.configure(awsmobile)
 const router = createBrowserRouter([
   {
     path: "/",

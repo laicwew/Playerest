@@ -1,10 +1,10 @@
 import { Review, Comment } from "../../../model/review";
 
-export const ROOT_URL = "http://localhost:3000";
+export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 
 export const getRecommendReviews = async () => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/reviews`);
+    const response = await fetch(`${ROOT_URL}/api/reviews`, { mode: 'no-cors'});
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }

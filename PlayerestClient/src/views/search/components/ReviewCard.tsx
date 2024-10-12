@@ -54,7 +54,11 @@ export function ReviewCard({ review }: { review: Review }) {
           as={CardImg}
           animation="wave"
           xs={10}
-          style={{ height: "20rem", borderRadius: "5%" }}
+          style={{
+            height: "20rem",
+            borderRadius: "5%",
+            backgroundColor: "rgb(0,0,0,0.2)",
+          }}
         />
       )}
       {imageUrl ? (

@@ -1,4 +1,10 @@
-import { Card, CardBody, CardTitle } from "react-bootstrap";
+import {
+  Card,
+  CardBody,
+  CardImg,
+  CardTitle,
+  Placeholder,
+} from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +29,8 @@ export function ReviewCard({ review }: { review: Review }) {
   const title = review?.title ?? "No title";
   const author = review?.author ?? "Unknown author";
 
+  const [isLoading, setIsloading] = useState(true);
+
   return (
     <Card
       className="text-white position-relative d-flex justify-content-center"
@@ -41,8 +49,21 @@ export function ReviewCard({ review }: { review: Review }) {
         navigate(`/details/${id}`);
       }}
     >
+      {isLoading && (
+        <Placeholder
+          as={CardImg}
+          animation="wave"
+          xs={10}
+          style={{ height: "20rem", borderRadius: "5%" }}
+        />
+      )}
       {imageUrl ? (
-        <Card.Img src={imageUrl} alt={title} />
+        <Card.Img
+          style={{ display: isLoading ? "none" : "block" }}
+          src={imageUrl}
+          alt={title}
+          onLoad={() => setIsloading(false)}
+        />
       ) : (
         <CardTitle style={{ color: "black", marginLeft: "12px" }}>
           {title}

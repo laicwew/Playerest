@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { LoginModal } from "./LoginModal";
 
-export function AppNavBar() {
+export function AppNavBar({
+  isDarkTheme,
+  changeTheme,
+}: {
+  isDarkTheme: boolean;
+  changeTheme: () => void;
+}) {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [showNavItems, setShowNavItems] = useState(true);
@@ -61,23 +67,31 @@ export function AppNavBar() {
               </a>
             </div>
           </>
-        ) : 
-        <div className="nav-item me-2 mx-2">
-          <a
-            className="nav-link active p-0"
-            aria-current="page"
-            href="/create"
-            style={{ fontFamily: "-moz-initial" }}
-          >
-            <span className="fa-solid fa-pen-nib nav-icon p-0" />
-          </a>
-        </div>}
+        ) : (
+          <div className="nav-item me-2 mx-2">
+            <a
+              className="nav-link active p-0"
+              aria-current="page"
+              href="/create"
+              style={{ fontFamily: "-moz-initial" }}
+            >
+              <span className="fa-solid fa-pen-nib nav-icon p-0" />
+            </a>
+          </div>
+        )}
 
         <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
+        <div className="nav navbar-nav navbar-right">
+          <div className="nav-item me-2">
+            <i
+              onClick={changeTheme}
+              className={`fa fa-toggle-${isDarkTheme ? "on" : "off"}`}
+              style={{ fontSize: "2rem" }}
+            ></i>
+          </div>
 
-        {/* TODO: add login status judge logic */}
-        {showNavItems && isLoggedIn ? (
-          <div className="nav navbar-nav navbar-right">
+          {/* TODO: add login status judge logic */}
+          {showNavItems && isLoggedIn ? (
             <button
               className="btn-nav me-2"
               onClick={() => navigateToPage("/login")}
@@ -85,15 +99,13 @@ export function AppNavBar() {
               <span className="fas fa-user nav-icon" />
               <span className="nav-text">Profile</span>
             </button>
-          </div>
-        ) : (
-          <div className="nav navbar-nav navbar-right">
+          ) : (
             <button className="btn-nav me-2" onClick={handleShow}>
               <span className="fas fa-sign-in-alt nav-icon" />
               <span className="nav-text">Login</span>
             </button>
-          </div>
-        )}
+          )}
+        </div>
         <LoginModal
           show={showModal}
           handleClose={handleClose}

@@ -5,12 +5,11 @@ import { useState } from "react";
 function App() {
   const [isDark, setIsDark] = useState(false);
 
-  const handleChange = () => {
+  const changeTheme = () => {
     setIsDark((prev) => !prev);
   };
 
   return (
-    /** TODO: light and dark theme */
     <div
       className={`container-fluid ${isDark ? "dark" : "light"}-theme`}
       style={{
@@ -18,12 +17,7 @@ function App() {
         width: "100vw",
       }}
     >
-      <AppNavBar />
-      <i
-        onClick={handleChange}
-        className={`fa fa-toggle-${isDark ? "on" : "off"}`}
-        style={{ fontSize: "2rem" }}
-      ></i>
+      <AppNavBar isDarkTheme={isDark} changeTheme={changeTheme}/>
       <main>
         <Outlet />
       </main>

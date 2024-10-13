@@ -30,11 +30,17 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
                     src={review.imageUrl}
                     alt={"review" + review.id}
                     className="rounded img-fluid"
-                    style={{
-                      maxHeight: "74vh",
-                      width: "600px",
-                      maxWidth: "80%",
-                    }}
+                    style={
+                      !isOpenComment
+                        ? {
+                            maxHeight: "65vh",
+                            minWidth: "35vw",
+                            objectFit: "contain",
+                          }
+                        : {
+                            maxHeight: "65vh",
+                          }
+                    }
                   />
                 </div>
 

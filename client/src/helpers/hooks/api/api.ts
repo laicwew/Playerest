@@ -76,9 +76,9 @@ export const getReviewComments = async (reviewId: number) => {
   }
 };
 
-export const getReviewDetail = async (reviewId: string) => {
+export const getReviewDetail = async (id: string) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/reviews/detail/${reviewId}`, {
+    const response = await fetch(`${ROOT_URL}/api/reviews/detail/${id}`, {
       method: "POST",
     });
     if (!response.ok) {

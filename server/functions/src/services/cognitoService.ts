@@ -1,5 +1,5 @@
 import { cognitoClient } from "../config/awsConfig";
-import { AuthFlowType, ConfirmSignUpCommand, SignUpCommand, InitiateAuthCommand } from "@aws-sdk/client-cognito-identity-provider";
+import { AuthFlowType, ConfirmSignUpCommand, SignUpCommand, InitiateAuthCommand, CognitoIdentityProviderClient, ResendConfirmationCodeCommand } from "@aws-sdk/client-cognito-identity-provider";
 import dotenv from "dotenv";
 
 dotenv.config(); // This loads the variables from .env into process.env
@@ -71,24 +71,23 @@ export const loginAuth = async ({ username, password }: { username: string; pass
     }
   };
 
-// export const loginUser = async (email: string, password: string) => {
-//     const params = {
-//         AuthFlow: "USER_PASSWORD_AUTH",
-//         ClientId: clientId,
-//         UserPoolId: userpoolId,
-//         AuthParameters: {
-//             USERNAME: email,
-//             PASSWORD: password,
-//         },
-//     };
+  export const resendConfirmationCode = async ({
+    username,
+  }: {
+    username: string,
+  }): Promise<void> => {
+    const client = new CognitoIdentityProviderClient({});
 
-//     try {
-//         const authCommand = new InitiateAuthCommand(params);
-//         const result = await cognitoClient.send(authCommand);
-//         console.log("User login successful:", result);
-//         return result.AuthenticationResult; // 包含访问令牌（AccessToken）、身份令牌（IdToken）等
-//     } catch (error) {
-//         console.error("Error logging in user:", error);
-//         throw error;
-//     }
-// };
+    const command = new ResendConfirmationCodeCommand({
+      ClientId: clientId,
+      Username: username,
+    });
+
+    try {
+      const result = await client.send(command);
+      console.log("Confirmation code resent successfully:", result);
+    } catch (error) {
+      console.error("Error resending confirmation code:", error);
+      throw error;
+    }
+  };

@@ -3,7 +3,7 @@ import {
   getAllUsers,
 } from "../services/dynamoService";
 import dotenv from "dotenv";
-import { loginAuth, register, registerConfirm } from "../services/cognitoService";
+import { loginAuth, register, registerConfirm, resendConfirmationCode } from "../services/cognitoService";
 
 dotenv.config(); // This loads the variables from .env into process.env
 
@@ -48,6 +48,22 @@ export const registerConfirmHandler = async (req: Request, res: Response) => {
     res.status(200).json({ message: "User confirmed successfully", result });
   } catch (error) {
     res.status(500).json({ message: "An error occurred during user confirmation." });
+  }
+};
+
+export const resendConfirmationCodeHandler = async (req: Request, res: Response): Promise<void> => {
+  const { username } = req.body;
+
+  if (!username) {
+    res.status(400).json({ error: "Username is required." });
+    return;
+  }
+
+  try {
+    await resendConfirmationCode({ username });
+    res.status(200).json({ message: "Confirmation code resent successfully." });
+  } catch (error) {
+    res.status(500).json({ error: "Error resending confirmation code." });
   }
 };
 

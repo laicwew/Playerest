@@ -62,12 +62,14 @@ export function Create() {
         imageUrl = await uploadImageFile(values.reviewPic);
       }
 
+      console.log(imageUrl)
+
       const review: Review = {
         content: values.reviewText,
         rate: rating * 2,
         imageUrl, // Use the uploaded image URL
         like: 0,
-        author: "Current User",
+        author: "Current User", //TODO
         title: values.reviewTitle,
       };
 

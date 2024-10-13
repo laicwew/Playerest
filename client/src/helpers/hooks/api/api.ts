@@ -181,12 +181,10 @@ export const uploadImageFile = async (selectedFile: File) => {
         },
       }
     );
-
     if (response.status !== 200) {
       throw new Error("Failed to upload image");
     }
-    console.log(response.data);
-    return response.data;
+    return response.data.imageUrl;
   } catch (error) {
     console.error("Error uploading image:", error);
   }

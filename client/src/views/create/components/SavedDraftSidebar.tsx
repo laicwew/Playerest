@@ -4,6 +4,7 @@ interface savedDraftProps {
   draftList: DraftList[];
   loadDraft: (draft: {
     id: number;
+    rate?: number
     imgURL?: string;
     title?: string;
     createdDate?: string;

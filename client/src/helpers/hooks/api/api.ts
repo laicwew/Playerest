@@ -10,7 +10,7 @@ export const userSignUp = async (
   password: string
 ) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/users/signup`, {
+    const response = await fetch(`${ROOT_URL}/api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,9 +26,45 @@ export const userSignUp = async (
   }
 };
 
+export const userSignUpVerify = async (username: string, code: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/registerconfirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, code }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to sign up");
+    }
+    return response;
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
+};
+
+export const sendVerifyCode = async (username: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/resendconfirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to sign up");
+    }
+    return response;
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
+};
+
 export const userSignIn = async (username: string, password: string) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/users/signin`, {
+    const response = await fetch(`${ROOT_URL}/api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

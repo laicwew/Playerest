@@ -21,10 +21,12 @@ export function AppNavBar({
 
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<string | null>(null)
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (username: string) => {
+    setUser(username)
     setIsLoggedIn(true);
   };
 
@@ -93,7 +95,7 @@ export function AppNavBar({
           {showNavItems && isLoggedIn ? (
             <button
               className="nav-item btn-nav me-2"
-              onClick={() => navigateToPage("/login")}
+              onClick={() => navigateToPage('/profile?user='+ user)}
             >
               <span className="fas fa-user nav-icon" />
               <span className="nav-text">Profile</span>

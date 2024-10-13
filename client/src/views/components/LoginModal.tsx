@@ -20,6 +20,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
   const formik = useFormik({
     initialValues: {
       email: "",
+      username: "",
       password: "",
       comfirmedPassword: "",
     },
@@ -29,7 +30,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
         try {
           const response = await userSignUp(
             values.email,
-            values.email,
+            values.username,
             values.password
           );
           if (response?.ok) {
@@ -52,7 +53,6 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
           console.log(error);
         }
       }
-      handleClose();
     },
   });
   return (
@@ -71,6 +71,16 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
               value={formik.values.email}
               onChange={formik.handleChange}
               placeholder="Enter email"
+            />
+            <FormField
+              className="register__form--username"
+              id="username"
+              name="username"
+              type="username"
+              label="username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              placeholder="Enter username"
             />
             <FormField
               className="register__form--password"

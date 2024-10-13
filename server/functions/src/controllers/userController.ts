@@ -2,13 +2,10 @@ import {Request, Response} from "express";
 import {
   getAllUsers,
 } from "../services/dynamoService";
-import {signUp, signIn} from "aws-amplify/auth";
-import {CognitoIdentityServiceProvider} from "aws-sdk";
 import dotenv from "dotenv";
+import { loginAuth, register, registerConfirm } from "../services/cognitoService";
 
 dotenv.config(); // This loads the variables from .env into process.env
-
-const cognito = new CognitoIdentityServiceProvider();
 
 export const getAllUsersHandler = async (
   req: Request,
@@ -22,102 +19,53 @@ export const getAllUsersHandler = async (
   }
 };
 
-// export const loginUserHandler = async (
-//   req: Request,
-//   res: Response
-// ): Promise<void> => {
-//   const { UserId, Password } = req.body;
+export const registerHandler = async (req: Request, res: Response) => {
+  const { username, email, password } = req.body;
 
-//   if (!UserId || !Password) {
-//     res.status(400).json({ error: "UserId and Password are required" });
-//     return;
-//   }
-
-//   try {
-//     const result = await loginUser(UserId, Password);
-//     if (result.success) {
-//       res.json(result);
-//     } else {
-//       res.status(401).json(result);
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: "Error logging in user" });
-//   }
-// };
-
-// export const registerUserHandler = async (
-//   req: Request,
-//   res: Response
-// ): Promise<void> => {
-//   const { UserId, Password } = req.body;
-
-//   if (!UserId || !Password) {
-//     res.status(400).json({ error: "UserId and Password are required" });
-//     return;
-//   }
-
-//   try {
-//     const result = await registerUser(UserId, Password);
-//     res.status(201).json(result);
-//   } catch (error) {
-//     res.status(500).json({ error: "Error registering user" });
-//   }
-// };
-
-export const signUpHandler = async (req: Request, res: Response) => {
-  const {email, username, password} = req.body;
+  if (!username || !email || !password) {
+      res.status(400).json({ message: "Username, email, and password are required." });
+  }
 
   try {
-    // Call AWS Amplify's signUp function
-    await signUp({
-      username: username,
-      password: password,
-      options: {
-        userAttributes: {
-          email: email,
-        },
-      },
-    });
-
-    // Automatically confirm the user
-    await cognito.adminConfirmSignUp({
-      UserPoolId: process.env.AWS_USERPOOL_ID!,
-      Username: username,
-    }).promise();
-
-    res.status(201).json({
-      message: "User signed up successfully!",
-    });
+      const result = await register(username, email, password);
+      res.status(201).json({ message: "User registered successfully", result });
   } catch (error) {
-    console.error("Error signing up:", error);
-    res.status(500).json({
-      message: "Sign up failed",
-      error: error,
-    });
+      res.status(500).json({ message: "An error occurred during registration." });
   }
 };
 
-export const signInHandler = async (req: Request, res: Response) => {
-  const {username, password} = req.body;
+export const registerConfirmHandler = async (req: Request, res: Response) => {
+  const { username, code } = req.body;
+
+  // Validate input
+  if (!username || !code) {
+    res.status(400).json({ message: "Username and confirmation code are required." });
+  }
 
   try {
-    // Call AWS Amplify's signIn function
-    const signInResponse = await signIn({
-      username: username,
-      password: password,
-    });
-
-    // On successful sign-in
-    res.status(200).json({
-      message: "User signed in successfully!",
-      signInResponse,
-    });
+    // Call the registerConfirm function
+    const result = await registerConfirm({ username, code });
+    res.status(200).json({ message: "User confirmed successfully", result });
   } catch (error) {
-    // Handle any error that occurs during sign-in
-    console.error("Error signing in:", error);
-    res.status(401).json({
-      message: "Sign in failed",
-      error: error || "An unknown error occurred",
-    });
+    res.status(500).json({ message: "An error occurred during user confirmation." });
+  }
+};
+
+export const loginAuthHandler = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  // Validate input
+  if (!username || !password) {
+    res.status(400).json({ message: "Username and password are required." });
+  }
+
+  try {
+    // Call the loginAuth function
+    const result = await loginAuth({ username, password });
+    res.status(200).json({ message: "Login successful", result });
+  } catch (error) {
+    // Handle different error types if necessary
+    console.error("Login failed:", error);
+    res.status(401).json({ message: "Invalid username or password." });
   }
 };

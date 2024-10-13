@@ -17,7 +17,7 @@ router.get("/", getAllReviewsHandler);
 router.post("/add", addReviewHandler);
 router.post("/by-author", getReviewsByAuthorHandler);
 router.post("/search", searchReviewsHandler);
-router.post("/review/:id", getReviewByIdHandler);
+router.get("/review/:id", getReviewByIdHandler);
 router.get("/paginated", fetchReviewsHandler);
 router.delete("/delete/:id", deleteReviewHandler);
 

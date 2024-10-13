@@ -68,23 +68,9 @@ Get reviews by pagination:
 
     GET http://localhost:3000/api/reviews/paginated?limit=10&lastEvaluatedKey=%7B%22id%22%3A9%7D (use the pagination id returned from previous call, in this example it's 9)
 
-<!-- Login:
-
-    POST http://localhost:3000/api/users/login
-
-    Example body:
-    {"UserId": "Yilei Cheng", "Password": "yileicheng"}
-
 Register:
 
     POST http://localhost:3000/api/users/register
-
-    Example body:
-    {"UserId": "Yilei Cheng 2", "Password": "yileicheng2"} -->
-
-SignUp:
-
-    POST http://localhost:3000/api/users/signup
 
     Example body:
     {
@@ -92,12 +78,29 @@ SignUp:
         "username": "testuser",
         "password": "password123"
     }
-    Test Example in FrontEnd:
-    https://docs.amplify.aws/react/build-a-backend/auth/connect-your-frontend/using-the-authenticator/
 
-SignIn:
+Register Confirm:
 
-    POST http://localhost:3000/api/users/signin
+    POST http://localhost:3000/api/users/registerconfirm
+
+    Example body:
+    {
+        "username": "testuser",
+        "code": "123456"
+    }
+
+Register Confirmation Code Resend:
+
+    POST http://localhost:3000/api/users/resendconfirm
+
+    Example body:
+    {
+        "username": "testuser",
+    }
+
+Login:
+
+    POST http://localhost:3000/api/users/login
 
     Example body:
     {

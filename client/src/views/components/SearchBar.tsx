@@ -58,7 +58,7 @@ export function SearchBar({
       setIsFocused(false);
       if (!searchTerm) {
         setShowSearchBar(false);
-        onToggleNavItems(true);  // Show other nav items
+        onToggleNavItems(true); // Show other nav items
       }
     }, 280);
   };
@@ -74,7 +74,7 @@ export function SearchBar({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    search()
+    search();
     if (searchTerm.trim()) {
       setRecentSearches((prevSearches) => {
         if (!prevSearches.includes(searchTerm.trim())) {
@@ -87,13 +87,12 @@ export function SearchBar({
     }
   };
 
-
   // If it's mobile and the search bar should be hidden, show just the search icon
   if (isSmallScreen && !showSearchBar) {
     return (
       <button
         className="btn-search fas fa-search nav-icon"
-        style={{border: "none" }}
+        style={{ border: "none" }}
         onClick={() => {
           setShowSearchBar(true);
           setIsFocused(true);

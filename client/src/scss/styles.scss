@@ -104,9 +104,9 @@ button {
 .review-content-box {
   flex-grow: 1;
   padding: 15px;
-  border: 1px solid #e3e6eb;
-  border-radius: 10px;
-  background-color: #f8f9fa;
+  border: none;
+
+  background-color: #dcb2b2;
   overflow-y: visible;
   max-height: 300px;
 }

@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getAllReviewsHandler,
+  getReviewByIdHandler,
   addReviewHandler,
   getReviewsByAuthorHandler,
   searchReviewsHandler,
@@ -14,6 +15,7 @@ router.get("/", getAllReviewsHandler);
 router.post("/add", addReviewHandler);
 router.post("/by-author", getReviewsByAuthorHandler);
 router.post("/search", searchReviewsHandler);
+router.post("/:id", getReviewByIdHandler);
 
 router.post("/upload", uploadImage.single("image"), uploadImageHandler);
 

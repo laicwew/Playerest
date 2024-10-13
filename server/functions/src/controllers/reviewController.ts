@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import {
   getAllReviews,
+  getReviewById,
   addReview,
   getReviewsByAuthor,
   searchReviews,
@@ -12,6 +13,26 @@ export const getAllReviewsHandler = async (req: Request, res: Response) => {
     res.json(orders);
   } catch (error) {
     res.status(500).json({error: "Unable to retrieve orders"});
+  }
+};
+
+export const getReviewByIdHandler = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const {id} = req.params;
+
+  if (!id) {
+    res.status(400).json({error: "reviewId is required in the request body"});
+  }
+
+  try {
+    const review = await getReviewById(
+      Number(id),
+    );
+    res.json(review);
+  } catch (error) {
+    res.status(500).json({error: "Error fetching reviews by author"});
   }
 };
 

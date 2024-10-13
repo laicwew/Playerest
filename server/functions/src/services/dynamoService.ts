@@ -28,6 +28,27 @@ export const getAllReviews = async () => {
   }
 };
 
+export const getReviewById = async (
+  reviewId: number
+): Promise<any> => {
+  try {
+    const params = {
+      TableName: "Reviews",
+      Key: {
+        id: reviewId, // Assuming 'id' is the primary key for the Reviews table
+      },
+    };
+
+    const data = await dynamoDB.get(params).promise();
+
+    // Return the item if found, or null if not found
+    return data.Item || null;
+  } catch (error) {
+    console.error("Error fetching review by ID:", error);
+    throw new Error("Could not fetch review by ID");
+  }
+};
+
 export const getMaxReviewId = async (): Promise<number> => {
   const params = {
     TableName: "Reviews",

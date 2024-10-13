@@ -14,9 +14,7 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
 
   useEffect(() => {
     const getComments = async () => {
-      const fetchedComments = await getReviewComments(review.id);
-      console.log(review.id);
-      console.log(fetchedComments);
+      const fetchedComments = await getReviewComments(review.id || 0);
       if (fetchedComments) {
         setComments(fetchedComments);
       }

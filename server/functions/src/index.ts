@@ -10,7 +10,6 @@
 import {onRequest} from "firebase-functions/v2/https";
 import * as admin from "firebase-admin";
 import * as dotenv from "dotenv";
-// import cors from "cors";
 import app from "./app";
 
 
@@ -26,10 +25,6 @@ admin.initializeApp();
 
 dotenv.config();
 
-// const corsMiddleware = cors({ origin: '*' });
-
 export const api = onRequest((req, res) => {
-  // corsMiddleware(req, res, () => {
     app(req, res);
-  // }); // repost request to app
 });

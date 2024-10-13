@@ -7,7 +7,6 @@ import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
 import { createReview, uploadImageFile } from "../../helpers/hooks/api/api";
 import { Review, Draft } from "../../model/review";
-import { saveDraft } from "../../helpers/hooks/api/api";
 
 export function Create() {
   const [draftList, setDraftList] = useState<
@@ -49,6 +48,7 @@ export function Create() {
 
   const formik = useFormik({
     initialValues: {
+      reviewRate: 0,
       reviewTitle: "",
       reviewText: "",
       reviewGame: "",
@@ -71,9 +71,9 @@ export function Create() {
         title: values.reviewTitle,
       };
 
-      /* createReview(review)
+      createReview(review)
         .then((review) => alert(review))
-        .catch((error) => console.error("Error", error)); */
+        .catch((error) => console.error("Error", error));
     },
   });
 
@@ -121,17 +121,18 @@ export function Create() {
     // await saveDraft(draft);
   };
 
-  /*   const loadDraft = (draft: {
+  const loadDraft = (draft: {
     id: number;
     title?: string;
     imgURL?: string;
     createdDate?: string;
   }) => {
     formik.setValues({
+      reviewRate: 0,
       reviewTitle: draft.title || "",
       reviewText: "",
       reviewGame: "",
-      reviewPic: draft.imgURL || "",
+      reviewPic: null,
     });
     setImgURL(draft.imgURL || "");
     setIsFormModified(true);
@@ -143,23 +144,25 @@ export function Create() {
     setCurrentDraftId(null);
     setIsFormModified(false);
   };
- */
+
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate: number) => {
     setRating(rate);
+    formik.setFieldValue("reviewRate", rate);
   };
 
   return (
-    <div className="card-container create-page">
-      {/*       <SavedDraftSidebar
+    <div className="create-page">
+      <SavedDraftSidebar
         isOpen={isOpen}
         setIsOpen={handleDraftListOpen}
         draftList={draftList}
         loadDraft={loadDraft}
         createNew={createNew}
-      /> */}
-      <div className="create-form">
+      />
+
+      <div className="card-container create-form">
         <div className="create-form__image-upload">
           <div className="create-form__image-container">
             <img

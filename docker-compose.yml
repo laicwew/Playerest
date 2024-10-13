@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./client # Path to the frontend code
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+  backend:
+    build:
+      context: ./server/functions/ # Path to the backend code
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"

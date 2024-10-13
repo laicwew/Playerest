@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import FormField from "../components/FormField";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { userSignIn, userSignUp } from "../../helpers/hooks/api/api";
 
 interface loginProps {
   show: boolean;
@@ -22,8 +23,35 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
       password: "",
       comfirmedPassword: "",
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      if (signup) {
+        // Handle sign-up˝
+        try {
+          const response = await userSignUp(
+            values.email,
+            values.email,
+            values.password
+          );
+          if (response?.ok) {
+            alert("Sign up successful!");
+            handleClose();
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        // Handle login
+        try {
+          const response = await userSignIn(values.email, values.password);
+          if (response?.ok) {
+            alert("Login successful!");
+            handleLogin(); // Call the parent login handler
+            handleClose();
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
       handleClose();
     },
   });

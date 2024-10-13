@@ -1,5 +1,5 @@
 import { Amplify } from "aws-amplify";
-import awsmobile from "./aws-exports.ts"
+import awsmobile from "./aws-exports.ts";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./views/App.tsx";
@@ -9,8 +9,9 @@ import { Profile } from "./views/profile/index.tsx";
 import { Search } from "./views/search";
 import { Create } from "./views/create";
 import { ReviewDetailPage } from "./views/details";
+import "@aws-amplify/ui-react/styles.css";
 
-Amplify.configure(awsmobile)
+Amplify.configure(awsmobile);
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <ReviewDetailPage  />,
+        element: <ReviewDetailPage />,
       },
     ],
   },
@@ -38,6 +39,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
+      <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
   </StrictMode>
 );

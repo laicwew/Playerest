@@ -3,6 +3,42 @@ import { Review, Comment } from "../../../model/review";
 
 export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 
+export const userSignUp = async (email: string, username: string, password: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, username, password }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to sign up");
+    }
+    return response
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
+};
+
+export const userSignIn = async (username: string, password: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to sign in");
+    }
+    return response;
+  } catch (error) {
+    console.error("Error Logining:", error);
+  }
+};
+
 export const getRecommendReviews = async () => {
   try {
     const response = await fetch(`${ROOT_URL}/api/reviews`);

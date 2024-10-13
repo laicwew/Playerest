@@ -9,7 +9,6 @@ import { Profile } from "./views/profile/index.tsx";
 import { Search } from "./views/search";
 import { Create } from "./views/create";
 import { ReviewDetailPage } from "./views/details";
-import "@aws-amplify/ui-react/styles.css";
 import { SearchResults } from "./views/search/components/SearchResults.tsx";
 
 Amplify.configure(awsmobile);

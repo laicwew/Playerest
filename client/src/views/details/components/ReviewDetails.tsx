@@ -41,7 +41,7 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
                   <div
                     className="author-box mb-3"
                     onClick={() => {
-                      navigate(`/profile`);
+                      navigate(`/profile?user=${review.author}`);
                     }}
                   >
                     <span className="fas fa-at me-2" />

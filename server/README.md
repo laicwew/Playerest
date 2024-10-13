@@ -40,7 +40,7 @@ Get all reviews:
 Get a review using id:
 
     POST http://localhost:3000/api/reviews/detail/:id
-    Example: http://localhost:3000/api/reviews/7
+    Example: http://localhost:3000/api/reviews/detail/7
 
 Add a review:
 

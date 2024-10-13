@@ -35,6 +35,21 @@ export const getReviewComments = async (reviewId: number) => {
   }
 };
 
+export const getReviewDetail = async (reviewId: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/reviews/${reviewId}`, {
+      method: "POST"
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch reviews");
+    }
+    const review = (await response.json()) as Review;
+    return review;
+  } catch (error) {
+    console.error("Error fetching review detail:", error);
+  }
+};
+
 export const searchReviews = async (query: string) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/reviews/search`, {

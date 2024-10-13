@@ -4,14 +4,15 @@ import { RecommendReviews } from "./RecommendReviews";
 import { Review } from "../../../model/review";
 
 //TODO: responsiveness
-export default function ReviewDetails({ review }: { review: Review }) {
+export default function ReviewDetails({ review }: { review: Review | null }) {
   const [isOpenComment, setIsOpenComment] = useState(false);
 
   const isCloseComment = () => {
     setIsOpenComment(false);
   };
   return (
-    <div className="review-page-container">
+    <>
+    {review && (<div className="review-page-container">
       {/* Main content area */}
       <div className="main-content">
         <div className="w-100 text-md-start text-center">
@@ -66,6 +67,9 @@ export default function ReviewDetails({ review }: { review: Review }) {
           <CommentForum review={review} setIsOpenComment={isCloseComment} />
         </div>
       )}
-    </div>
+    </div>)}
+    
+    </>
+    
   );
 }

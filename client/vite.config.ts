@@ -7,5 +7,4 @@ export default defineConfig({
     react(),
     sassDts() // This enables TypeScript support for Sass.
   ],
-  
 })

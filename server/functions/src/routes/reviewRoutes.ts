@@ -14,7 +14,7 @@ import {uploadImage} from "../services/s3Service";
 const router = express();
 
 router.get("/", getAllReviewsHandler);
-router.get("/:id", getReviewByIdHandler);
+router.get("/detail/:id", getReviewByIdHandler);
 router.get("/paginated", fetchReviewsHandler);
 
 router.post("/add", addReviewHandler);

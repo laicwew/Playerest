@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Review, Comment, Draft } from "../../../model/review";
 
-export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
+/* export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app"; */
+export const ROOT_URL = "http://localhost:3000";
 
 export const userSignUp = async (
   email: string,
@@ -77,7 +78,7 @@ export const getReviewComments = async (reviewId: number) => {
 
 export const getReviewDetail = async (reviewId: string) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/reviews/${reviewId}`, {
+    const response = await fetch(`${ROOT_URL}/api/reviews/detail/${reviewId}`, {
       method: "POST",
     });
     if (!response.ok) {

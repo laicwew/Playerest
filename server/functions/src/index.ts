@@ -10,7 +10,6 @@
 import {onRequest} from "firebase-functions/v2/https";
 import * as admin from "firebase-admin";
 import * as dotenv from "dotenv";
-import cors from "cors";
 import app from "./app";
 
 
@@ -26,13 +25,6 @@ admin.initializeApp();
 
 dotenv.config();
 
-const corsMiddleware = cors({origin: [
-  "http://localhost:5173",
-  "https://main.d1zjx5qj46wizn.amplifyapp.com",
-]});
-
 export const api = onRequest((req, res) => {
-  corsMiddleware(req, res, () => {
     app(req, res);
-  }); // repost request to app
 });

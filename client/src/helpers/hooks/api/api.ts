@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Review, Comment } from "../../../model/review";
+import { Review, Comment, Draft } from "../../../model/review";
 
 export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 
@@ -150,5 +150,66 @@ export const uploadImageFile = async (selectedFile: File) => {
     return response.data;
   } catch (error) {
     console.error("Error uploading image:", error);
+  }
+};
+
+export const saveDraft = async (draft: Draft) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/drafts/store`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(draft),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save draft");
+    }
+
+    const responseData = await response.json();
+    console.log("Successfully saved draft:", responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error saving draft:", error);
+  }
+};
+
+export const publishDraft = async (draftId: number) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/drafts/publish`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ draftId }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to publish draft");
+    }
+
+    const responseData = await response.json();
+    console.log("Successfully published draft:", responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error publishing draft:", error);
+  }
+};
+
+export const getDraftsByUserId = async (userId: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/drafts/user/${userId}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch drafts");
+    }
+
+    const drafts = (await response.json()) as Review[];
+    return drafts;
+  } catch (error) {
+    console.error("Error fetching drafts:", error);
   }
 };

@@ -8,6 +8,16 @@ export interface Review {
   like?: number; //the number of likes
 }
 
+export interface Draft {
+  id?: number;
+  imageUrl?: string | null; // image url
+  author: string;
+  title?: string;
+  content?: string;
+  rate?: number;
+  like?: number; //the number of likes
+}
+
 export interface Comment {
   id: number;
   reviewId: number;

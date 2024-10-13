@@ -21,7 +21,7 @@ export function Search() {
   return (
     <div>
       <Masonry
-        columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4 }}
+        columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4, 1680: 5 }}
         gap={20}
         columnProps={{
           style: {

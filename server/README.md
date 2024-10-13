@@ -116,6 +116,17 @@ Get comments by reviewId:
     Example body:
     {"reviewId": 5}
 
+Add comment:
+
+    POST http://localhost:3000/api/comments/add
+
+    Example body:
+    {
+        "author": "testuser",
+        "content": "This is a comment.",
+        "reviewId": 123
+    }
+
 Get a list of relevant reviews by query - SEARCH:
 
     POST http://localhost:3000/api/reviews/search

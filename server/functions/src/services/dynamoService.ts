@@ -250,6 +250,58 @@ export const getAllComments = async () => {
   }
 };
 
+const getMaxCommentId = async (): Promise<number> => {
+  const params = {
+    TableName: "Comments",
+    ProjectionExpression: "id",
+  };
+
+  try {
+    const data = await dynamoDB.scan(params).promise();
+    if (!data.Items || data.Items.length === 0) {
+      return 0;
+    }
+
+    const maxId = Math.max(...data.Items.map((item) => item.id));
+    return maxId;
+  } catch (error) {
+    console.error("Error fetching max comment id:", error);
+    throw new Error("Could not fetch max comment id");
+  }
+};
+
+export const addComment = async (comment: {
+  author: string;
+  content: string;
+  reviewId: number;
+}) => {
+  const currentMaxId = await getMaxCommentId();
+  const newCommentId = currentMaxId + 1;
+
+  const params = {
+    TableName: "Comments",
+    Item: {
+      id: newCommentId,
+      author: comment.author,
+      content: comment.content,
+      reviewId: comment.reviewId,
+      like: 0,
+    },
+  };
+
+  try {
+    await dynamoDB.put(params).promise();
+    return {
+      success: true,
+      message: "Comment added successfully!",
+      id: newCommentId,
+    };
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    throw new Error("Could not add comment");
+  }
+};
+
 export const getCommentsByReviewId = async (reviewId: number) => {
   const params = {
     TableName: "Comments",

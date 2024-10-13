@@ -151,7 +151,7 @@ export function Create() {
   };
 
   return (
-    <div className="create-page">
+    <div className="card-container create-page">
       {/*       <SavedDraftSidebar
         isOpen={isOpen}
         setIsOpen={handleDraftListOpen}

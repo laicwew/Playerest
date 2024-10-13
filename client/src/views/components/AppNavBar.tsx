@@ -84,8 +84,8 @@ export function AppNavBar({
         <div className="nav navbar-nav navbar-right d-flex flex-row align-content-center">
           <i
             onClick={changeTheme}
-            className={`fa fa-toggle-${isDarkTheme ? "on" : "off"} me-2 align-content-center`}
-            style={{ fontSize: "2.5rem"}}
+            className={`fa-moon fa-${isDarkTheme ? "solid" : "regular"} me-2 align-content-center`}
+            style={{ fontSize: "2rem" }}
           ></i>
           <span className="align-content-center me-4 fw-bold">Theme</span>
 

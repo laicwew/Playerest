@@ -5,6 +5,8 @@ import defaultImage from "../../assets/defaultImage.png";
 import FormField from "../components/FormField";
 import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
+import { createReview } from "../../helpers/hooks/api/api";
+import { Review } from "../../model/review";
 
 export function Create() {
   const [draftList, setDraftList] = useState<
@@ -52,12 +54,24 @@ export function Create() {
     },
 
     onSubmit: (values) => {
-      const submissionValues = {
-        ...values,
-        reviewPic: imgURL === defaultImage ? "" : imgURL,
+      const review: Review = {
+        imageUrl: " ",
+        author: "Current User",
+        title: values.reviewTitle,
+        content: values.reviewText,
+        rate: rating * 2,
+        like: 0,
       };
-      alert(JSON.stringify(submissionValues, null, 2));
-      alert(rating * 2);
+
+      // Call the createReview function with the constructed Review object
+      createReview(review)
+        .then((review) => {
+          alert(review);
+        })
+        .catch((error) => {
+          console.error("Error creating review:", error);
+          alert("Failed to create the review.");
+        });
     },
   });
 

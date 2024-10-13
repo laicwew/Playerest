@@ -1,0 +1,16 @@
+services:
+  backend:
+    image: lawrencewonde/playerest-backend:0.0.1 # Backend image from Docker Hub
+    container_name: playerest-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./server/functions/.env
+
+  frontend:
+    image: lawrencewonde/playerest-frontend:0.0.1 # Frontend image from Docker Hub
+    container_name: playerest-frontend
+    ports:
+      - "80:80"
+    env_file:
+      - ./client/.env

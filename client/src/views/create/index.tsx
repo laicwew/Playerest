@@ -5,7 +5,7 @@ import defaultImage from "../../assets/defaultImage.png";
 import FormField from "../components/FormField";
 import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
-import { createReview } from "../../helpers/hooks/api/api";
+import { createReview, uploadImageFile } from "../../helpers/hooks/api/api";
 import { Review } from "../../model/review";
 
 export function Create() {
@@ -42,6 +42,7 @@ export function Create() {
     if (uploadedFile) {
       const cachedURL = URL.createObjectURL(uploadedFile);
       setImgURL(cachedURL);
+      formik.setFieldValue("reviewPic", uploadedFile);
     }
   };
 
@@ -50,20 +51,28 @@ export function Create() {
       reviewTitle: "",
       reviewText: "",
       reviewGame: "",
-      reviewPic: "",
+      reviewPic: null,
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      let imageUrl = defaultImage;
+
+      if (values.reviewPic) {
+        // Upload the file and get the image URL
+        imageUrl = await uploadImageFile(values.reviewPic);
+      }
+
       const review: Review = {
         content: values.reviewText,
         rate: rating * 2,
-        imageUrl: defaultImage,
+        imageUrl, // Use the uploaded image URL
         like: 0,
         author: "Current User",
         title: values.reviewTitle,
       };
-      createReview(review)
+
+      /* createReview(review)
         .then((review) => alert(review))
-        .catch((error) => console.error("Error", error));
+        .catch((error) => console.error("Error", error)); */
     },
   });
 
@@ -106,7 +115,7 @@ export function Create() {
     setIsFormModified(true);
   };
 
-  const loadDraft = (draft: {
+  /*   const loadDraft = (draft: {
     id: number;
     title?: string;
     imgURL?: string;
@@ -128,7 +137,7 @@ export function Create() {
     setCurrentDraftId(null);
     setIsFormModified(false);
   };
-
+ */
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate: number) => {
@@ -137,13 +146,13 @@ export function Create() {
 
   return (
     <div className="create-page">
-      <SavedDraftSidebar
+      {/*       <SavedDraftSidebar
         isOpen={isOpen}
         setIsOpen={handleDraftListOpen}
         draftList={draftList}
         loadDraft={loadDraft}
         createNew={createNew}
-      />
+      /> */}
       <div className="create-form">
         <div className="create-form__image-upload">
           <div className="create-form__image-container">

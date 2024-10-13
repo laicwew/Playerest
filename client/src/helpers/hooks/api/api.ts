@@ -3,7 +3,11 @@ import { Review, Comment } from "../../../model/review";
 
 export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 
-export const userSignUp = async (email: string, username: string, password: string) => {
+export const userSignUp = async (
+  email: string,
+  username: string,
+  password: string
+) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/users/signup`, {
       method: "POST",
@@ -15,7 +19,7 @@ export const userSignUp = async (email: string, username: string, password: stri
     if (!response.ok) {
       throw new Error("Failed to sign up");
     }
-    return response
+    return response;
   } catch (error) {
     console.error("Error signing up:", error);
   }
@@ -74,7 +78,7 @@ export const getReviewComments = async (reviewId: number) => {
 export const getReviewDetail = async (reviewId: string) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/reviews/${reviewId}`, {
-      method: "POST"
+      method: "POST",
     });
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
@@ -124,12 +128,13 @@ export const createReview = async (Review: Review) => {
   }
 };
 
-export const uploadImageURL = async (imageURL: string) => {
+export const uploadImageFile = async (selectedFile: File) => {
   try {
+    // Perform the POST request
     const formData = new FormData();
-    formData.append("image", imageURL);
+    formData.append("image", selectedFile);
     const response = await axios.post(
-      "http://localhost:3000/upload",
+      `${ROOT_URL}/api/reviews/upload`,
       formData,
       {
         headers: {
@@ -137,12 +142,13 @@ export const uploadImageURL = async (imageURL: string) => {
         },
       }
     );
+
     if (response.status !== 200) {
       throw new Error("Failed to upload image");
     }
-    const imgURL = (await response.data) as string[];
-    return imgURL;
-  } catch {
-    console.error("Error uploading image");
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error uploading image:", error);
   }
 };

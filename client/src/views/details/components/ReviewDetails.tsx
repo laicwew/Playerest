@@ -11,16 +11,6 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
     setIsOpenComment(false);
   };
 
-  const imageStyle = isOpenComment
-    ? {
-        maxHeight: "65vh",
-        minWidth: "35vw",
-        objectFit: "contain",
-      }
-    : {
-        maxHeight: "65vh",
-      };
-
   return (
     <>
       {review && (

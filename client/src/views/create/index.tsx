@@ -52,26 +52,18 @@ export function Create() {
       reviewGame: "",
       reviewPic: "",
     },
-
     onSubmit: (values) => {
       const review: Review = {
-        imageUrl: " ",
-        author: "Current User",
-        title: values.reviewTitle,
         content: values.reviewText,
         rate: rating * 2,
+        imageUrl: defaultImage,
         like: 0,
+        author: "Current User",
+        title: values.reviewTitle,
       };
-
-      // Call the createReview function with the constructed Review object
       createReview(review)
-        .then((review) => {
-          alert(review);
-        })
-        .catch((error) => {
-          console.error("Error creating review:", error);
-          alert("Failed to create the review.");
-        });
+        .then((review) => alert(review))
+        .catch((error) => console.error("Error", error));
     },
   });
 

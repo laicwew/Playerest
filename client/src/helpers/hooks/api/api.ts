@@ -56,7 +56,7 @@ export const searchReviews = async (query: string) => {
 
 export const createReview = async (Review: Review) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/review/add`, {
+    const response = await fetch(`${ROOT_URL}/api/reviews/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const createReview = async (Review: Review) => {
       throw new Error("Failed to create review");
     }
     const responseData = await response.json();
-    console.log("Review added successfully:", responseData);
+    console.log("Successfully added review:", responseData);
   } catch (error) {
     console.error("Error creating review:", error);
   }

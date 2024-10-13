@@ -51,6 +51,24 @@ export const fetchReviewsWithPagination = async (
   }
 };
 
+export const deleteReview = async (id: number) => {
+  const params = {
+    TableName: "Reviews",
+    Key: { id },
+  };
+
+  try {
+    await dynamoDB.delete(params).promise();
+    return {
+      success: true,
+      message: `Review with id ${id} deleted successfully`,
+    };
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    throw new Error("Could not delete review");
+  }
+};
+
 export const getReviewById = async (reviewId: number): Promise<any> => {
   try {
     const params = {

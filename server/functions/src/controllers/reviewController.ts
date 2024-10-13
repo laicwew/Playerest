@@ -6,6 +6,7 @@ import {
   getReviewsByAuthor,
   searchReviews,
   fetchReviewsWithPagination,
+  deleteReview,
 } from "../services/dynamoService";
 
 export const getAllReviewsHandler = async (req: Request, res: Response) => {
@@ -30,6 +31,24 @@ export const fetchReviewsHandler = async (
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: "Error fetching reviews" });
+  }
+};
+
+export const deleteReviewHandler = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { id } = req.params;
+
+  if (!id) {
+    res.status(400).json({ error: "Review id is required" });
+  }
+
+  try {
+    const result = await deleteReview(Number(id));
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: `Error deleting review with id ${id}` });
   }
 };
 

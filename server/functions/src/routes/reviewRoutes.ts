@@ -7,6 +7,7 @@ import {
   searchReviewsHandler,
   uploadImageHandler,
   fetchReviewsHandler,
+  deleteReviewHandler,
 } from "../controllers/reviewController";
 import { uploadImage } from "../services/s3Service";
 
@@ -18,6 +19,7 @@ router.post("/by-author", getReviewsByAuthorHandler);
 router.post("/search", searchReviewsHandler);
 router.post("/:id", getReviewByIdHandler);
 router.get("/paginated", fetchReviewsHandler);
+router.delete("/:id", deleteReviewHandler);
 
 router.post("/upload", uploadImage.single("image"), uploadImageHandler);
 

@@ -19,7 +19,7 @@ export function ReviewDetailPage() {
     };
 
     getReviews(); // Call the function to fetch reviews when the component mounts
-  }, []);
+  }, [id]);
 
   return (
     <div>

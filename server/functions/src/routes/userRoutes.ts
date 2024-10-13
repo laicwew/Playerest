@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import {
   getAllUsersHandler,
   registerHandler,
@@ -6,6 +6,7 @@ import {
   loginAuthHandler,
   resendConfirmationCodeHandler,
 } from "../controllers/userController";
+import { authenticateToken } from "../middlewares/authMiddleware";
 
 const router = express();
 
@@ -15,5 +16,9 @@ router.post("/register", registerHandler);
 router.post("/registerconfirm", registerConfirmHandler);
 router.post("/resendconfirm", resendConfirmationCodeHandler);
 router.post("/login", loginAuthHandler);
+
+router.get("/protected", authenticateToken, (req: Request, res: Response) => {
+  res.json({ message: "Protected data"});
+});
 
 export default router;

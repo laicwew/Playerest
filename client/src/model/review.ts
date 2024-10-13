@@ -25,3 +25,8 @@ export interface Comment {
   content: string;
   like?: number;
 }
+
+export interface AuthorData {
+  author: string;
+  reviewId: number;
+}

@@ -2,10 +2,12 @@ import { useState } from "react";
 import CommentForum from "./CommentForum";
 import { RecommendReviews } from "./RecommendReviews";
 import { Review } from "../../../model/review";
+import { useNavigate } from "react-router-dom";
 
 //TODO: responsiveness
 export default function ReviewDetails({ review }: { review: Review | null }) {
   const [isOpenComment, setIsOpenComment] = useState(false);
+  const navigate = useNavigate();
 
   const isCloseComment = () => {
     setIsOpenComment(false);
@@ -41,7 +43,12 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
                   className="w-50 d-flex flex-column justify-content-between"
                   style={{ height: "40vh" }}
                 >
-                  <div className="author-box mb-3">
+                  <div
+                    className="author-box mb-3"
+                    onClick={() => {
+                      navigate(`/profile?user=${review.author}`);
+                    }}
+                  >
                     <span className="fas fa-at me-2" />
                     <span>{review.author}</span>
                   </div>

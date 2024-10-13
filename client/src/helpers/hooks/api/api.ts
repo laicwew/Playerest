@@ -77,9 +77,7 @@ export const getReviewComments = async (reviewId: number) => {
 
 export const getReviewDetail = async (id: string) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/reviews/detail/${id}`, {
-      method: "POST",
-    });
+    const response = await fetch(`${ROOT_URL}/api/reviews/detail/${id}`);
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }

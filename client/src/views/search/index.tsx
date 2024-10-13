@@ -23,7 +23,13 @@ export function Search() {
       <Masonry
         columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4 }}
         gap={20}
-        columnProps={{ style: { marginTop: "2rem", marginInlineEnd: "1rem"} }}
+        columnProps={{
+          style: {
+            marginTop: "2rem",
+            display: "flex",
+            alignItems: "center",
+          },
+        }}
       >
         {reviews.map((review) => (
           <ReviewCard review={review} />

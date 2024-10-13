@@ -17,8 +17,13 @@ function App() {
         width: "100vw",
       }}
     >
-      <AppNavBar isDarkTheme={isDark} changeTheme={changeTheme}/>
-      <main>
+      <AppNavBar isDarkTheme={isDark} changeTheme={changeTheme} />
+      <main
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Outlet />
       </main>
     </div>

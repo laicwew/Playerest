@@ -187,16 +187,6 @@ export function Create() {
               <Rating onClick={handleRating} />
             </div>
             <FormField
-              className="create-form__fields--game"
-              id="reviewGame"
-              name="reviewGame"
-              type="input"
-              label="Game"
-              value={formik.values.reviewGame}
-              onChange={handleFieldChange}
-              placeholder="Game Name"
-            />
-            <FormField
               className="create-form__fields--title"
               id="reviewTitle"
               name="reviewTitle"

@@ -14,35 +14,34 @@ export function SearchResults() {
 
   useEffect(() => {
     const search = async () => {
-    const reviews = await searchReviews(searchTerm??"");
-    setReviews(reviews)
-  }
-  search();
-})
-  
+      const reviews = await searchReviews(searchTerm ?? "");
+      setReviews(reviews);
+    };
+    search();
+  });
 
   return (
     <div>
       {/* Render the search results based on the searchTerm */}
-      {reviews ? <Masonry
-        columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4, 1680: 5 }}
-        gap={20}
-        columnProps={{
-          style: {
-            marginTop: "2rem",
-            display: "flex",
-            alignItems: "center",
-          },
-        }}
-      >
-        {reviews.map((review) => (
-          <ReviewCard review={review} />
-        ))}
-      </Masonry> :
-      <div>
-        No Results
-      </div>
-}
+      {reviews ? (
+        <Masonry
+          columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4, 1680: 5 }}
+          gap={20}
+          columnProps={{
+            style: {
+              marginTop: "2rem",
+              display: "flex",
+              alignItems: "center",
+            },
+          }}
+        >
+          {reviews.map((review) => (
+            <ReviewCard review={review} />
+          ))}
+        </Masonry>
+      ) : (
+        <div>No Results</div>
+      )}
     </div>
   );
 }

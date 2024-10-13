@@ -6,7 +6,8 @@ import FormField from "../components/FormField";
 import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
 import { createReview, uploadImageFile } from "../../helpers/hooks/api/api";
-import { Review } from "../../model/review";
+import { Review, Draft } from "../../model/review";
+import { saveDraft } from "../../helpers/hooks/api/api";
 
 export function Create() {
   const [draftList, setDraftList] = useState<
@@ -115,6 +116,11 @@ export function Create() {
     setIsFormModified(true);
   };
 
+  const handleSaveDraft = async (draft: Draft) => {
+    console.log("Draft", draft);
+    // await saveDraft(draft);
+  };
+
   /*   const loadDraft = (draft: {
     id: number;
     title?: string;
@@ -145,7 +151,7 @@ export function Create() {
   };
 
   return (
-    <div className="create-page">
+    <div className="card-container create-page">
       {/*       <SavedDraftSidebar
         isOpen={isOpen}
         setIsOpen={handleDraftListOpen}
@@ -219,6 +225,21 @@ export function Create() {
 
           <button type="submit" className="create-form__btn--submit">
             Publish
+          </button>
+          <button
+            type="submit"
+            className="create-form__btn--submit"
+            style={{ marginRight: "1rem" }}
+            onClick={() =>
+              handleSaveDraft({
+                imageUrl: formik.values.reviewPic,
+                author: formik.values.reviewTitle,
+                title: formik.values.reviewGame,
+                content: formik.values.reviewText,
+              })
+            }
+          >
+            Save As Draft
           </button>
         </form>
       </div>

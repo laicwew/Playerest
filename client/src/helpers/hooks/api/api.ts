@@ -3,6 +3,8 @@ import { Review, Comment, Draft } from "../../../model/review";
 
 // export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 export const ROOT_URL = "http://localhost:3000";
+// export const ROOT_URL = "http://localhost:5000";
+
 export const userSignUp = async (
   email: string,
   username: string,
@@ -52,6 +54,7 @@ export const getRecommendReviews = async () => {
     const reviews = (await response.json()) as Review[];
     return reviews;
   } catch (error) {
+    console.log(ROOT_URL);
     console.error("Error fetching reviews:", error);
   }
 };

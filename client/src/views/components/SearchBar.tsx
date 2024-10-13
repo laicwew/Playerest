@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useIsSmallScreen } from "../../helpers/hooks/useIsSmallScreen";
-import { searchReviews } from "../../helpers/hooks/api/api";
+import { useNavigate } from "react-router-dom";
 
 function SearchBarDropDown({
   recentSearches,
@@ -46,6 +46,8 @@ export function SearchBar({
   const [searchTerm, setSearchTerm] = useState("");
   const isSmallScreen = useIsSmallScreen();
   const [showSearchBar, setShowSearchBar] = useState(false);
+  // React Router's navigate hook
+  const navigate = useNavigate();
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -65,10 +67,9 @@ export function SearchBar({
     setSearchTerm(searchTerm);
     setIsFocused(false);
   };
-
   const search = async () => {
-    const reviews = await searchReviews(searchTerm);
-    console.log(reviews);
+    // Navigate to the search page with the search term as a query parameter
+    navigate(`/search-results?query=${encodeURIComponent(searchTerm)}`);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

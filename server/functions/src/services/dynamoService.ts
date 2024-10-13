@@ -383,3 +383,21 @@ export const publishDraft = async (draftId: number) => {
     throw new Error("Could not publish draft");
   }
 };
+
+export const getDraftsByUserName = async (userId: string) => {
+  const params = {
+    TableName: "Drafts",
+    FilterExpression: "author = :author",
+    ExpressionAttributeValues: {
+      ":author": userId,
+    },
+  };
+
+  try {
+    const data = await dynamoDB.scan(params).promise();
+    return data.Items || [];
+  } catch (error) {
+    console.error("Error fetching drafts by userId:", error);
+    throw new Error("Could not fetch drafts by userId");
+  }
+};

@@ -10,6 +10,7 @@ import { Search } from "./views/search";
 import { Create } from "./views/create";
 import { ReviewDetailPage } from "./views/details";
 import "@aws-amplify/ui-react/styles.css";
+import { SearchResults } from "./views/search/components/SearchResults.tsx";
 
 Amplify.configure(awsmobile);
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <ReviewDetailPage />,
+      },
+      {
+        path: "/search-results", // Add the route for search results
+        element: <SearchResults />, // Link it to the SearchResults component
       },
     ],
   },

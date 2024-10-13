@@ -135,6 +135,10 @@ Add draft:
         "content": "This is a draft review."
     }
 
+Get drafts by username:
+
+    GET http://localhost:3000/api/drafts/user/nightwarrior
+
 Publish draft using draft id:
 
     POST http://localhost:3000/api/drafts/publish

@@ -66,7 +66,7 @@ export const getReviewByIdHandler = async (
     const review = await getReviewById(Number(id));
     res.json(review);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching reviews by author" });
+    res.status(500).json({ error: "Error fetching reviews by review Id" });
   }
 };
 

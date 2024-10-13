@@ -33,22 +33,16 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
                 style={{ maxHeight: "80vh" }}
               >
                 {/* TODO: conditional judge if comment column is open */}
-                <div className="w-50 text-md-start text-center">
+                <div className="w-50 text-center">
                   <img
                     src={review.imageUrl}
                     alt={"review" + review.id}
                     className="rounded img-fluid"
-                    style={
-                      !isOpenComment
-                        ? {
-                            maxHeight: "65vh",
-                            minWidth: "35vw",
-                            objectFit: "contain",
-                          }
-                        : {
-                            maxHeight: "65vh",
-                          }
-                    }
+                    style={{
+                      maxHeight: "74vh",
+                      width: "600px",
+                      maxWidth: "80%",
+                    }}
                   />
                 </div>
 

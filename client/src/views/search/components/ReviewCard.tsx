@@ -33,14 +33,11 @@ export function ReviewCard({ review }: { review: Review }) {
 
   return (
     <Card
-      className="text-white position-relative d-flex justify-content-center"
+      className="text-white position-relative d-flex justify-content-center custom-card"
       style={{
         width: "21rem",
         height: `${imageUrl && title ? "" : "12rem"}`,
-        borderRadius: "5%",
-        marginBottom: "0.5rem",
         cursor: "pointer",
-        padding: "0",
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}
@@ -66,20 +63,20 @@ export function ReviewCard({ review }: { review: Review }) {
           style={{
             display: isLoading ? "none" : "block",
             minHeight: "9rem",
+            borderRadius: "0.8rem",
           }}
           src={imageUrl}
           alt={title}
           onLoad={() => setIsloading(false)}
         />
       ) : (
-        <CardTitle style={{ color: "black", marginLeft: "12px" }}>
-          {title}
-        </CardTitle>
+        <CardTitle style={{ color: "black" }}>{title}</CardTitle>
       )}
       {showBtn && (
         <Card.ImgOverlay
           style={{
             background: "rgba(0, 0, 0, .5) ",
+            borderRadius: "0.8rem",
           }}
         >
           <div className="rank-score position-absolute top-2">

@@ -49,13 +49,13 @@ export function ReviewCard({ review }: { review: Review }) {
         navigate(`/details/${id}`);
       }}
     >
-      {isLoading && (
+      {isLoading && imageUrl && (
         <Placeholder
           as={CardImg}
           animation="wave"
           xs={10}
           style={{
-            height: "20rem",
+            height: "10rem",
             borderRadius: "5%",
             backgroundColor: "rgb(0,0,0,0.2)",
           }}
@@ -63,7 +63,10 @@ export function ReviewCard({ review }: { review: Review }) {
       )}
       {imageUrl ? (
         <Card.Img
-          style={{ display: isLoading ? "none" : "block" }}
+          style={{
+            display: isLoading ? "none" : "block",
+            minHeight: "9rem",
+          }}
           src={imageUrl}
           alt={title}
           onLoad={() => setIsloading(false)}

@@ -35,8 +35,8 @@ export function ReviewCard({ review }: { review: Review }) {
     <Card
       className="text-white position-relative d-flex justify-content-center"
       style={{
-        width: "15rem",
-        height: `${imageUrl && title ? "" : "10rem"}`,
+        width: "24rem",
+        height: `${imageUrl && title ? "" : "12rem"}`,
         borderRadius: "5%",
         marginBottom: "0.5rem",
         cursor: "pointer",

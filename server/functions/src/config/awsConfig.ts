@@ -2,6 +2,8 @@
 import AWS from "aws-sdk";
 import {S3Client} from "@aws-sdk/client-s3";
 import {Amplify} from "aws-amplify";
+import {CognitoIdentityProviderClient} from "@aws-sdk/client-cognito-identity-provider";
+
 import dotenv from "dotenv";
 
 dotenv.config(); // This loads the variables from .env into process.env
@@ -21,6 +23,8 @@ const s3Client = new S3Client({
   },
 });
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+
+const cognitoClient = new CognitoIdentityProviderClient({region: process.env.AWS_REGION});
 
 Amplify.configure({
   Auth: {
@@ -49,4 +53,4 @@ Amplify.configure({
   },
 });
 
-export {s3Client, dynamoDB};
+export {s3Client, dynamoDB, cognitoClient};

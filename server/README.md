@@ -62,6 +62,12 @@ Get reviews by author:
     Example body:
     {"author": "topgamer", "reviewId": "5"}
 
+Get reviews by pagination:
+
+    GET http://localhost:3000/api/reviews/paginated?limit=10 (can change the limit, this is the first time it's fetch, a pagination id is returned)
+
+    GET http://localhost:3000/api/reviews/paginated?limit=10&lastEvaluatedKey=%7B%22id%22%3A9%7D (use the pagination id returned from previous call, in this example it's 9)
+
 <!-- Login:
 
     POST http://localhost:3000/api/users/login

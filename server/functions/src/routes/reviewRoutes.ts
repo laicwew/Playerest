@@ -6,8 +6,9 @@ import {
   getReviewsByAuthorHandler,
   searchReviewsHandler,
   uploadImageHandler,
+  fetchReviewsHandler,
 } from "../controllers/reviewController";
-import {uploadImage} from "../services/s3Service";
+import { uploadImage } from "../services/s3Service";
 
 const router = express();
 
@@ -16,6 +17,7 @@ router.post("/add", addReviewHandler);
 router.post("/by-author", getReviewsByAuthorHandler);
 router.post("/search", searchReviewsHandler);
 router.post("/:id", getReviewByIdHandler);
+router.get("/paginated", fetchReviewsHandler);
 
 router.post("/upload", uploadImage.single("image"), uploadImageHandler);
 

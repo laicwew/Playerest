@@ -1,4 +1,4 @@
-import {dynamoDB} from "../config/awsConfig";
+import { dynamoDB } from "../config/awsConfig";
 
 export const getAllUsers = async () => {
   const params = {
@@ -28,9 +28,30 @@ export const getAllReviews = async () => {
   }
 };
 
-export const getReviewById = async (
-  reviewId: number
-): Promise<any> => {
+export const fetchReviewsWithPagination = async (
+  limit: number,
+  lastEvaluatedKey?: any
+) => {
+  const params = {
+    TableName: "Reviews",
+    Limit: limit,
+    ExclusiveStartKey: lastEvaluatedKey ? JSON.parse(lastEvaluatedKey) : null, // Parse the lastEvaluatedKey if provided
+  };
+
+  try {
+    const data = await dynamoDB.scan(params).promise();
+
+    return {
+      reviews: data.Items || [],
+      lastEvaluatedKey: data.LastEvaluatedKey || null,
+    };
+  } catch (error) {
+    console.error("Error fetching reviews with pagination:", error); // Log the error
+    throw new Error("Could not fetch reviews with pagination");
+  }
+};
+
+export const getReviewById = async (reviewId: number): Promise<any> => {
   try {
     const params = {
       TableName: "Reviews",
@@ -163,9 +184,9 @@ export const loginUser = async (userId: string, password: string) => {
     const data = await dynamoDB.get(params).promise();
 
     if (data.Item && data.Item.Password === password) {
-      return {success: true, message: "Login successful!"};
+      return { success: true, message: "Login successful!" };
     } else {
-      return {success: false, message: "Invalid UserId or Password"};
+      return { success: false, message: "Invalid UserId or Password" };
     }
   } catch (error) {
     console.error("Error logging in user:", error);
@@ -177,7 +198,7 @@ export const registerUser = async (userId: string, password: string) => {
   const userExists = await checkUserExists(userId);
 
   if (userExists) {
-    return {success: false, message: "User already exists"};
+    return { success: false, message: "User already exists" };
   }
 
   const params = {
@@ -190,7 +211,7 @@ export const registerUser = async (userId: string, password: string) => {
 
   try {
     await dynamoDB.put(params).promise();
-    return {success: true, message: "User registered successfully!"};
+    return { success: true, message: "User registered successfully!" };
   } catch (error) {
     console.error("Error registering user:", error);
     throw new Error("Could not register user");
@@ -311,7 +332,7 @@ export const storeDraft = async (draft: {
 export const publishDraft = async (draftId: number) => {
   const getParams = {
     TableName: "Drafts",
-    Key: {id: draftId},
+    Key: { id: draftId },
   };
 
   try {
@@ -333,12 +354,12 @@ export const publishDraft = async (draftId: number) => {
 
     const deleteParams = {
       TableName: "Drafts",
-      Key: {id: draftId},
+      Key: { id: draftId },
     };
 
     await dynamoDB.delete(deleteParams).promise();
 
-    return {success: true, message: "Draft published successfully!"};
+    return { success: true, message: "Draft published successfully!" };
   } catch (error) {
     console.error("Error publishing draft:", error);
     throw new Error("Could not publish draft");

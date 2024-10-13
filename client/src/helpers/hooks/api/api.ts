@@ -3,7 +3,11 @@ import { Review, Comment } from "../../../model/review";
 
 export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
 
-export const userSignUp = async (email: string, username: string, password: string) => {
+export const userSignUp = async (
+  email: string,
+  username: string,
+  password: string
+) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/users/signup`, {
       method: "POST",
@@ -15,7 +19,7 @@ export const userSignUp = async (email: string, username: string, password: stri
     if (!response.ok) {
       throw new Error("Failed to sign up");
     }
-    return response
+    return response;
   } catch (error) {
     console.error("Error signing up:", error);
   }

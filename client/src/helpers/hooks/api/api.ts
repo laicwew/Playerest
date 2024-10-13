@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Review, Comment } from "../../../model/review";
 
 export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
@@ -34,6 +35,21 @@ export const getReviewComments = async (reviewId: number) => {
   }
 };
 
+export const getReviewDetail = async (reviewId: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/reviews/${reviewId}`, {
+      method: "POST"
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch reviews");
+    }
+    const review = (await response.json()) as Review;
+    return review;
+  } catch (error) {
+    console.error("Error fetching review detail:", error);
+  }
+};
+
 export const searchReviews = async (query: string) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/reviews/search`, {
@@ -50,5 +66,47 @@ export const searchReviews = async (query: string) => {
     return reviews;
   } catch (error) {
     console.error("Error fetching reviews:", error);
+  }
+};
+
+export const createReview = async (Review: Review) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/reviews/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Review),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to create review");
+    }
+    const responseData = await response.json();
+    console.log("Successfully added review:", responseData);
+  } catch (error) {
+    console.error("Error creating review:", error);
+  }
+};
+
+export const uploadImageURL = async (imageURL: string) => {
+  try {
+    const formData = new FormData();
+    formData.append("image", imageURL);
+    const response = await axios.post(
+      "http://localhost:3000/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (response.status !== 200) {
+      throw new Error("Failed to upload image");
+    }
+    const imgURL = (await response.data) as string[];
+    return imgURL;
+  } catch {
+    console.error("Error uploading image");
   }
 };

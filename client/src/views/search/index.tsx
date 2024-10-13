@@ -21,9 +21,9 @@ export function Search() {
   return (
     <div>
       <Masonry
-        columns={{ 300: 2, 640: 3, 768: 4, 1024: 5, 1280: 6 }}
-        gap={2}
-        columnProps={{ style: { marginTop: "2rem" } }}
+        columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4 }}
+        gap={20}
+        columnProps={{ style: { marginTop: "2rem", marginInlineEnd: "1rem"} }}
       >
         {reviews.map((review) => (
           <ReviewCard review={review} />

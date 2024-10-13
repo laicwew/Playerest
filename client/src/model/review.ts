@@ -1,5 +1,5 @@
 export interface Review {
-  id: number;
+  id?: number;
   imageUrl?: string; // image url
   author: string;
   title: string;

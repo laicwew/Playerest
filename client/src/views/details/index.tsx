@@ -1,18 +1,24 @@
+import { useState, useEffect } from "react";
+import { getReviewDetail } from "../../helpers/hooks/api/api";
 import { Review } from "../../model/review";
 import ReviewDetails from "./components/ReviewDetails";
+import { useParams } from "react-router-dom";
 
 export function ReviewDetailPage() {
-  // const { id } = useParams();
-  //TODO: getReviewDetail(params.id)
-  const review = {
-    id: 1,
-    imageUrl: "../../../src/assets/placeholder/2.jpeg",
-    author: "AmiyaSX",
-    title: "This game is just so good",
-    content: "balabala bala bababab lalalal",
-    rate: 7,
-    like: 10,
-  } as Review;
+  const { id } = useParams();
+
+  const [review, setReview] = useState<Review | null>(null);
+
+  useEffect(() => {
+    const getReviews = async () => {
+      const fetchedReview = await getReviewDetail(id ?? ""); // Fetch reviews
+      if (fetchedReview) {
+        setReview(fetchedReview); // Update state with fetched reviews
+      }
+    };
+
+    getReviews(); // Call the function to fetch reviews when the component mounts
+  }, []);
 
   return (
     <div>

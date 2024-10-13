@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import FormField from "../components/FormField";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { userSignIn, userSignUp } from "../../helpers/hooks/api/api";
 
 interface loginProps {
   show: boolean;
@@ -19,12 +20,39 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
   const formik = useFormik({
     initialValues: {
       email: "",
+      username: "",
       password: "",
       comfirmedPassword: "",
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      handleClose();
+    onSubmit: async (values) => {
+      if (signup) {
+        // Handle sign-up˝
+        try {
+          const response = await userSignUp(
+            values.email,
+            values.username,
+            values.password
+          );
+          if (response?.ok) {
+            alert("Sign up successful!");
+            handleClose();
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        // Handle login
+        try {
+          const response = await userSignIn(values.username, values.password);
+          if (response?.ok) {
+            alert("Login successful!");
+            handleLogin(); // Call the parent login handler
+            handleClose();
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
     },
   });
   return (
@@ -34,7 +62,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
           <Modal.Header closeButton />
           <h1 className="register__header"> {!signup ? "Login" : "Sign up"}</h1>
           <form className="register__form" onSubmit={formik.handleSubmit}>
-            <FormField
+          <FormField
               className="register__form--username"
               id="email"
               name="email"
@@ -43,6 +71,16 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
               value={formik.values.email}
               onChange={formik.handleChange}
               placeholder="Enter email"
+            />
+            <FormField
+              className="register__form--username"
+              id="username"
+              name="username"
+              type="username"
+              label="username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              placeholder="Enter username"
             />
             <FormField
               className="register__form--password"

@@ -43,7 +43,7 @@ export function ReviewCard({ review }: { review: Review }) {
       onMouseLeave={() => setShowBtn(false)}
       key={id}
       onClick={() => {
-        navigate(`/details/${id}`);
+        navigate(`/detail/${id}`);
       }}
     >
       {isLoading && imageUrl && (

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Review, Comment, Draft } from "../../../model/review";
 
-export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
+// export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
+export const ROOT_URL = "http://localhost:3000";
 
 export const userSignUp = async (
   email: string,
@@ -9,7 +10,7 @@ export const userSignUp = async (
   password: string
 ) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/users/signup`, {
+    const response = await fetch(`${ROOT_URL}/api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,9 +26,45 @@ export const userSignUp = async (
   }
 };
 
+export const userSignUpVerify = async (username: string, code: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/registerconfirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, code }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to sign up");
+    }
+    return response;
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
+};
+
+export const sendVerifyCode = async (username: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/resendconfirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to sign up");
+    }
+    return response;
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
+};
+
 export const userSignIn = async (username: string, password: string) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/users/signin`, {
+    const response = await fetch(`${ROOT_URL}/api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +89,7 @@ export const getRecommendReviews = async () => {
     const reviews = (await response.json()) as Review[];
     return reviews;
   } catch (error) {
+    console.log(ROOT_URL);
     console.error("Error fetching reviews:", error);
   }
 };
@@ -75,10 +113,10 @@ export const getReviewComments = async (reviewId: number) => {
   }
 };
 
-export const getReviewDetail = async (reviewId: string) => {
+export const getReviewDetail = async (id: string) => {
   try {
-    const response = await fetch(`${ROOT_URL}/api/reviews/${reviewId}`, {
-      method: "POST",
+    const response = await fetch(`${ROOT_URL}/api/reviews/detail/${id}`, {
+      method: "GET",
     });
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");

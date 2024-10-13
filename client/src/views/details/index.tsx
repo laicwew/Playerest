@@ -11,6 +11,7 @@ export function ReviewDetailPage() {
 
   useEffect(() => {
     const getReviews = async () => {
+      console.log(id);
       const fetchedReview = await getReviewDetail(id ?? ""); // Fetch reviews
       if (fetchedReview) {
         setReview(fetchedReview); // Update state with fetched reviews
@@ -18,7 +19,7 @@ export function ReviewDetailPage() {
     };
 
     getReviews(); // Call the function to fetch reviews when the component mounts
-  }, []);
+  }, [id]);
 
   return (
     <div>

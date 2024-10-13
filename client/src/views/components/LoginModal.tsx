@@ -43,7 +43,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
       } else {
         // Handle login
         try {
-          const response = await userSignIn(values.email, values.password);
+          const response = await userSignIn(values.username, values.password);
           if (response?.ok) {
             alert("Login successful!");
             handleLogin(); // Call the parent login handler
@@ -62,7 +62,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
           <Modal.Header closeButton />
           <h1 className="register__header"> {!signup ? "Login" : "Sign up"}</h1>
           <form className="register__form" onSubmit={formik.handleSubmit}>
-            <FormField
+          <FormField
               className="register__form--username"
               id="email"
               name="email"

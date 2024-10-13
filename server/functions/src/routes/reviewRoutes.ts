@@ -14,13 +14,14 @@ import {uploadImage} from "../services/s3Service";
 const router = express();
 
 router.get("/", getAllReviewsHandler);
+router.get("/:id", getReviewByIdHandler);
+router.get("/paginated", fetchReviewsHandler);
+
 router.post("/add", addReviewHandler);
+router.post("/upload", uploadImage.single("image"), uploadImageHandler);
 router.post("/by-author", getReviewsByAuthorHandler);
 router.post("/search", searchReviewsHandler);
-router.get("/review/:id", getReviewByIdHandler);
-router.get("/paginated", fetchReviewsHandler);
-router.delete("/delete/:id", deleteReviewHandler);
 
-router.post("/upload", uploadImage.single("image"), uploadImageHandler);
+router.delete("/:id", deleteReviewHandler);
 
 export default router;

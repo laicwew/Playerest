@@ -10,6 +10,17 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
   const isCloseComment = () => {
     setIsOpenComment(false);
   };
+
+  const imageStyle = isOpenComment
+    ? {
+        maxHeight: "65vh",
+        minWidth: "35vw",
+        objectFit: "contain",
+      }
+    : {
+        maxHeight: "65vh",
+      };
+
   return (
     <>
       {review && (
@@ -27,11 +38,17 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
                     src={review.imageUrl}
                     alt={"review" + review.id}
                     className="rounded img-fluid"
-                    style={{
-                      maxHeight: "65vh",
-                      minWidth: "35vw",
-                      objectFit: "contain",
-                    }}
+                    style={
+                      !isOpenComment
+                        ? {
+                            maxHeight: "65vh",
+                            minWidth: "35vw",
+                            objectFit: "contain",
+                          }
+                        : {
+                            maxHeight: "65vh",
+                          }
+                    }
                   />
                 </div>
 

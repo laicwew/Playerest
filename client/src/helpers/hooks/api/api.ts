@@ -152,3 +152,25 @@ export const uploadImageFile = async (selectedFile: File) => {
     console.error("Error uploading image:", error);
   }
 };
+
+export const getReviewByAuthor = async (id: string) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/reviews/by-author`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    });
+    const responseData = await response.json();
+    if (response.status === 200) {
+      // Assuming the response contains a list of reviews
+      console.log("Reviews retrieved successfully:", responseData);
+      return responseData; // Return the list of reviews
+    } else {
+      throw new Error("Failed to retrieve reviews");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};

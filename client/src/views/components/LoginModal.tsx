@@ -62,8 +62,8 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
           <Modal.Header closeButton />
           <h1 className="register__header"> {!signup ? "Login" : "Sign up"}</h1>
           <form className="register__form" onSubmit={formik.handleSubmit}>
-          <FormField
-              className="register__form--username"
+            <FormField
+              className="register__form--user"
               id="email"
               name="email"
               type="email"
@@ -73,7 +73,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
               placeholder="Enter email"
             />
             <FormField
-              className="register__form--username"
+              className="register__form--user"
               id="username"
               name="username"
               type="username"
@@ -83,7 +83,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
               placeholder="Enter username"
             />
             <FormField
-              className="register__form--password"
+              className="register__form--user"
               id="password"
               name="password"
               type="password"
@@ -95,7 +95,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
 
             {signup && (
               <FormField
-                className="register__form--confirmedPassword"
+                className="register__form--user"
                 id="comfirmedPassword"
                 name="comfirmedPassword"
                 type="password"

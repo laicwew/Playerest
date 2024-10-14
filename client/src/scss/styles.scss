@@ -310,9 +310,7 @@ button:focus-visible {
     flex-direction: column;
     margin-bottom: 2rem;
 
-    &--username,
-    &--password,
-    &--confirmedPassword {
+    &--user {
       display: flex;
       flex-direction: row;
       margin-left: 5rem;
@@ -703,6 +701,11 @@ button:focus-visible {
   .input {
     color: themed("text");
     border: solid 2px black;
+  }
+
+  .label,
+  .score-label {
+    color: themed("text");
   }
 
   .create-form {

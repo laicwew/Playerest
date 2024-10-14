@@ -30,8 +30,6 @@ export function Profile() {
             ></img>
           </div>
           <h3 className="profile__username">{user}</h3>
-
-          <button>Edit Profile</button>
         </div>
         <div className="profile__folder">
           <div className="profile__folder_tab">

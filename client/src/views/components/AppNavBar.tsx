@@ -82,12 +82,12 @@ export function AppNavBar({
 
         <SearchBar onToggleNavItems={(show) => setShowNavItems(show)} />
         <div className="nav navbar-nav navbar-right d-flex flex-row align-content-center">
-          <i
-            onClick={changeTheme}
-            className={`fa-moon fa-${isDarkTheme ? "solid" : "regular"} me-2 align-content-center`}
-            style={{ fontSize: "2rem" }}
-          ></i>
-          <span className="align-content-center me-4 fw-bold">Theme</span>
+          <button onClick={changeTheme} className="nav-item btn-nav me-2">
+            <i
+              className={`fa-moon fa-${isDarkTheme ? "solid" : "regular"} align-content-center`}
+              style={{ fontSize: "1.5rem" }}
+            ></i>
+          </button>
 
           {/* TODO: add login status judge logic */}
           {showNavItems && isLoggedIn ? (

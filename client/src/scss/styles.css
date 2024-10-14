@@ -102,10 +102,9 @@ button {
 .review-content-box {
   flex-grow: 1;
   padding: 15px;
-  border: 1px solid #e3e6eb;
-  border-radius: 10px;
-  background-color: #f8f9fa;
-  overflow-y: auto;
+  border: none;
+  background-color: #dcb2b2;
+  overflow-y: visible;
   max-height: 300px;
 }
 
@@ -299,19 +298,19 @@ button:focus-visible {
   flex-direction: column;
   margin-bottom: 2rem;
 }
-.register__form--username, .register__form--password, .register__form--confirmedPassword {
+.register__form--user {
   display: flex;
   flex-direction: row;
   margin-left: 5rem;
   margin-bottom: 4rem;
   margin-right: 2rem;
 }
-.register__form--username-label, .register__form--password-label, .register__form--confirmedPassword-label {
+.register__form--user-label {
   flex: 1;
   font-weight: bold;
   text-align: left;
 }
-.register__form--username-input, .register__form--password-input, .register__form--confirmedPassword-input {
+.register__form--user-input {
   width: 15rem;
   color: black;
 }
@@ -611,123 +610,131 @@ button:focus-visible {
 }
 
 .light-theme .navbar {
-  background-color: #fcfafa;
-  color: black;
+  background-color: #ffffff;
+  color: #333333;
 }
 .light-theme button {
-  background-color: #a84a54;
-  color: white;
+  background-color: #d1495b;
+  color: #ffffff;
 }
 .light-theme .btn:hover {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 .light-theme .btn-search {
-  background-color: #fcfafa;
-  color: #a84a54;
+  background-color: #ffffff;
+  color: #d1495b;
 }
 .light-theme .btn-search:hover {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 .light-theme .search-bar {
-  background-color: #fef1f2;
-  border-color: #ab6767;
+  background-color: #fff0f1;
+  border-color: #f48c8e;
 }
 .light-theme .search-bar:focus {
-  border-color: #ab6767;
+  border-color: #f48c8e;
   box-shadow: none;
 }
 .light-theme .btn-nav:hover {
-  background-color: #963d43;
+  background-color: #c83744;
 }
 .light-theme button:hover {
-  background-color: #963d43;
+  background-color: #c83744;
 }
 .light-theme .input {
-  color: black;
+  color: #333333;
   border: solid 2px black;
 }
+.light-theme .label,
+.light-theme .score-label {
+  color: #333333;
+}
 .light-theme .create-form {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 .light-theme .create-form__fields-label {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 .light-theme .draft-sidebar {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 .light-theme .list-item {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.0509803922);
 }
 .light-theme .author-box {
-  background-color: #ab6767;
+  background-color: #f48c8e;
 }
 .light-theme .comment-forum {
-  background-color: #ab6767;
+  background-color: #f48c8e;
 }
 .light-theme .comment-list {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 .light-theme .card-container {
-  background-color: #ead3d3;
+  background-color: #ffe5e5;
 }
 
 .dark-theme .navbar {
-  background-color: #302a51;
-  color: white;
+  background-color: #26233a;
+  color: #f0f0f0;
 }
 .dark-theme button {
-  background-color: #200f28;
-  color: white;
+  background-color: #622569;
+  color: #ffffff;
 }
 .dark-theme .btn:hover {
-  background-color: #0a050b;
+  background-color: #332533;
 }
 .dark-theme .btn-search {
-  background-color: #200f28;
-  color: #dddbdc;
+  background-color: #311540;
+  color: #e6e6e6;
 }
 .dark-theme .btn-search:hover {
-  background-color: #0a050b;
+  background-color: #332533;
 }
 .dark-theme .search-bar {
-  background-color: #fef1f2;
-  border-color: #2a1416;
+  background-color: #5c596d;
+  border-color: #803a3a;
 }
 .dark-theme .search-bar:focus {
-  border-color: #2a1416;
+  border-color: #803a3a;
   box-shadow: none;
 }
 .dark-theme .btn-nav:hover {
-  background-color: #0a050b;
+  background-color: #4d2c4b;
 }
 .dark-theme button:hover {
-  background-color: #0a050b;
+  background-color: #4d2c4b;
 }
 .dark-theme .input {
-  color: white;
+  color: #f0f0f0;
   border: solid 2px black;
 }
+.dark-theme .label,
+.dark-theme .score-label {
+  color: #f0f0f0;
+}
 .dark-theme .create-form {
-  background-color: #0a050b;
+  background-color: #332533;
 }
 .dark-theme .create-form__fields-label {
-  background-color: #0a050b;
+  background-color: #332533;
 }
 .dark-theme .draft-sidebar {
-  background-color: #0a050b;
+  background-color: #332533;
 }
 .dark-theme .list-item {
-  background-color: #d0e7f3;
+  background-color: #1e1e2e;
 }
 .dark-theme .author-box {
-  background-color: #2a1416;
+  background-color: #803a3a;
 }
 .dark-theme .comment-forum {
-  background-color: #2a1416;
+  background-color: #803a3a;
 }
 .dark-theme .comment-list {
-  background-color: #0a050b;
+  background-color: #332533;
 }
 .dark-theme .card-container {
-  background-color: #0a050b;
+  background-color: #332533;
 }/*# sourceMappingURL=styles.css.map */

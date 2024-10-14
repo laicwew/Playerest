@@ -148,14 +148,14 @@ export const searchReviews = async (query: string) => {
   }
 };
 
-export const createReview = async (Review: Review) => {
+export const createReview = async (review: Review) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/reviews/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(Review),
+      body: JSON.stringify(review),
     });
     if (!response.ok) {
       throw new Error("Failed to create review");
@@ -271,5 +271,79 @@ export const getDraftsByUserId = async (userId: string) => {
     return drafts;
   } catch (error) {
     console.error("Error fetching drafts:", error);
+  }
+};
+
+export const getReviewsByPagination = async (
+  limit: number,
+  lastEvaluatedKeyParam?: string // Renaming to avoid conflict
+) => {
+  try {
+    let response;
+    if (lastEvaluatedKeyParam) {
+      response = await fetch(
+        `${ROOT_URL}/api/reviews/paginated?limit=${limit}&lastEvaluatedKey=${lastEvaluatedKeyParam}`,
+        {
+          method: "GET",
+        }
+      );
+    } else {
+      response = await fetch(
+        `${ROOT_URL}/api/reviews/paginated?limit=${limit}`,
+        {
+          method: "GET",
+        }
+      );
+    }
+    if (!response.ok) {
+      throw new Error("Failed to fetch Review by limit");
+    }
+    const jsonData = await response.json();
+    const reviews = jsonData["reviews"] as Review[];
+    const newLastEvaluatedKey = jsonData["lastEvaluatedKey"];
+    return { reviews, newLastEvaluatedKey };
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    return { reviews: [], lastEvaluatedKey: undefined };
+  }
+};
+
+export const addComment = async (comment: Comment) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/comments/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to add comment");
+    }
+    const responseData = await response.json();
+    console.log("Successfully added comment:", responseData);
+  } catch (error) {
+    console.error("Error creating comment:", error);
+  }
+};
+
+export const getUserSavedReviews = async (username: string) => {
+  try {
+    const access_token = ""; //TODO
+    const response = await fetch(`${ROOT_URL}/api/users/saved`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(username),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch user saved reviews");
+    }
+    const responseData = await response.json();
+    console.log("Successfully fetching user saved reviews:", responseData);
+  } catch (error) {
+    console.error("Error fetching user saved reviews:", error);
   }
 };

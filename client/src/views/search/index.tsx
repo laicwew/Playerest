@@ -7,31 +7,35 @@ import { Review } from "../../model/review";
 export function Search() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
-  const [evaluatedKey, setEvaluatedKey] = useState<string | undefined>(undefined); // For pagination
+  const [evaluatedKey, setEvaluatedKey] = useState<string | undefined>(
+    undefined
+  ); // For pagination
 
   const fetchReviews = async () => {
     setLoading(true);
-    
+
     // Fetch reviews with pagination
-    const {reviews, lastEvaluatedKey} = await getReviewsByPagination(10, evaluatedKey); // Fetch 10 reviews at a time
-    console.log(reviews)
+    const { reviews, lastEvaluatedKey } = await getReviewsByPagination(
+      10,
+      evaluatedKey
+    ); // Fetch 10 reviews at a time
     if (reviews) {
       setReviews((prevReviews) => [...prevReviews, ...reviews]); // Append new reviews
-      setEvaluatedKey(lastEvaluatedKey); 
+      setEvaluatedKey(lastEvaluatedKey);
     }
-    
+
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchReviews(); // Initial fetch on component mount
+    fetchReviews();
   }, []);
 
   // Function to handle scroll event
   const handleScroll = () => {
-    const scrollTop = window.scrollY; // Current scroll position
-    const windowHeight = window.innerHeight; // Height of the window
-    const documentHeight = document.documentElement.scrollHeight; // Total height of the document
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
 
     // Check if the user has scrolled to the bottom
     if (scrollTop + windowHeight >= documentHeight - 100 && !loading) {
@@ -64,8 +68,10 @@ export function Search() {
           <ReviewCard key={review.id} review={review} /> // Ensure each review has a unique key
         ))}
       </Masonry>
-      
-      {loading && <div className="loading-indicator">Loading more reviews...</div>} {/* Loading indicator */}
+      {loading && (
+        <div className="loading-indicator">Loading more reviews...</div>
+      )}{" "}
+      {/* Loading indicator */}
     </div>
   );
 }

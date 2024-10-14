@@ -276,7 +276,7 @@ export const getDraftsByUserId = async (userId: string) => {
 
 export const getReviewsByPagination = async (
   limit: number,
-  lastEvaluatedKeyParam?: string // Renaming to avoid conflict
+  lastEvaluatedKeyParam?: string
 ) => {
   try {
     let response;

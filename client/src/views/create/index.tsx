@@ -5,21 +5,20 @@ import defaultImage from "../../assets/defaultImage.png";
 import FormField from "../components/FormField";
 import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
-import { createReview, uploadImageFile } from "../../helpers/hooks/api/api";
+import {
+  createReview,
+  saveDraft,
+  uploadImageFile,
+} from "../../helpers/hooks/api/api";
 import { Review, Draft } from "../../model/review";
 
 export function Create() {
-  const [draftList, setDraftList] = useState<
-    { id: number; title: string; imgURL?: string; createdDate: string }[]
-  >([]);
-  const [isFormModified, setIsFormModified] = useState(false);
-  const [currentDraftId, setCurrentDraftId] = useState<number | null>(null);
-
   const [imgURL, setImgURL] = useState(defaultImage);
   const fileUploadedRef = useRef<HTMLInputElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-
-  const generateUniqueId = () => Math.floor(Math.random() * 1000000);
+  const [rating, setRating] = useState(0);
+  // Manage drafts in a state
+  const [draftList, setDraftList] = useState<Draft[]>([]);
 
   const handleDraftListOpen = () => {
     setIsOpen(!isOpen);
@@ -76,79 +75,27 @@ export function Create() {
     },
   });
 
-  useEffect(() => {
-    if (
-      (isFormModified && formik.values.reviewTitle) ||
-      formik.values.reviewText ||
-      formik.values.reviewGame ||
-      imgURL !== defaultImage
-    ) {
-      const draftId = currentDraftId || generateUniqueId();
-      const newDraft = {
-        id: draftId,
-        title: formik.values.reviewTitle,
-        imgURL: imgURL === defaultImage ? defaultImage : imgURL,
-        createdDate: new Date().toISOString().split("T")[0],
-      };
-
-      setDraftList((prevDrafts) => {
-        const draftIndex = prevDrafts.findIndex(
-          (draft) => draft.id === draftId
-        );
-        if (draftIndex >= 0) {
-          const updatedDrafts = [...prevDrafts];
-          updatedDrafts[draftIndex] = newDraft;
-          return updatedDrafts;
-        }
-
-        return [...prevDrafts, newDraft];
-      });
-
-      setCurrentDraftId(draftId);
-    }
-  }, [formik.values, imgURL, currentDraftId, isFormModified]);
-
   const handleFieldChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     formik.handleChange(event);
-    setIsFormModified(true);
   };
-
-  const handleSaveDraft = async (draft: Draft) => {
-    console.log("Draft", draft);
-    // await saveDraft(draft);
-  };
-
-  const loadDraft = (draft: {
-    id: number;
-    title?: string;
-    imgURL?: string;
-    createdDate?: string;
-  }) => {
-    formik.setValues({
-      reviewRate: 0,
-      reviewTitle: draft.title || "",
-      reviewText: "",
-      reviewGame: "",
-      reviewPic: null,
-    });
-    setImgURL(draft.imgURL || "");
-    setIsFormModified(true);
-  };
-
-  const createNew = () => {
-    formik.resetForm();
-    setImgURL(defaultImage);
-    setCurrentDraftId(null);
-    setIsFormModified(false);
-  };
-
-  const [rating, setRating] = useState(0);
 
   const handleRating = (rate: number) => {
     setRating(rate);
     formik.setFieldValue("reviewRate", rate);
+  };
+
+  useEffect(() => {
+    const storedDrafts = localStorage.getItem("drafts");
+    if (storedDrafts) {
+      setDraftList(JSON.parse(storedDrafts));
+    }
+  }, []);
+
+  const handleSaveDraft = async (draft: Draft) => {
+    // await saveDraft(draft);
+    console.log(draft);
   };
 
   return (
@@ -157,8 +104,6 @@ export function Create() {
         isOpen={isOpen}
         setIsOpen={handleDraftListOpen}
         draftList={draftList}
-        loadDraft={loadDraft}
-        createNew={createNew}
       />
 
       <div className="create-form">
@@ -229,14 +174,15 @@ export function Create() {
             Publish
           </button>
           <button
-            type="submit"
+            type="reset"
             className="create-form__btn--submit"
             style={{ marginRight: "1rem" }}
             onClick={() =>
               handleSaveDraft({
-                imageUrl: formik.values.reviewPic,
-                author: formik.values.reviewTitle,
-                title: formik.values.reviewGame,
+                id: draftList.length + 1,
+                imageUrl: formik.values.reviewPic || defaultImage,
+                author: "CurrentUser",
+                title: formik.values.reviewTitle,
                 content: formik.values.reviewText,
               })
             }

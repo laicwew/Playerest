@@ -6,6 +6,7 @@ import {
   loginAuthHandler,
   resendConfirmationCodeHandler,
   getUserSavedReviewsHandler,
+  saveReviewHandler,
 } from "../controllers/userController";
 import { authenticateToken } from "../middlewares/authMiddleware";
 
@@ -18,6 +19,7 @@ router.post("/registerconfirm", registerConfirmHandler);
 router.post("/resendconfirm", resendConfirmationCodeHandler);
 router.post("/login", loginAuthHandler);
 
+router.post("/save", authenticateToken, saveReviewHandler);
 router.post("/saved", authenticateToken, getUserSavedReviewsHandler);
 
 router.get("/protected", authenticateToken, (req: Request, res: Response) => {

@@ -28,15 +28,39 @@ export const getAllReviews = async () => {
   }
 };
 
+export const saveReview = async (username: string, reviewId: number) => {
+  const params = {
+    TableName: "Profiles",
+    Key: {
+      userName: String(username), // Ensure this matches the primary key for the Profiles table
+    },
+    UpdateExpression: "SET saved = list_append(if_not_exists(saved, :empty_list), :new_review_id)",
+    ExpressionAttributeValues: {
+      ":new_review_id": [reviewId], // New reviewId to add
+      ":empty_list": [], // Default value if 'saved' doesn't exist
+    },
+    ReturnValues: "UPDATED_NEW", // Return the new value of 'saved'
+  };
+
+  try {
+    const result = await dynamoDB.update(params).promise();
+    console.log(`Review ID ${reviewId} added to user ${username}'s saved list.`);
+    return result.Attributes?.saved || []; // Return the updated saved List
+  } catch (error) {
+    console.error("Error saving review:", error);
+    throw new Error("Could not save the review.");
+  }
+};
+
 export const getUserSavedReviews = async (username: string) => {
   const params = {
     TableName: "Profiles",
     Key: {
-      userName: String(username) // Ensure this matches the primary key for the Profiles table
+      userName: String(username), // Ensure this matches the primary key for the Profiles table
     },
-    ProjectionExpression: "saved" // Specify that we only want the 'saved' attribute
-  }
-  console.log(username)
+    ProjectionExpression: "saved", // Specify that we only want the 'saved' attribute
+  };
+  console.log(username);
   try {
     const data = await dynamoDB.get(params).promise();
     if (!data.Item) {
@@ -47,7 +71,7 @@ export const getUserSavedReviews = async (username: string) => {
     console.error("Error retrieving saved reviews:", error);
     throw new Error("Could not retrieve saved reviews.");
   }
-}
+};
 
 export const fetchReviewsWithPagination = async (
   limit: number,

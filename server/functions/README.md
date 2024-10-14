@@ -29,18 +29,20 @@ Run script
 
 ## Local API
 
-Get all users:
 
-    GET http://localhost:3000/api/users
+Save review by reviewId (Authorized user):
 
-Get all reviews:
-
-    GET http://localhost:3000/api/reviews
-
-Get a review using id:
-
-    GET http://localhost:3000/api/reviews/detail/:id
-    Example: http://localhost:3000/api/reviews/detail/7
+    POST http://localhost:3000/api/users/save
+    Example request:
+    Headers: 
+    {
+        "Authorization": `Bearer ${access_token}`
+    }
+    Body:
+    {
+        "username": "testuser",
+        "reviewId": 1
+    }
 
 Get saved reviews by username (Authorized user):
 
@@ -54,6 +56,19 @@ Get saved reviews by username (Authorized user):
     {
         "username": "testuser"
     }
+
+Get all users:
+
+    GET http://localhost:3000/api/users
+
+Get all reviews:
+
+    GET http://localhost:3000/api/reviews
+
+Get a review using id:
+
+    GET http://localhost:3000/api/reviews/detail/:id
+    Example: http://localhost:3000/api/reviews/detail/7
 
 
 Add a review:

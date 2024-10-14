@@ -82,9 +82,7 @@ button {
 
 .card-container {
   border-radius: 20px;
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.1),
-    0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .author-box {
@@ -99,6 +97,10 @@ button {
   align-content: center;
   max-width: -moz-fit-content;
   max-width: fit-content;
+}
+
+.custom-card {
+  border-radius: 5% !important;
 }
 
 .review-content-box {
@@ -172,23 +174,17 @@ button:focus-visible {
   padding-top: 1rem;
   gap: 3rem;
 }
-.create-form__fields--game,
-.create-form__fields--title,
-.create-form__fields--text {
+.create-form__fields--game, .create-form__fields--title, .create-form__fields--text {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 2rem;
 }
-.create-form__fields--game-label,
-.create-form__fields--title-label,
-.create-form__fields--text-label {
+.create-form__fields--game-label, .create-form__fields--title-label, .create-form__fields--text-label {
   font-weight: bold;
   text-align: left;
 }
-.create-form__fields--game-input,
-.create-form__fields--title-input,
-.create-form__fields--text-input {
+.create-form__fields--game-input, .create-form__fields--title-input, .create-form__fields--text-input {
   width: 20rem;
   text-align: left;
 }
@@ -199,9 +195,7 @@ button:focus-visible {
   float: right;
   margin-top: 3.5rem;
 }
-.create-form__fields--game-input:focus,
-.create-form__fields--title-input:focus,
-.create-form__fields--text-input:focus {
+.create-form__fields--game-input:focus, .create-form__fields--title-input:focus, .create-form__fields--text-input:focus {
   box-shadow: none;
   outline: none;
 }
@@ -284,9 +278,9 @@ button:focus-visible {
 }
 .list-item__img-container__img {
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -308,25 +302,19 @@ button:focus-visible {
   flex-direction: column;
   margin-bottom: 2rem;
 }
-.register__form--username,
-.register__form--password,
-.register__form--confirmedPassword {
+.register__form--user {
   display: flex;
   flex-direction: row;
   margin-left: 5rem;
   margin-bottom: 4rem;
   margin-right: 2rem;
 }
-.register__form--username-label,
-.register__form--password-label,
-.register__form--confirmedPassword-label {
+.register__form--user-label {
   flex: 1;
   font-weight: bold;
   text-align: left;
 }
-.register__form--username-input,
-.register__form--password-input,
-.register__form--confirmedPassword-input {
+.register__form--user-input {
   width: 15rem;
   color: black;
 }
@@ -339,9 +327,7 @@ button:focus-visible {
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
-.register__form--username-input:focus,
-.register__form--password-input:focus,
-.register__form--confirmedPassword-input:focus {
+.register__form--username-input:focus, .register__form--password-input:focus, .register__form--confirmedPassword-input:focus {
   box-shadow: none; /* Removes shadow */
   outline: none;
 }
@@ -401,9 +387,9 @@ button:focus-visible {
 }
 .comment-card__img-container--img {
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -457,9 +443,9 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   border-radius: 50%;
 }
 .profile__folder_tab {
@@ -532,9 +518,6 @@ button:focus-visible {
   .btn-nav:hover {
     background-color: transparent;
   }
-  .nav-icon {
-    color: #a84a54;
-  }
   .create-form {
     width: 18rem;
     height: auto;
@@ -553,8 +536,7 @@ button:focus-visible {
   .create-form__fields {
     width: 16rem;
   }
-  .create-form__fields--game-input,
-  .create-form__fields--title-input {
+  .create-form__fields--game-input, .create-form__fields--title-input {
     width: 8rem;
   }
   .create-form__fields--text-input {
@@ -570,12 +552,10 @@ button:focus-visible {
   .register__form {
     margin-bottom: 1rem;
   }
-  .register__form--username,
-  .register__form--password {
+  .register__form--username, .register__form--password {
     margin-bottom: 2rem;
   }
-  .register__form--username-input,
-  .register__form--password-input {
+  .register__form--username-input, .register__form--password-input {
     width: 10rem;
   }
   .register__form_link--active {
@@ -630,6 +610,9 @@ button:focus-visible {
   color: black;
 }
 
+.light-theme .nav-icon {
+  color: #ffe5e5;
+}
 .light-theme .navbar {
   background-color: #ffffff;
   color: #333333;
@@ -639,14 +622,14 @@ button:focus-visible {
   color: #ffffff;
 }
 .light-theme .btn:hover {
-  background-color: #ffe5e5;
+  background-color: #f48c8e;
 }
 .light-theme .btn-search {
   background-color: #ffffff;
   color: #d1495b;
 }
 .light-theme .btn-search:hover {
-  background-color: #ffe5e5;
+  background-color: #f48c8e;
 }
 .light-theme .search-bar {
   background-color: #fff0f1;
@@ -680,7 +663,7 @@ button:focus-visible {
   background-color: #ffe5e5;
 }
 .light-theme .list-item {
-  background-color: rgba(0, 0, 0, 0.0509803922);
+  background-color: #ffe5e5;
 }
 .light-theme .author-box {
   background-color: #f48c8e;
@@ -691,41 +674,51 @@ button:focus-visible {
 .light-theme .comment-list {
   background-color: #ffe5e5;
 }
+.light-theme .comment-card__text {
+  background-color: #f48c8e;
+}
 .light-theme .card-container {
   background-color: #ffe5e5;
 }
+.light-theme .review-content-box {
+  background-color: #f48c8e;
+  border-radius: 10px;
+}
 
+.dark-theme .nav-icon {
+  color: #b099c8;
+}
 .dark-theme .navbar {
-  background-color: #26233a;
+  background-color: #423261;
   color: #f0f0f0;
 }
 .dark-theme button {
-  background-color: #622569;
+  background-color: #745196;
   color: #ffffff;
 }
 .dark-theme .btn:hover {
-  background-color: #332533;
+  background-color: #b9a5e2;
 }
 .dark-theme .btn-search {
-  background-color: #311540;
+  background-color: #7c58a3;
   color: #e6e6e6;
 }
 .dark-theme .btn-search:hover {
-  background-color: #332533;
+  background-color: #b9a5e2;
 }
 .dark-theme .search-bar {
-  background-color: #5c596d;
-  border-color: #803a3a;
+  background-color: #e7ddff;
+  border-color: #956cbd;
 }
 .dark-theme .search-bar:focus {
-  border-color: #803a3a;
+  border-color: #956cbd;
   box-shadow: none;
 }
 .dark-theme .btn-nav:hover {
-  background-color: #4d2c4b;
+  background-color: #a25db3;
 }
 .dark-theme button:hover {
-  background-color: #4d2c4b;
+  background-color: #a25db3;
 }
 .dark-theme .input {
   color: #f0f0f0;
@@ -736,26 +729,33 @@ button:focus-visible {
   color: #f0f0f0;
 }
 .dark-theme .create-form {
-  background-color: #332533;
+  background-color: #b099c8;
 }
 .dark-theme .create-form__fields-label {
-  background-color: #332533;
+  background-color: #b099c8;
 }
 .dark-theme .draft-sidebar {
-  background-color: #332533;
+  background-color: #b099c8;
 }
 .dark-theme .list-item {
-  background-color: #1e1e2e;
+  background-color: #b099c8;
 }
 .dark-theme .author-box {
-  background-color: #803a3a;
+  background-color: #b9a5e2;
 }
 .dark-theme .comment-forum {
-  background-color: #803a3a;
+  background-color: #956cbd;
 }
 .dark-theme .comment-list {
-  background-color: #332533;
+  background-color: #b099c8;
+}
+.dark-theme .comment-card__text {
+  background-color: #b9a5e2;
 }
 .dark-theme .card-container {
-  background-color: #0a050b;
-} /*# sourceMappingURL=styles.css.map */
+  background-color: #b099c8;
+}
+.dark-theme .review-content-box {
+  background-color: #b9a5e2;
+  border-radius: 10px;
+}/*# sourceMappingURL=styles.css.map */

@@ -135,7 +135,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
           <form className="register__form" onSubmit={formik.handleSubmit}>
             {signup && (
               <FormField
-                className="register__form--username"
+                className="register__form--user"
                 id="email"
                 name="email"
                 type="email"
@@ -168,7 +168,7 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
 
             {signup && (
               <FormField
-                className="register__form--confirmedPassword"
+                className="register__form--user"
                 id="confirmedPassword"
                 name="confirmedPassword"
                 type="password"

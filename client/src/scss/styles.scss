@@ -551,9 +551,7 @@ button:focus-visible {
   .btn-nav:hover {
     background-color: transparent;
   }
-  .nav-icon {
-    color: #a84a54;
-  }
+
   .create-form {
     width: 18rem;
     height: auto;
@@ -661,6 +659,9 @@ button:focus-visible {
 }
 
 @include themify($themes) {
+  .nav-icon {
+    color: themed("bg");
+  }
   .navbar {
     background-color: themed("navBg");
     color: themed("text");
@@ -713,16 +714,16 @@ button:focus-visible {
   }
 
   .create-form {
-    background-color: themed("hint");
+    background-color: themed("bg");
     &__fields {
       &-label {
-        background-color: themed("hint");
+        background-color: themed("bg");
       }
     }
   }
 
   .draft-sidebar {
-    background-color: themed("hint");
+    background-color: themed("bg");
   }
 
   .list-item {
@@ -730,7 +731,7 @@ button:focus-visible {
   }
 
   .author-box {
-    background-color: themed("secondary");
+    background-color: themed("hint");
   }
 
   .comment-forum {
@@ -738,10 +739,18 @@ button:focus-visible {
   }
 
   .comment-list {
+    background-color: themed("bg");
+  }
+  .comment-card__text {
     background-color: themed("hint");
   }
 
   .card-container {
+    background-color: themed("bg");
+  }
+
+  .review-content-box {
     background-color: themed("hint");
+    border-radius: 10px;
   }
 }

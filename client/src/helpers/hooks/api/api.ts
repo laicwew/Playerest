@@ -322,6 +322,7 @@ export const addComment = async (comment: Comment) => {
     }
     const responseData = await response.json();
     console.log("Successfully added comment:", responseData);
+    return responseData;
   } catch (error) {
     console.error("Error creating comment:", error);
   }

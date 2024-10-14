@@ -62,7 +62,7 @@ export function Create() {
         imageUrl = await uploadImageFile(values.reviewPic);
       }
 
-      console.log(imageUrl)
+      console.log(imageUrl);
 
       const review: Review = {
         content: values.reviewText,
@@ -164,7 +164,7 @@ export function Create() {
         createNew={createNew}
       />
 
-      <div className="card-container create-form">
+      <div className="create-form">
         <div className="create-form__image-upload">
           <div className="create-form__image-container">
             <img

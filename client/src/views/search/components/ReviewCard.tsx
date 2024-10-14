@@ -6,13 +6,16 @@ import {
   Placeholder,
 } from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Review } from "../../../model/review";
+import { AuthContext } from "../../../helpers/AuthContext";
+import { saveReviewById } from "../../../helpers/hooks/api/api";
 
 export function ReviewCard({ review }: { review: Review }) {
   const [showBtn, setShowBtn] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated, accessToken, userName } = useContext(AuthContext);
 
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -20,7 +23,15 @@ export function ReviewCard({ review }: { review: Review }) {
     setLiked((prevState) => !prevState);
   };
   const handleSaved = () => {
-    setSaved((prevState) => !prevState);
+    if (isAuthenticated && accessToken && userName) {
+      const saveReview = async () => {
+        await saveReviewById(accessToken, userName, review.id ?? 0);
+      };
+      saveReview();
+      setSaved((prevState) => !prevState);
+    } else {
+      alert("Please login first!");
+    }
   };
 
   // Fallbacks for imageUrl and title

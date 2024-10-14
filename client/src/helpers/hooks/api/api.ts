@@ -335,22 +335,49 @@ export const addComment = async (comment: Comment) => {
   }
 };
 
-export const getUserSavedReviews = async (username: string) => {
+export const saveReviewById = async (
+  access_token: string,
+  username: string,
+  reviewId: number
+) => {
   try {
-    const access_token = ""; //TODO
+    const response = await fetch(`${ROOT_URL}/api/users/save`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, reviewId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to save review");
+    }
+    const responseData = await response.json();
+    console.log("Successfully save review:", responseData);
+  } catch (error) {
+    console.error("Error save review:", error);
+  }
+};
+
+export const getUserSavedReviews = async (access_token: string,
+  username: string) => {
+    console.log(access_token)
+    console.log(username)
+  try {
     const response = await fetch(`${ROOT_URL}/api/users/saved`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        "Authorization": `Bearer ${access_token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(username),
+      body: JSON.stringify({username}),
     });
     if (!response.ok) {
       throw new Error("Failed to fetch user saved reviews");
     }
     const responseData = await response.json();
     console.log("Successfully fetching user saved reviews:", responseData);
+    return responseData as Review[]
   } catch (error) {
     console.error("Error fetching user saved reviews:", error);
   }

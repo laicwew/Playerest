@@ -75,7 +75,14 @@ export const userSignIn = async (username: string, password: string) => {
     if (!response.ok) {
       throw new Error("Failed to sign in");
     }
-    return response;
+
+    const data = await response.json();
+    if (data?.result?.AuthenticationResult) {
+      console.log("Login successful, tokens saved in localStorage");
+      return data;
+    } else {
+      throw new Error("AuthenticationResult not found");
+    }
   } catch (error) {
     console.error("Error Logining:", error);
   }

@@ -19,7 +19,6 @@ export function Profile() {
   }, [user]);
 
   return (
-    <>
       <div className="profile">
         <div className="profile__container">
           <div className="profile__container_img">
@@ -70,6 +69,5 @@ export function Profile() {
           </div>
         </div>
       </div>
-    </>
   );
 }

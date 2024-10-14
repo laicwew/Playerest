@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useIsMobile } from "../../helpers/hooks/useIsMobile";
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { LoginModal } from "./LoginModal";
+import { AuthContext } from "../../helpers/AuthContext";
 
 export function AppNavBar({
   isDarkTheme,
@@ -11,6 +12,7 @@ export function AppNavBar({
   isDarkTheme: boolean;
   changeTheme: () => void;
 }) {
+  const { isAuthenticated, userName, logout } = useContext(AuthContext);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [showNavItems, setShowNavItems] = useState(true);
@@ -20,15 +22,9 @@ export function AppNavBar({
   };
 
   const [showModal, setShowModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<string | null>(null)
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-  const handleLoginSuccess = (username: string) => {
-    setUser(username)
-    setIsLoggedIn(true);
-  };
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -91,15 +87,20 @@ export function AppNavBar({
             ></i>
           </button>
 
-          {/* TODO: add login status judge logic */}
-          {showNavItems && isLoggedIn ? (
-            <button
-              className="nav-item btn-nav me-2"
-              onClick={() => navigateToPage('/profile?user='+ user)}
-            >
-              <span className="fas fa-user nav-icon" />
-              <span className="nav-text">Profile</span>
-            </button>
+          {showNavItems && isAuthenticated ? (
+            <>
+              <button
+                className="nav-item btn-nav me-2"
+                onClick={() => navigateToPage("/profile?user=" + userName)}
+              >
+                <span className="fas fa-user nav-icon" />
+                <span className="nav-text">Profile</span>
+              </button>
+              <button className="nav-item btn-nav me-2" onClick={logout}>
+                <span className="fas fa-sign-in-alt nav-icon" />
+                <span className="nav-text">Logout</span>
+              </button>
+            </>
           ) : (
             <button className="nav-item btn-nav me-2" onClick={handleShow}>
               <span className="fas fa-sign-in-alt nav-icon" />
@@ -107,11 +108,7 @@ export function AppNavBar({
             </button>
           )}
         </div>
-        <LoginModal
-          show={showModal}
-          handleClose={handleClose}
-          handleLogin={handleLoginSuccess}
-        />
+        <LoginModal show={showModal} handleClose={handleClose} />
       </div>
     </nav>
   );

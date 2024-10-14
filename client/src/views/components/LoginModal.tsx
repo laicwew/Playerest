@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import FormField from "../components/FormField";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import {
   userSignIn,
@@ -8,17 +8,19 @@ import {
   userSignUpVerify,
   sendVerifyCode,
 } from "../../helpers/hooks/api/api";
+import { AuthContext } from "../../helpers/AuthContext";
 
 interface loginProps {
   show: boolean;
   handleClose: () => void;
-  handleLogin: (username: string) => void;
 }
 
-export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
+export function LoginModal({ show, handleClose }: loginProps) {
   const [signup, setSignup] = useState(false); // To toggle between login and signup
   const [isToVerify, setIsToVerify] = useState(false); // To handle the verification code page
   const [verificationCode, setVerificationCode] = useState(""); // Store verification code
+
+  const { login } = useContext(AuthContext);
 
   const signupHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -52,9 +54,10 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
         // Handle login process
         try {
           const response = await userSignIn(values.username, values.password);
-          if (response?.ok) {
+          if (response) {
+            const token = response.result.AuthenticationResult.AccessToken;
+            login(token, values.username);
             alert("Login successful!");
-            handleLogin(values.username); // Call parent login handler
             handleClose(); // Close modal after login
           }
         } catch (error) {
@@ -74,7 +77,6 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
         alert("Verification successful!");
         setIsToVerify(false); // Reset verify state
         handleClose(); // Close the modal
-        handleLogin(formik.values.username);
       }
     } catch (error) {
       console.log(error);

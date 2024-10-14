@@ -10,6 +10,7 @@ import { Search } from "./views/search";
 import { Create } from "./views/create";
 import { ReviewDetailPage } from "./views/details";
 import { SearchResults } from "./views/search/components/SearchResults.tsx";
+import { AuthProvider } from "./helpers/AuthContext.tsx";
 
 Amplify.configure(awsmobile);
 const router = createBrowserRouter([
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
+    <AuthProvider>
+      <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />
+    </AuthProvider>
   </StrictMode>
 );

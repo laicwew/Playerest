@@ -9,12 +9,10 @@ export function Search() {
   const [loading, setLoading] = useState(false);
   const [evaluatedKey, setEvaluatedKey] = useState<string | undefined>(
     undefined
-  ); // For pagination
+  );
 
   const fetchReviews = async () => {
     setLoading(true);
-
-    // Fetch reviews with pagination
     const { reviews, lastEvaluatedKey } = await getReviewsByPagination(
       10,
       evaluatedKey
@@ -23,7 +21,6 @@ export function Search() {
       setReviews((prevReviews) => [...prevReviews, ...reviews]); // Append new reviews
       setEvaluatedKey(lastEvaluatedKey);
     }
-
     setLoading(false);
   };
 
@@ -31,23 +28,20 @@ export function Search() {
     fetchReviews();
   }, []);
 
-  // Function to handle scroll event
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    // Check if the user has scrolled to the bottom
     if (scrollTop + windowHeight >= documentHeight - 100 && !loading) {
-      fetchReviews(); // Load more reviews when at the bottom
+      fetchReviews();
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll); // Add scroll event listener
-
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Cleanup on component unmount
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [loading]);
 
@@ -65,7 +59,7 @@ export function Search() {
         }}
       >
         {reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} /> // Ensure each review has a unique key
+          <ReviewCard key={review.id} review={review} />
         ))}
       </Masonry>
       {loading && (

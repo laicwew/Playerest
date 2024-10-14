@@ -133,16 +133,18 @@ export function LoginModal({ show, handleClose, handleLogin }: loginProps) {
         ) : (
           /* Sign Up / Login Form */
           <form className="register__form" onSubmit={formik.handleSubmit}>
-            <FormField
-              className="register__form--username"
-              id="email"
-              name="email"
-              type="email"
-              label="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              placeholder="Enter email"
-            />
+            {signup && (
+              <FormField
+                className="register__form--username"
+                id="email"
+                name="email"
+                type="email"
+                label="Email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                placeholder="Enter email"
+              />
+            )}
             <FormField
               className="register__form--user"
               id="username"

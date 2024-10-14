@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import profile from "../../assets/placeholder.jpeg";
+import profile from "../../assets/defaultImage.png";
 import { getReviewByAuthor } from "../../helpers/hooks/api/api";
 import { Review } from "../../model/review";
 import Masonry from "react-layout-masonry";

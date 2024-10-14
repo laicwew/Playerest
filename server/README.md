@@ -42,6 +42,20 @@ Get a review using id:
     GET http://localhost:3000/api/reviews/detail/:id
     Example: http://localhost:3000/api/reviews/detail/7
 
+Get saved reviews by username (Authorized user):
+
+    POST http://localhost:3000/api/users/saved
+    Example request:
+    Headers: 
+    {
+        "Authorization": `Bearer ${access_token}`
+    }
+    Body:
+    {
+        "username": "testuser"
+    }
+
+
 Add a review:
 
     POST http://localhost:3000/api/reviews/add

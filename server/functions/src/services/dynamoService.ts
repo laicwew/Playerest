@@ -28,6 +28,27 @@ export const getAllReviews = async () => {
   }
 };
 
+export const getUserSavedReviews = async (username: string) => {
+  const params = {
+    TableName: "Profiles",
+    Key: {
+      userName: String(username) // Ensure this matches the primary key for the Profiles table
+    },
+    ProjectionExpression: "saved" // Specify that we only want the 'saved' attribute
+  }
+  console.log(username)
+  try {
+    const data = await dynamoDB.get(params).promise();
+    if (!data.Item) {
+      throw new Error(`User ${username} not found.`);
+    }
+    return data.Item.saved || [];
+  } catch (error) {
+    console.error("Error retrieving saved reviews:", error);
+    throw new Error("Could not retrieve saved reviews.");
+  }
+}
+
 export const fetchReviewsWithPagination = async (
   limit: number,
   lastEvaluatedKey?: any

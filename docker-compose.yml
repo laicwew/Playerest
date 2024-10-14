@@ -1,16 +1,16 @@
-version: "3.8"
-
 services:
+  backend:
+    image: lawrencewonde/playerest-backend:0.0.1 # Backend image from Docker Hub
+    container_name: playerest-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./server/functions/.env
+
   frontend:
-    build:
-      context: ./client # Path to the frontend code
-      dockerfile: Dockerfile
+    image: lawrencewonde/playerest-frontend:0.0.1 # Frontend image from Docker Hub
+    container_name: playerest-frontend
     ports:
       - "80:80"
-
-  backend:
-    build:
-      context: ./server/functions/ # Path to the backend code
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
+    env_file:
+      - ./client/.env

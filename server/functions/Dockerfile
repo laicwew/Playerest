@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Expose port
-EXPOSE 5000
+EXPOSE 3000
 
 # Start the backend service
 CMD ["npm", "start"]

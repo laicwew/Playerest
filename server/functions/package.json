@@ -6,7 +6,7 @@
     "lint": "eslint --ext .js,.ts .",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node lib/server.js",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
@@ -23,6 +23,7 @@
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.670.0",
     "@aws-sdk/client-s3": "^3.665.0",
+    "@aws-sdk/lib-dynamodb": "^3.670.0",
     "aws-amplify": "^6.6.4",
     "aws-sdk": "^2.1691.0",
     "axios": "^1.7.7",

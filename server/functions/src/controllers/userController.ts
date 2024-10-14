@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
 import {
   getAllUsers,
+  getUserSavedReviews,
+  saveReview,
 } from "../services/dynamoService";
 import dotenv from "dotenv";
 import { loginAuth, register, registerConfirm, resendConfirmationCode } from "../services/cognitoService";
@@ -16,6 +18,26 @@ export const getAllUsersHandler = async (
     res.json(users);
   } catch (error) {
     res.status(500).json({error: "Unable to retrieve users"});
+  }
+};
+
+export const saveReviewHandler = async (req: Request, res: Response) => {
+  const { username, reviewId } = req.body;
+  try {
+    await saveReview(username, reviewId);
+    res.status(200).json({ message: "Save review successfully"});
+  } catch (error) {
+    res.status(500).json({error: "Unable to get user saved reviews."});
+  }
+};
+
+export const getUserSavedReviewsHandler = async (req: Request, res: Response) => {
+  const { username } = req.body;
+  try {
+    const reviews = await getUserSavedReviews(username);
+    res.status(200).json(reviews);
+  } catch (error) {
+    res.status(500).json({error: "Unable to get user saved reviews."});
   }
 };
 

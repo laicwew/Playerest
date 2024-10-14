@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { AppNavBar } from "./components/AppNavBar";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [isDark, setIsDark] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark";
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme === "dark" ? true : false;
   });
 
   const changeTheme = () => {
@@ -17,15 +17,19 @@ function App() {
   };
 
   useEffect(() => {
-    document.body.className = isDark ? "dark-theme" : "light-theme";
-  }, [isDark]);
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setIsDark(storedTheme === "dark");
+    }
+  }, []);
 
   return (
     <div
       className={`container-fluid ${isDark ? "dark" : "light"}-theme`}
       style={{
-        height: "100vh",
-        width: "100vw",
+        minHeight: "100vh",
+        minWidth: "100vw",
+        backgroundColor: isDark ? "#1B1039FF" : "#fcfafa",
       }}
     >
       <AppNavBar isDarkTheme={isDark} changeTheme={changeTheme} />

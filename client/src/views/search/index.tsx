@@ -1,22 +1,55 @@
 import { useEffect, useState } from "react";
 import { ReviewCard } from "./components/ReviewCard";
 import Masonry from "react-layout-masonry";
-import { getRecommendReviews } from "../../helpers/hooks/api/api";
+import { getReviewsByPagination } from "../../helpers/hooks/api/api"; // Import the new function
 import { Review } from "../../model/review";
 
 export function Search() {
-  const [reviews, setReviews] = useState([] as Review[]);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [evaluatedKey, setEvaluatedKey] = useState<string | undefined>(
+    undefined
+  ); // For pagination
+
+  const fetchReviews = async () => {
+    setLoading(true);
+
+    // Fetch reviews with pagination
+    const { reviews, lastEvaluatedKey } = await getReviewsByPagination(
+      10,
+      evaluatedKey
+    ); // Fetch 10 reviews at a time
+    if (reviews) {
+      setReviews((prevReviews) => [...prevReviews, ...reviews]); // Append new reviews
+      setEvaluatedKey(lastEvaluatedKey);
+    }
+
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const getReviews = async () => {
-      const fetchedReviews = await getRecommendReviews(); // Fetch reviews
-      if (fetchedReviews) {
-        setReviews(fetchedReviews); // Update state with fetched reviews
-      }
-    };
-
-    getReviews(); // Call the function to fetch reviews when the component mounts
+    fetchReviews();
   }, []);
+
+  // Function to handle scroll event
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // Check if the user has scrolled to the bottom
+    if (scrollTop + windowHeight >= documentHeight - 100 && !loading) {
+      fetchReviews(); // Load more reviews when at the bottom
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll); // Add scroll event listener
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll); // Cleanup on component unmount
+    };
+  }, [loading]);
 
   return (
     <div>
@@ -32,9 +65,13 @@ export function Search() {
         }}
       >
         {reviews.map((review) => (
-          <ReviewCard review={review} />
+          <ReviewCard key={review.id} review={review} /> // Ensure each review has a unique key
         ))}
       </Masonry>
+      {loading && (
+        <div className="loading-indicator">Loading more reviews...</div>
+      )}{" "}
+      {/* Loading indicator */}
     </div>
   );
 }

@@ -58,24 +58,22 @@ export function Create() {
       let imageUrl = defaultImage;
 
       if (values.reviewPic) {
-        // Upload the file and get the image URL
         imageUrl = await uploadImageFile(values.reviewPic);
       }
-
-      console.log(imageUrl);
-
-      const review: Review = {
-        content: values.reviewText,
-        rate: rating * 2,
-        imageUrl, // Use the uploaded image URL
-        like: 0,
-        author: "Current User", //TODO
-        title: values.reviewTitle,
-      };
-
-      createReview(review)
-        .then((review) => alert(review))
-        .catch((error) => console.error("Error", error));
+      if (imageUrl !== null) {
+        const review: Review = {
+          content: values.reviewText,
+          rate: rating * 2,
+          imageUrl, // Use the uploaded image URL
+          like: 0,
+          author: "Current User", //TODO
+          title: values.reviewTitle,
+        };
+        createReview(review)
+          .then((review) => alert(review))
+          .catch((error) => console.error("Error", error));
+        formik.resetForm();
+      }
     },
   });
 
@@ -204,7 +202,7 @@ export function Create() {
           <div className="create-form__fields">
             <div className="score-container">
               <label className="score-label">Score</label>
-              <Rating onClick={handleRating} />
+              <Rating onClick={handleRating} size={25} />
             </div>
             <FormField
               className="create-form__fields--title"

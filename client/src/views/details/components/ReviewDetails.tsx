@@ -13,40 +13,42 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
     setIsOpenComment(false);
   };
 
+  const [isImgLoaded, setIsImgLoaded] = useState(true);
+
   return (
     <>
       {review && (
         <div className="review-page-container">
-          {/* Main content area */}
           <div className="main-content">
             <div className="w-100 text-md-start text-center">
               <div
                 className="card-container row mt-4 align-items-center p-5"
                 style={{ maxHeight: "80vh" }}
               >
-                {/* TODO: conditional judge if comment column is open */}
-                <div className="w-50 text-center">
-                  <img
-                    src={review.imageUrl}
-                    alt={"review" + review.id}
-                    className="rounded img-fluid"
-                    style={
-                      !isOpenComment
-                        ? {
-                            maxHeight: "65vh",
-                            minWidth: "35vw",
-                            objectFit: "contain",
-                          }
-                        : {
-                            maxHeight: "65vh",
-                          }
-                    }
-                  />
-                </div>
+                {isImgLoaded && review.imageUrl && (
+                  <div className={`w-50 text-center`}>
+                    <img
+                      src={review.imageUrl}
+                      alt={"review" + review.id}
+                      className={`rounded img-fluid d-${review.imageUrl ? "" : "none"}`}
+                      onError={() => setIsImgLoaded(false)}
+                      style={
+                        !isOpenComment
+                          ? {
+                              maxHeight: "65vh",
+                              minWidth: "35vw",
+                              objectFit: "contain",
+                            }
+                          : {
+                              maxHeight: "65vh",
+                            }
+                      }
+                    />
+                  </div>
+                )}
 
-                {/* Text content on the right */}
                 <div
-                  className="w-50 d-flex flex-column justify-content-between"
+                  className={`w-${review.imageUrl && isImgLoaded ? "50" : "100"} d-flex flex-column justify-content-between`}
                   style={{ height: "40vh" }}
                 >
                   <div

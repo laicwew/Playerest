@@ -30,13 +30,14 @@ export function ReviewCard({ review }: { review: Review }) {
   const author = review?.author ?? "Unknown author";
 
   const [isLoading, setIsloading] = useState(true);
+  const [isImageError, setIsImageError] = useState(false);
 
   return (
     <Card
       className="text-white position-relative d-flex justify-content-center"
       style={{
         width: "21rem",
-        height: `${imageUrl && title ? "" : "12rem"}`,
+        height: `${imageUrl && title && !isImageError ? "" : "9rem"}`,
         borderRadius: "5%",
         marginBottom: "0.5rem",
         cursor: "pointer",
@@ -49,7 +50,7 @@ export function ReviewCard({ review }: { review: Review }) {
         navigate(`/detail/${id}`);
       }}
     >
-      {isLoading && imageUrl && (
+      {isLoading && imageUrl && !isImageError && (
         <Placeholder
           as={CardImg}
           animation="wave"
@@ -61,7 +62,7 @@ export function ReviewCard({ review }: { review: Review }) {
           }}
         />
       )}
-      {imageUrl ? (
+      {imageUrl && !isImageError ? (
         <Card.Img
           style={{
             display: isLoading ? "none" : "block",
@@ -70,6 +71,7 @@ export function ReviewCard({ review }: { review: Review }) {
           src={imageUrl}
           alt={title}
           onLoad={() => setIsloading(false)}
+          onError={() => setIsImageError(true)}
         />
       ) : (
         <CardTitle style={{ color: "black", marginLeft: "12px" }}>
@@ -82,9 +84,11 @@ export function ReviewCard({ review }: { review: Review }) {
             background: "rgba(0, 0, 0, .5) ",
           }}
         >
-          <div className="rank-score position-absolute top-2">
-            {review.rate}
-          </div>
+          {review.rate && (
+            <div className="rank-score position-absolute top-2">
+              {review.rate}
+            </div>
+          )}
           <BtnGrupp
             liked={liked}
             saved={saved}

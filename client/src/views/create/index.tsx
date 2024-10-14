@@ -55,7 +55,7 @@ export function Create() {
       reviewPic: null,
     },
     onSubmit: async (values) => {
-      let imageUrl = defaultImage;
+      let imageUrl: string | null = null;
 
       if (values.reviewPic) {
         imageUrl = await uploadImageFile(values.reviewPic);
@@ -64,7 +64,7 @@ export function Create() {
         const review: Review = {
           content: values.reviewText,
           rate: rating * 2,
-          imageUrl, // Use the uploaded image URL
+          imageUrl: imageUrl, // Use the uploaded image URL
           like: 0,
           author: "Current User", //TODO
           title: values.reviewTitle,
@@ -72,6 +72,7 @@ export function Create() {
         createReview(review)
           .then((review) => alert(review))
           .catch((error) => console.error("Error", error));
+        console.log(review);
         formik.resetForm();
       }
     },

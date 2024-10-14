@@ -37,7 +37,7 @@ export function ReviewCard({ review }: { review: Review }) {
       className="text-white position-relative d-flex justify-content-center custom-card"
       style={{
         width: "21rem",
-        height: `${imageUrl && title ? "" : "12rem"}`,
+        height: `${imageUrl && title && !isImageError ? "" : "8rem"}`,
         cursor: "pointer",
       }}
       onMouseEnter={() => setShowBtn(true)}

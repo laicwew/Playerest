@@ -55,8 +55,7 @@ export function Create() {
       reviewPic: null,
     },
     onSubmit: async (values) => {
-      let imageUrl: string | null = null;
-
+      let imageUrl;
       if (values.reviewPic) {
         imageUrl = await uploadImageFile(values.reviewPic);
       }
@@ -72,7 +71,6 @@ export function Create() {
         createReview(review)
           .then((review) => alert(review))
           .catch((error) => console.error("Error", error));
-        console.log(review);
         formik.resetForm();
       }
     },

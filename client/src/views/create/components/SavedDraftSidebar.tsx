@@ -4,7 +4,7 @@ interface savedDraftProps {
   draftList: DraftList[];
   loadDraft: (draft: {
     id: number;
-    rate?: number
+    rate?: number;
     imgURL?: string;
     title?: string;
     createdDate?: string;
@@ -43,7 +43,7 @@ const SavedDraftSidebar = ({
           {isOpen ? (
             <span className="fa-solid fa-xmark"></span>
           ) : (
-            <span>View Saved Drafts</span>
+            <span className="fa-solid fa-bars"></span>
           )}
         </button>
       </div>

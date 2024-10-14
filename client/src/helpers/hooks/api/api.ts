@@ -283,13 +283,13 @@ export const getDraftsByUserId = async (userId: string) => {
 
 export const getReviewsByPagination = async (
   limit: number,
-  lastEvaluatedKeyParam?: string
+  lastEvaluatedKeyParam?: number
 ) => {
   try {
     let response;
     if (lastEvaluatedKeyParam) {
       response = await fetch(
-        `${ROOT_URL}/api/reviews/paginated?limit=${limit}&lastEvaluatedKey=${lastEvaluatedKeyParam}`,
+        `${ROOT_URL}/api/reviews/paginated?limit=${limit}&lastEvaluatedKey=%7B%22id%22%3A${lastEvaluatedKeyParam}%7D`,
         {
           method: "GET",
         }
@@ -307,8 +307,13 @@ export const getReviewsByPagination = async (
     }
     const jsonData = await response.json();
     const reviews = jsonData["reviews"] as Review[];
-    const newLastEvaluatedKey = jsonData["lastEvaluatedKey"];
-    return { reviews, newLastEvaluatedKey };
+    if(jsonData["lastEvaluatedKey"]) {
+      const newLastEvaluatedKey = jsonData["lastEvaluatedKey"].id as number;
+      return { reviews, newLastEvaluatedKey };
+    }
+    
+    // console.log(newLastEvaluatedKey)
+    return { reviews };
   } catch (error) {
     console.error("Error fetching reviews:", error);
     return { reviews: [], lastEvaluatedKey: undefined };

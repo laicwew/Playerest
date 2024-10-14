@@ -7,20 +7,25 @@ import { Review } from "../../model/review";
 export function Search() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
-  const [evaluatedKey, setEvaluatedKey] = useState<string | undefined>(
+  const [evaluatedKey, setEvaluatedKey] = useState<number | undefined>(
     undefined
   );
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const fetchReviews = async () => {
     setLoading(true);
-    const { reviews, lastEvaluatedKey } = await getReviewsByPagination(
+    await delay(400); // Delay
+    const { reviews, newLastEvaluatedKey } = await getReviewsByPagination(
       10,
       evaluatedKey
     ); // Fetch 10 reviews at a time
     if (reviews) {
-      setReviews((prevReviews) => [...prevReviews, ...reviews]); // Append new reviews
-      setEvaluatedKey(lastEvaluatedKey);
+      setReviews((prevReviews) => {
+        return [...prevReviews, ...reviews];
+      });
+      setEvaluatedKey(newLastEvaluatedKey);
     }
+    console.log(evaluatedKey);
     setLoading(false);
   };
 

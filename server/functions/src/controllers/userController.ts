@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import {
   getAllUsers,
+  getReviewById,
   getUserSavedReviews,
   saveReview,
 } from "../services/dynamoService";
@@ -34,7 +35,9 @@ export const saveReviewHandler = async (req: Request, res: Response) => {
 export const getUserSavedReviewsHandler = async (req: Request, res: Response) => {
   const { username } = req.body;
   try {
-    const reviews = await getUserSavedReviews(username);
+    const reviewIds = await getUserSavedReviews(username);
+    const reviews = await Promise.all(reviewIds.map((id: number) => getReviewById(id)));
+    console.log(reviews);
     res.status(200).json(reviews);
   } catch (error) {
     res.status(500).json({error: "Unable to get user saved reviews."});

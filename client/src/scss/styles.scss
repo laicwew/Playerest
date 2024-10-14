@@ -626,6 +626,8 @@ button:focus-visible {
   background-color: white;
   padding-left: 1rem;
   font-family: inherit;
+  color: black;
+  border: solid 2px black;
 }
 
 .btn-group {
@@ -703,27 +705,26 @@ button:focus-visible {
     background-color: themed("btnFocus");
   }
 
-  .input {
-    color: themed("text");
-    border: solid 2px black;
-  }
-
   .label,
   .score-label {
     color: themed("text");
   }
 
   .create-form {
-    background-color: themed("bg");
+    background-color: themed("hint");
     &__fields {
       &-label {
-        background-color: themed("bg");
+        background-color: themed("hint");
       }
     }
   }
 
   .draft-sidebar {
-    background-color: themed("bg");
+    background-color: themed("hint");
+  }
+
+  .draft-list {
+    background-color: themed("hint");
   }
 
   .list-item {

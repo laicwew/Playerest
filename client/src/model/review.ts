@@ -10,7 +10,7 @@ export interface Review {
 
 export interface Draft {
   id?: number;
-  imageUrl?: string | null; // image url
+  imageUrl?: string; // image url
   author: string;
   title?: string;
   content?: string;

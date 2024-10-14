@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import FormField from "../../components/FormField";
 import { useEffect, useState } from "react";
-import { getReviewComments } from "../../../helpers/hooks/api/api";
+import { addComment, getReviewComments } from "../../../helpers/hooks/api/api";
 import { Review, Comment } from "../../../model/review";
 interface CommentForumProps {
   review: Review;
@@ -20,25 +20,28 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
       }
     };
     getComments();
-  }, []);
+  }, [review.id, comments]);
 
   const formik = useFormik({
     initialValues: {
       comment: "",
     },
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const newComment = {
-        id: (comments?.length || 0) + 1,
-        user: "Anonymous",
+        reviewId: review.id,
+        author: "Anonymous",
         content: values.comment,
-      };
-      const newComments = [...(comments || []), newComment];
+      } as Comment;
+      const response = await addComment(newComment);
 
-      setUpdatedReview((prevReview) => ({
-        ...prevReview,
-        comments: newComments,
-      }));
+      if (response) {
+        const newComments = [...(comments || []), newComment];
+        setUpdatedReview((prevReview) => ({
+          ...prevReview,
+          comments: newComments,
+        }));
+      }
       formik.resetForm();
     },
   });

@@ -97,7 +97,7 @@ export function ReviewCard({ review }: { review: Review }) {
             className="position-absolute top-2 end-0 mx-3"
           />
           <CardBody className="position-absolute bottom-0 start-0 text-start">
-            {imageUrl && title ? `${title}` : ""}
+            {imageUrl && title && !isImageError ? `${title}` : ""}
             <br></br>
             By {author}
           </CardBody>

@@ -19,14 +19,9 @@ export interface Draft {
 }
 
 export interface Comment {
-  id: number;
+  id?: number;
   reviewId: number;
   author: string;
   content: string;
   like?: number;
-}
-
-export interface AuthorData {
-  author: string;
-  reviewId: number;
 }

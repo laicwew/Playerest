@@ -236,3 +236,19 @@ export const getDraftsByUserId = async (userId: string) => {
     console.error("Error fetching drafts:", error);
   }
 };
+
+export const addComment = async (Comment: Comment) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/comments/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Comment),
+    });
+    if (!response.ok) console.error("Failed to add comment");
+    return response;
+  } catch (error) {
+    console.error("Error adding comment", error);
+  }
+};

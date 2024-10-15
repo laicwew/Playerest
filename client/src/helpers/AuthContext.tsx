@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Function to handle login and save token
   const login = (token: string, username: string) => {
-    console.log(username)
     setIsAuthenticated(true);
     setAccessToken(token);
     setUserName(username);

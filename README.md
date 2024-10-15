@@ -35,3 +35,6 @@ Steps:
         Frontend: http://localhost
 
         Backend: http://localhost:3000
+
+## Backend old Repo (For checking commits in grading)
+We migrated the back-end repo to the repo where the front-end is located (that is, the current repo) halfway through the project. Old commits can be seen at https://github.com/YileiCheng/Playerest-Backend

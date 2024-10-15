@@ -719,6 +719,10 @@ button:focus-visible {
     }
   }
 
+  .profile__info {
+    color: themed("text");
+  }
+
   .draft-sidebar {
     background-color: themed("hint");
   }

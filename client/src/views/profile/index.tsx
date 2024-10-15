@@ -1,36 +1,28 @@
 import { useContext, useEffect, useState } from "react";
 import profile from "../../assets/defaultImage.png";
-import {
-  getReviewByAuthor,
-  getUserSavedReviews,
-} from "../../helpers/hooks/api/api";
 import { Review } from "../../model/review";
 import Masonry from "react-layout-masonry";
 import { ReviewCard } from "../search/components/ReviewCard";
 import { AuthContext } from "../../helpers/AuthContext";
+import { profilePresenter } from "../../presenter/profilePresenter";
 export function Profile() {
   const { accessToken, userName } = useContext(AuthContext);
-
   const [tabContent, setTabContent] = useState(0);
+  const [posts, setPosts] = useState<Review[]>([]); // User's posts (reviews)
+  const [savedPosts, setSavedPosts] = useState<Review[]>([]); // User's saved posts
+
   const queryParams = new URLSearchParams(location.search);
-  const user = queryParams.get("user");
-  const [posts, setPosts] = useState([] as Review[] | undefined);
-  const [savedPosts, setSavedPosts] = useState([] as Review[] | undefined);
+  const user = queryParams.get("user") || "unknown User";
 
   useEffect(() => {
-    const fetchData = async () => {
-      const reviews = await getReviewByAuthor(user || "unknown User");
-      setPosts(reviews);
-    };
-    fetchData();
+    // Fetch user's reviews
+    profilePresenter.fetchUserReviews(user, setPosts);
+
+    // If logged in user matches the profile being viewed, fetch saved posts
     if (userName && userName === user && accessToken) {
-      const fetchSavedPosts = async () => {
-        const reviews = await getUserSavedReviews(accessToken, userName);
-        setSavedPosts(reviews);
-      };
-      fetchSavedPosts();
+      profilePresenter.fetchSavedReviews(accessToken, userName, setSavedPosts);
     }
-  }, [user]);
+  }, [user, userName, accessToken]);
 
   return (
     <div className="profile">
@@ -42,7 +34,7 @@ export function Profile() {
             className="profile__container_image"
           ></img>
         </div>
-        <h3 className="profile__username">{user}</h3>
+        <h3 className="profile__info">{user}</h3>
       </div>
       <div className="profile__folder">
         <div className="profile__folder_tab">
@@ -58,7 +50,7 @@ export function Profile() {
         <div className="profile__folder_files">
           {tabContent === 0 ? (
             <div className="profile__files--created">
-              <h3>Created Reviews</h3>
+              <h3 className="profile__info">Created Reviews</h3>
               {posts && (
                 <Masonry
                   columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4, 1680: 5 }}
@@ -79,7 +71,7 @@ export function Profile() {
             </div>
           ) : (
             <div className="profile__files--saved">
-              <h3>Saved Reviews</h3>
+              <h3 className="profile__info">Saved Reviews</h3>
               {savedPosts && (
                 <Masonry
                   columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4, 1680: 5 }}

@@ -1,28 +1,20 @@
 import { useFormik } from "formik";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import "../../scss/styles.scss";
 import defaultImage from "../../assets/defaultImage.png";
 import FormField from "../components/FormField";
 import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
-import {
-  createReview,
-  saveDraft,
-  uploadImageFile,
-} from "../../helpers/hooks/api/api";
-import { Review, Draft } from "../../model/review";
+import { Draft } from "../../model/review";
+import { AuthContext } from "../../helpers/AuthContext";
+import { createPresenter } from "../../presenter/createPresenter";
+import { uploadImageFile } from "../../helpers/hooks/api/api";
 
 export function Create() {
+  const { isAuthenticated, userName } = useContext(AuthContext);
   const [imgURL, setImgURL] = useState(defaultImage);
   const fileUploadedRef = useRef<HTMLInputElement | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
-  // Manage drafts in a state
-  const [draftList, setDraftList] = useState<Draft[]>([]);
-
-  const handleDraftListOpen = () => {
-    setIsOpen(!isOpen);
-  };
 
   const handleImageUpload = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -45,35 +37,10 @@ export function Create() {
     }
   };
 
-  const formik = useFormik({
-    initialValues: {
-      reviewRate: 0,
-      reviewTitle: "",
-      reviewText: "",
-      reviewGame: "",
-      reviewPic: null,
-    },
-    onSubmit: async (values) => {
-      let imageUrl;
-      if (values.reviewPic) {
-        imageUrl = await uploadImageFile(values.reviewPic);
-      }
-      if (imageUrl !== null) {
-        const review: Review = {
-          content: values.reviewText,
-          rate: rating * 2,
-          imageUrl: imageUrl, // Use the uploaded image URL
-          like: 0,
-          author: "Current User", //TODO
-          title: values.reviewTitle,
-        };
-        createReview(review)
-          .then((review) => alert(review))
-          .catch((error) => console.error("Error", error));
-        formik.resetForm();
-      }
-    },
-  });
+  const handleRating = (rate: number) => {
+    setRating(rate);
+    formik.setFieldValue("reviewRate", rate);
+  };
 
   const handleFieldChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -81,11 +48,39 @@ export function Create() {
     formik.handleChange(event);
   };
 
-  const handleRating = (rate: number) => {
-    setRating(rate);
-    formik.setFieldValue("reviewRate", rate);
-  };
+  const formik = useFormik({
+    initialValues: {
+      reviewRate: 0,
+      reviewTitle: "",
+      reviewText: "",
+      reviewPic: null,
+    },
+    onSubmit: async (values) => {
+      let imageUrl;
+      if (values.reviewPic) {
+        imageUrl = await uploadImageFile(values.reviewPic);
+        setImgURL(imageUrl);
+      }
+      if (imageUrl !== null && isAuthenticated) {
+        createPresenter.submitReview(
+          values,
+          rating,
+          isAuthenticated,
+          userName,
+          setImgURL
+        );
+        formik.resetForm();
+      }
+    },
+  });
 
+  /* SAVED DRAFT LOGIC */
+  const [isOpen, setIsOpen] = useState(false);
+  // Manage drafts in a state
+  const [draftList, setDraftList] = useState<Draft[]>([]);
+  const handleDraftListOpen = () => {
+    setIsOpen(!isOpen);
+  };
   useEffect(() => {
     const storedDrafts = localStorage.getItem("drafts");
     if (storedDrafts) {
@@ -180,7 +175,7 @@ export function Create() {
             onClick={() =>
               handleSaveDraft({
                 id: draftList.length + 1,
-                imageUrl: formik.values.reviewPic || defaultImage,
+                imageUrl: /* formik.values.reviewPic || */ defaultImage,
                 author: "CurrentUser",
                 title: formik.values.reviewTitle,
                 content: formik.values.reviewText,

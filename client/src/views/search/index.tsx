@@ -1,54 +1,44 @@
 import { useEffect, useState } from "react";
 import { ReviewCard } from "./components/ReviewCard";
 import Masonry from "react-layout-masonry";
-import { getReviewsByPagination } from "../../helpers/hooks/api/api"; // Import the new function
 import { Review } from "../../model/review";
+import { searchPresenter } from "../../presenter/SearchPresenter";
 
 export function Search() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]); // Reviews state
+  const [loading, setLoading] = useState(false); // Loading state
   const [evaluatedKey, setEvaluatedKey] = useState<number | undefined>(
     undefined
-  );
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  ); // Pagination key
 
-  const fetchReviews = async () => {
-    setLoading(true);
-    await delay(400); // Delay
-    const { reviews, newLastEvaluatedKey } = await getReviewsByPagination(
-      10,
-      evaluatedKey
-    ); // Fetch 10 reviews at a time
-    if (reviews) {
-      setReviews((prevReviews) => {
-        return [...prevReviews, ...reviews];
+  // Fetch reviews when component mounts
+  useEffect(() => {
+    searchPresenter.fetchReviews(
+      evaluatedKey,
+      setReviews,
+      setEvaluatedKey,
+      setLoading
+    );
+  }, [evaluatedKey]);
+
+  // Handle scrolling to load more reviews
+  useEffect(() => {
+    const handleScroll = () => {
+      searchPresenter.handleScroll(loading, () => {
+        searchPresenter.fetchReviews(
+          evaluatedKey,
+          setReviews,
+          setEvaluatedKey,
+          setLoading
+        );
       });
-      setEvaluatedKey(newLastEvaluatedKey);
-    }
-    console.log(evaluatedKey);
-    setLoading(false);
-  };
+    };
 
-  useEffect(() => {
-    fetchReviews();
-  }, []);
-
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    if (scrollTop + windowHeight >= documentHeight - 100 && !loading) {
-      fetchReviews();
-    }
-  };
-
-  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [loading]);
+  }, [loading, evaluatedKey]);
 
   return (
     <div>

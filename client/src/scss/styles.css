@@ -578,6 +578,8 @@ button:focus-visible {
   background-color: white;
   padding-left: 1rem;
   font-family: inherit;
+  color: black;
+  border: solid 2px black;
 }
 
 .btn-group {
@@ -645,22 +647,21 @@ button:focus-visible {
 .light-theme button:hover {
   background-color: #c83744;
 }
-.light-theme .input {
-  color: #333333;
-  border: solid 2px black;
-}
 .light-theme .label,
 .light-theme .score-label {
   color: #333333;
 }
 .light-theme .create-form {
-  background-color: #ffe5e5;
+  background-color: #f48c8e;
 }
 .light-theme .create-form__fields-label {
-  background-color: #ffe5e5;
+  background-color: #f48c8e;
 }
 .light-theme .draft-sidebar {
-  background-color: #ffe5e5;
+  background-color: #f48c8e;
+}
+.light-theme .draft-list {
+  background-color: #f48c8e;
 }
 .light-theme .list-item {
   background-color: #ffe5e5;
@@ -720,22 +721,21 @@ button:focus-visible {
 .dark-theme button:hover {
   background-color: #a25db3;
 }
-.dark-theme .input {
-  color: #f0f0f0;
-  border: solid 2px black;
-}
 .dark-theme .label,
 .dark-theme .score-label {
   color: #f0f0f0;
 }
 .dark-theme .create-form {
-  background-color: #b099c8;
+  background-color: #b9a5e2;
 }
 .dark-theme .create-form__fields-label {
-  background-color: #b099c8;
+  background-color: #b9a5e2;
 }
 .dark-theme .draft-sidebar {
-  background-color: #b099c8;
+  background-color: #b9a5e2;
+}
+.dark-theme .draft-list {
+  background-color: #b9a5e2;
 }
 .dark-theme .list-item {
   background-color: #b099c8;

@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import FormField from "../../components/FormField";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { addComment, getReviewComments } from "../../../helpers/hooks/api/api";
 import { Review, Comment } from "../../../model/review";
+import { AuthContext } from "../../../helpers/AuthContext";
 interface CommentForumProps {
   review: Review;
   setIsOpenComment: () => void;
@@ -11,6 +12,8 @@ interface CommentForumProps {
 const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
   const [updatedReview, setUpdatedReview] = useState(review);
   const [comments, setComments] = useState([] as Comment[]);
+
+  const { isAuthenticated, userName } = useContext(AuthContext);
 
   useEffect(() => {
     const getComments = async () => {
@@ -28,9 +31,13 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
     },
 
     onSubmit: async (values) => {
+      if (!isAuthenticated) {
+        alert("Please Login first!");
+        return;
+      }
       const newComment = {
         reviewId: review.id,
-        author: "Anonymous",
+        author: userName,
         content: values.comment,
       } as Comment;
       const response = await addComment(newComment);

@@ -16,11 +16,21 @@ Steps:
 
 # Running with Docker (Local)
 
-1. Run Docker Compose:
+1. Go to `/client` and Build
+
+        cd client
+        npm run build
+
+2. Go to `/server/functions` and Build
+
+        cd /server/functions
+        npm run build
+
+3. Run Docker Compose in **root directory**:
    
         docker-compose -f docker-compose-build-images.yml up --build
    
-2.  Access Playerest:
+5.  Access Playerest:
 
         Frontend: http://localhost
 

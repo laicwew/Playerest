@@ -78,7 +78,6 @@ export const userSignIn = async (username: string, password: string) => {
 
     const data = await response.json();
     if (data?.result?.AuthenticationResult) {
-      console.log("Login successful, tokens saved in localStorage");
       return data;
     } else {
       throw new Error("AuthenticationResult not found");
@@ -97,7 +96,6 @@ export const getRecommendReviews = async () => {
     const reviews = (await response.json()) as Review[];
     return reviews;
   } catch (error) {
-    console.log(ROOT_URL);
     console.error("Error fetching reviews:", error);
   }
 };
@@ -208,7 +206,6 @@ export const getReviewByAuthor = async (author: string) => {
     });
 
     if (response.status === 200) {
-      // Assuming the response contains a list of reviews
       console.log("Reviews retrieved successfully:");
     } else {
       throw new Error("Failed to retrieve reviews");
@@ -312,7 +309,6 @@ export const getReviewsByPagination = async (
       return { reviews, newLastEvaluatedKey };
     }
     
-    // console.log(newLastEvaluatedKey)
     return { reviews };
   } catch (error) {
     console.error("Error fetching reviews:", error);
@@ -333,7 +329,6 @@ export const addComment = async (comment: Comment) => {
       throw new Error("Failed to add comment");
     }
     const responseData = await response.json();
-    console.log("Successfully added comment:", responseData);
     return responseData;
   } catch (error) {
     console.error("Error creating comment:", error);
@@ -357,8 +352,6 @@ export const saveReviewById = async (
     if (!response.ok) {
       throw new Error("Failed to save review");
     }
-    const responseData = await response.json();
-    console.log("Successfully save review:", responseData);
   } catch (error) {
     console.error("Error save review:", error);
   }
@@ -366,8 +359,6 @@ export const saveReviewById = async (
 
 export const getUserSavedReviews = async (access_token: string,
   username: string) => {
-    console.log(access_token)
-    console.log(username)
   try {
     const response = await fetch(`${ROOT_URL}/api/users/saved`, {
       method: "POST",
@@ -381,7 +372,6 @@ export const getUserSavedReviews = async (access_token: string,
       throw new Error("Failed to fetch user saved reviews");
     }
     const responseData = await response.json();
-    console.log("Successfully fetching user saved reviews:", responseData);
     return responseData as Review[]
   } catch (error) {
     console.error("Error fetching user saved reviews:", error);

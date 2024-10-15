@@ -7,7 +7,7 @@ import SavedDraftSidebar from "./components/SavedDraftSidebar";
 import { Rating } from "react-simple-star-rating";
 import { Draft } from "../../model/review";
 import { AuthContext } from "../../helpers/AuthContext";
-import { createPresenter } from "../../presenter/createPresenter";
+import { createPresenter } from "../../presenter/CreatePresenter";
 import { uploadImageFile } from "../../helpers/hooks/api/api";
 
 export function Create() {

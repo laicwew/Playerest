@@ -3,7 +3,7 @@
 ```
 Welcome to Playerest!
 
-Have fun here : https://main.d1zjx5qj46wizn.amplifyapp.com/ 
+Have fun here : [https://main.d1zjx5qj46wizn.amplifyapp.com/]
 ```
 
 ## How To Start

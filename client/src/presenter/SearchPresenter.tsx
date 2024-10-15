@@ -38,11 +38,7 @@ class SearchPresenter {
   }
 
   // Handle scrolling and fetching more reviews
-  handleScroll(
-    loading: boolean,
-    evaluatedKey: number | undefined,
-    fetchReviews: () => void
-  ): void {
+  handleScroll(loading: boolean, fetchReviews: () => void): void {
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;

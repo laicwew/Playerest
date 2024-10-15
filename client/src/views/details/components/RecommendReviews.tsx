@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ReviewCard } from "../../search/components/ReviewCard";
-import { detailsPresenter } from "../../../presenter/detailPresenter";
+import { detailsPresenter } from "../../../presenter/DetailsPresenter";
 import { Review } from "../../../model/review";
 
 export function RecommendReviews() {

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Review } from "../../model/review";
 import ReviewDetails from "./components/ReviewDetails";
 import { useParams } from "react-router-dom";
-import { detailsPresenter } from "../../presenter/detailPresenter";
+import { detailsPresenter } from "../../presenter/DetailsPresenter";
 
 export function ReviewDetailPage() {
   const { id } = useParams();

@@ -4,7 +4,7 @@ import { Review } from "../../model/review";
 import Masonry from "react-layout-masonry";
 import { ReviewCard } from "../search/components/ReviewCard";
 import { AuthContext } from "../../helpers/AuthContext";
-import { profilePresenter } from "../../presenter/profilePresenter";
+import { profilePresenter } from "../../presenter/ProfilePresenter";
 export function Profile() {
   const { accessToken, userName } = useContext(AuthContext);
   const [tabContent, setTabContent] = useState(0);

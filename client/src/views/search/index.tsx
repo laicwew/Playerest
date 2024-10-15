@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ReviewCard } from "./components/ReviewCard";
 import Masonry from "react-layout-masonry";
 import { Review } from "../../model/review";
-import { searchPresenter } from "../../presenter/searchPresenter";
+import { searchPresenter } from "../../presenter/SearchPresenter";
 
 export function Search() {
   const [reviews, setReviews] = useState<Review[]>([]); // Reviews state
@@ -24,7 +24,7 @@ export function Search() {
   // Handle scrolling to load more reviews
   useEffect(() => {
     const handleScroll = () => {
-      searchPresenter.handleScroll(loading, evaluatedKey, () => {
+      searchPresenter.handleScroll(loading, () => {
         searchPresenter.fetchReviews(
           evaluatedKey,
           setReviews,

@@ -12,16 +12,21 @@ import { Review } from "../../../model/review";
 import { AuthContext } from "../../../helpers/AuthContext";
 import { saveReviewById } from "../../../helpers/hooks/api/api";
 
-export function ReviewCard({ review }: { review: Review }) {
+export function ReviewCard({
+  review,
+  isDeletable,
+  handleDelete,
+}: {
+  review: Review;
+  isDeletable: boolean;
+  handleDelete: () => void;
+}) {
   const [showBtn, setShowBtn] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, accessToken, userName } = useContext(AuthContext);
 
-  const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
-  const handleLiked = () => {
-    setLiked((prevState) => !prevState);
-  };
+
   const handleSaved = () => {
     if (isAuthenticated && accessToken && userName) {
       const saveReview = async () => {
@@ -98,9 +103,9 @@ export function ReviewCard({ review }: { review: Review }) {
             </div>
           )}
           <BtnGrupp
-            liked={liked}
+            isDeletable={isDeletable}
             saved={saved}
-            handleLiked={handleLiked}
+            handleDelete={handleDelete}
             handleSaved={handleSaved}
             className="position-absolute top-2 end-0 mx-3"
           />

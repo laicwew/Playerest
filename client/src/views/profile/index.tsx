@@ -6,7 +6,7 @@ import { ReviewCard } from "../search/components/ReviewCard";
 import { AuthContext } from "../../helpers/AuthContext";
 import { profilePresenter } from "../../presenter/ProfilePresenter";
 export function Profile() {
-  const { accessToken, userName } = useContext(AuthContext);
+  const { isAuthenticated, accessToken, userName } = useContext(AuthContext);
   const [tabContent, setTabContent] = useState(0);
   const [posts, setPosts] = useState<Review[]>([]); // User's posts (reviews)
   const [savedPosts, setSavedPosts] = useState<Review[]>([]); // User's saved posts
@@ -23,6 +23,14 @@ export function Profile() {
       profilePresenter.fetchSavedReviews(accessToken, userName, setSavedPosts);
     }
   }, [user, userName, accessToken]);
+
+  const handleDelete = (reviewId: number | undefined) => {
+    if (isAuthenticated && reviewId) {
+      profilePresenter.deleteReview(reviewId);
+    } else {
+      alert("Please login first!");
+    }
+  };
 
   return (
     <div className="profile">
@@ -64,7 +72,11 @@ export function Profile() {
                   }}
                 >
                   {posts.map((review) => (
-                    <ReviewCard review={review} />
+                    <ReviewCard
+                      isDeletable={isAuthenticated}
+                      handleDelete={() => handleDelete(review.id)}
+                      review={review}
+                    />
                   ))}
                 </Masonry>
               )}
@@ -85,7 +97,11 @@ export function Profile() {
                   }}
                 >
                   {savedPosts.map((review) => (
-                    <ReviewCard review={review} />
+                    <ReviewCard
+                      isDeletable={false}
+                      handleDelete={() => handleDelete(review.id)}
+                      review={review}
+                    />
                   ))}
                 </Masonry>
               )}

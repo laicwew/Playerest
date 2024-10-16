@@ -114,6 +114,57 @@ export const deleteReview = async (id: number) => {
   }
 };
 
+
+// Helper function to find the index of the reviewId in the saved list
+const getReviewIndex = async (username: string, reviewId: number): Promise<number> => {
+  const params = {
+    TableName: "Profiles",
+    Key: {
+      userName: String(username), // Ensure this matches the primary key for the Profiles table
+    },
+    ProjectionExpression: "saved", // Specify that we only want the 'saved' attribute
+  };
+
+  const data = await dynamoDB.get(params).promise();
+  const savedList = data.Item?.saved || [];
+
+  const index = savedList.indexOf(reviewId);
+  return index;
+};
+
+export const unsaveReview = async (username: string, reviewId: number) => {
+  // First, find the index of the reviewId in the saved reviews list
+  const index = await getReviewIndex(username, Number(reviewId));
+
+  // Ensure the index is valid before proceeding with the update
+  if (index === -1) {
+    throw new Error("Review not found in the saved list.");
+  }
+
+  const params = {
+    TableName: "Profiles",
+    Key: {
+      userName: String(username), // Ensure this matches the primary key for the Profiles table
+    },
+    UpdateExpression: `REMOVE #saved[${index}]`, // Correctly removing the item at the specified index
+    ExpressionAttributeNames: {
+      "#saved": "saved", // Reference the 'saved' list in the expression
+    },
+    ReturnValues: "UPDATED_NEW",
+  };
+
+  try {
+    await dynamoDB.update(params).promise();
+    return {
+      success: true,
+      message: `Review with id ${reviewId} unsaved successfully`,
+    };
+  } catch (error) {
+    console.error("Error unsaving review:", error);
+    throw new Error("Could not unsave review");
+  }
+};
+
 export const getReviewById = async (reviewId: number): Promise<any> => {
   try {
     const params = {

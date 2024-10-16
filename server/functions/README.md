@@ -29,12 +29,25 @@ Run script
 
 ## Local API
 
-
 Save review by reviewId (Authorized user):
 
     POST http://localhost:3000/api/users/save
     Example request:
-    Headers: 
+    Headers:
+    {
+        "Authorization": `Bearer ${access_token}`
+    }
+    Body:
+    {
+        "username": "testuser",
+        "reviewId": 1
+    }
+
+Unsave review by reviewId (Authorized user):
+
+    POST http://localhost:3000/api/users/unsave
+    Example request:
+    Headers:
     {
         "Authorization": `Bearer ${access_token}`
     }
@@ -48,7 +61,7 @@ Get saved reviews by username (Authorized user):
 
     POST http://localhost:3000/api/users/saved
     Example request:
-    Headers: 
+    Headers:
     {
         "Authorization": `Bearer ${access_token}`
     }
@@ -70,7 +83,6 @@ Get a review using id:
     GET http://localhost:3000/api/reviews/detail/:id
     Example: http://localhost:3000/api/reviews/detail/7
 
-
 Add a review:
 
     POST http://localhost:3000/api/reviews/add
@@ -88,7 +100,7 @@ Delete a review:
 
     DELETE http://localhost:3000/api/reviews/:id
     Example: http://localhost:3000/api/reviews/7
-    
+
 Get reviews by author:
 
     POST http://localhost:3000/api/reviews/by-author

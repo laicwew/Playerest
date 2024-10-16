@@ -4,6 +4,7 @@ import {
   getReviewById,
   getUserSavedReviews,
   saveReview,
+  unsaveReview,
 } from "../services/dynamoService";
 import dotenv from "dotenv";
 import { loginAuth, register, registerConfirm, resendConfirmationCode } from "../services/cognitoService";
@@ -28,7 +29,18 @@ export const saveReviewHandler = async (req: Request, res: Response) => {
     await saveReview(username, reviewId);
     res.status(200).json({ message: "Save review successfully"});
   } catch (error) {
-    res.status(500).json({error: "Unable to get user saved reviews."});
+    res.status(500).json({error: "Unable to save this review."});
+  }
+};
+
+export const unsaveReviewHandler = async (req: Request, res: Response) => {
+  const {username, reviewId} = req.body;
+  try {
+    const result = await unsaveReview(username, reviewId);
+    res.status(200).json(result.message);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error: "Unable to unsave this review."});
   }
 };
 

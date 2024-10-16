@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Review, Comment, Draft } from "../../../model/review";
 
-// export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
-export const ROOT_URL = "http://localhost:3000";
+export const ROOT_URL = "https://api-ttvkb2gtia-uc.a.run.app";
+// export const ROOT_URL = "http://localhost:3000";
 // export const ROOT_URL = "http://backend:3000";
 
 export const userSignUp = async (

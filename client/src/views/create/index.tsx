@@ -67,8 +67,10 @@ export function Create() {
           rating,
           isAuthenticated,
           userName,
-          setImgURL
+          imageUrl
         );
+        setImgURL(defaultImage)
+        setRating(0)
         formik.resetForm();
       }
     },
@@ -141,7 +143,7 @@ export function Create() {
           <div className="create-form__fields">
             <div className="score-container">
               <label className="score-label">Score</label>
-              <Rating onClick={handleRating} size={25} />
+              <Rating initialValue={rating} onClick={handleRating} size={25} />
             </div>
             <FormField
               className="create-form__fields--title"

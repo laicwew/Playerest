@@ -14,7 +14,7 @@ class CreatePresenter {
     rating: number,
     isAuthenticated: boolean,
     userName: string | null,
-    setImgURL: (url: string) => void
+    imageUrl: string | undefined,
   ): Promise<void> {
     if (!isAuthenticated) {
       alert("Please Login to publish review!");
@@ -24,7 +24,7 @@ class CreatePresenter {
     const review: Review = {
       content: values.reviewText,
       rate: rating * 2,
-      imageUrl: "",
+      imageUrl: imageUrl,
       like: 0,
       author: userName || "Anonymous", // Provide fallback if userName is null
       title: values.reviewTitle,
@@ -33,7 +33,6 @@ class CreatePresenter {
     try {
       await createReview(review);
       alert("Review published successfully!");
-      setImgURL(""); // Reset the image URL
     } catch (error) {
       console.error("Error submitting review", error);
     }

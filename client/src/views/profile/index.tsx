@@ -27,6 +27,7 @@ export function Profile() {
   const handleDelete = (reviewId: number | undefined) => {
     if (isAuthenticated && reviewId) {
       profilePresenter.deleteReview(reviewId);
+      posts.filter((review)=> review.id !== reviewId)
     } else {
       alert("Please login first!");
     }

@@ -15,7 +15,7 @@ export function RecommendReviews() {
       <h2>Similar Reviews</h2>
       <div className="recommend-reviews row gap-3 align-items-center">
         {reviews.map((review) => (
-          <ReviewCard review={review} />
+          <ReviewCard isDeletable={false} handleDelete={()=>{}} review={review} />
         ))}
       </div>
     </div>

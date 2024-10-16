@@ -84,6 +84,11 @@ Add a review:
         "rate": 5
     }
 
+Delete a review:
+
+    DELETE http://localhost:3000/api/reviews/:id
+    Example: http://localhost:3000/api/reviews/7
+    
 Get reviews by author:
 
     POST http://localhost:3000/api/reviews/by-author

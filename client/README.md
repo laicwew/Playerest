@@ -1,22 +1,17 @@
 # Playerest
 
-```
 Welcome to Playerest!
 
-Have fun here : [Playerest](https://main.d1zjx5qj46wizn.amplifyapp.com/)
-```
+Have fun here:  [Playerest](https://amplify-deploy.d1zjx5qj46wizn.amplifyapp.com/)
 
 ## How To Start
-
+- install packages and dependencies
 ```
-1. install packages and dependencies
 npm install
-
 ```
 
+- start development server
 ```
-
-2.start development server
 npm run dev
 ```
 

@@ -172,6 +172,21 @@ export const createReview = async (review: Review) => {
   }
 };
 
+export const deleteReview = async (reviewId: number) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/reviews/${reviewId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete review");
+    }
+    const responseData = await response.json();
+    console.log("Successfully deleted review:", responseData);
+  } catch (error) {
+    console.error("Error deleting review:", error);
+  }
+};
+
 export const uploadImageFile = async (selectedFile: File) => {
   try {
     // Perform the POST request
@@ -189,6 +204,7 @@ export const uploadImageFile = async (selectedFile: File) => {
     if (response.status !== 200) {
       throw new Error("Failed to upload image");
     }
+    console.log("Image upload success");
     return response.data.imageUrl;
   } catch (error) {
     console.error("Error uploading image:", error);
@@ -205,9 +221,7 @@ export const getReviewByAuthor = async (author: string) => {
       body: JSON.stringify({ author }),
     });
 
-    if (response.status === 200) {
-      console.log("Reviews retrieved successfully:");
-    } else {
+    if (response.status !== 200) {
       throw new Error("Failed to retrieve reviews");
     }
     const responseData = (await response.json()) as Review[];
@@ -304,11 +318,11 @@ export const getReviewsByPagination = async (
     }
     const jsonData = await response.json();
     const reviews = jsonData["reviews"] as Review[];
-    if(jsonData["lastEvaluatedKey"]) {
+    if (jsonData["lastEvaluatedKey"]) {
       const newLastEvaluatedKey = jsonData["lastEvaluatedKey"].id as number;
       return { reviews, newLastEvaluatedKey };
     }
-    
+
     return { reviews };
   } catch (error) {
     console.error("Error fetching reviews:", error);
@@ -344,7 +358,7 @@ export const saveReviewById = async (
     const response = await fetch(`${ROOT_URL}/api/users/save`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${access_token}`,
+        Authorization: `Bearer ${access_token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, reviewId }),
@@ -357,22 +371,46 @@ export const saveReviewById = async (
   }
 };
 
-export const getUserSavedReviews = async (access_token: string,
-  username: string) => {
+export const unSaveReviewById = async (
+  access_token: string,
+  username: string,
+  reviewId: number
+) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/unsave`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, reviewId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to save review");
+    }
+  } catch (error) {
+    console.error("Error save review:", error);
+  }
+};
+
+export const getUserSavedReviews = async (
+  access_token: string,
+  username: string
+) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/users/saved`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${access_token}`,
+        Authorization: `Bearer ${access_token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({username}),
+      body: JSON.stringify({ username }),
     });
     if (!response.ok) {
       throw new Error("Failed to fetch user saved reviews");
     }
     const responseData = await response.json();
-    return responseData as Review[]
+    return responseData as Review[];
   } catch (error) {
     console.error("Error fetching user saved reviews:", error);
   }

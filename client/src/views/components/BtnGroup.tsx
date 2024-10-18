@@ -1,18 +1,18 @@
-interface btnStateProps {
-  liked: boolean;
+interface BtnStateProps {
+  isDeletable: boolean;
   saved: boolean;
   handleSaved: () => void;
-  handleLiked: () => void;
+  handleDelete: () => void;
   className: string;
 }
 
 const BtnGroup = ({
-  liked,
+  isDeletable,
   saved,
   handleSaved,
-  handleLiked,
+  handleDelete,
   className,
-}: btnStateProps) => {
+}: BtnStateProps) => {
   return (
     <div className={`${className} btn-group`}>
       <button
@@ -23,14 +23,14 @@ const BtnGroup = ({
       >
         <span className={`fa-${saved ? "solid" : "regular"} fa-star`}></span>
       </button>
-      <button
+      {isDeletable && <button
         onClick={(e) => {
           e.stopPropagation();
-          handleLiked();
+          handleDelete();
         }}
       >
-        <span className={`fa-${liked ? "solid" : "regular"} fa-heart`}></span>
-      </button>
+        <span className={"fa-regular fa-trash-can"}></span>
+      </button>}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { ReviewCard } from "../search/components/ReviewCard";
 import { AuthContext } from "../../helpers/AuthContext";
 import { profilePresenter } from "../../presenter/ProfilePresenter";
 export function Profile() {
-  const { accessToken, userName } = useContext(AuthContext);
+  const { isAuthenticated, accessToken, userName } = useContext(AuthContext);
   const [tabContent, setTabContent] = useState(0);
   const [posts, setPosts] = useState<Review[]>([]); // User's posts (reviews)
   const [savedPosts, setSavedPosts] = useState<Review[]>([]); // User's saved posts
@@ -16,13 +16,32 @@ export function Profile() {
 
   useEffect(() => {
     // Fetch user's reviews
-    profilePresenter.fetchUserReviews(user, setPosts);
+    const fetchUserReviews = async () => {
+      const reviews = await profilePresenter.fetchUserReviews(user);
+      setPosts(reviews);
+    };
+    const fetchSavedReviews = async (token: string, user: string) => {
+      const reviews = await profilePresenter.fetchSavedReviews(token, user);
+      const ids = reviews.map((review) => review.id);
+      localStorage.setItem("savedReviewsIds", JSON.stringify(ids));
+      setSavedPosts(reviews);
+    };
 
+    fetchUserReviews();
     // If logged in user matches the profile being viewed, fetch saved posts
     if (userName && userName === user && accessToken) {
-      profilePresenter.fetchSavedReviews(accessToken, userName, setSavedPosts);
+      fetchSavedReviews(accessToken, userName);
     }
   }, [user, userName, accessToken]);
+
+  const handleDelete = (reviewId: number | undefined) => {
+    if (isAuthenticated && reviewId) {
+      profilePresenter.deleteReview(reviewId);
+      posts.filter((review) => review.id !== reviewId);
+    } else {
+      alert("Please login first!");
+    }
+  };
 
   return (
     <div className="profile">
@@ -64,7 +83,12 @@ export function Profile() {
                   }}
                 >
                   {posts.map((review) => (
-                    <ReviewCard review={review} />
+                    <ReviewCard
+                      key={review.id}
+                      isDeletable={isAuthenticated}
+                      handleDelete={() => handleDelete(review.id)}
+                      review={review}
+                    />
                   ))}
                 </Masonry>
               )}
@@ -85,7 +109,11 @@ export function Profile() {
                   }}
                 >
                   {savedPosts.map((review) => (
-                    <ReviewCard review={review} />
+                    <ReviewCard
+                      isDeletable={false}
+                      handleDelete={() => handleDelete(review.id)}
+                      review={review}
+                    />
                   ))}
                 </Masonry>
               )}

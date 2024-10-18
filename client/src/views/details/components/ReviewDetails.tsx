@@ -4,7 +4,6 @@ import { RecommendReviews } from "./RecommendReviews";
 import { Review } from "../../../model/review";
 import { useNavigate } from "react-router-dom";
 
-//TODO: responsiveness
 export default function ReviewDetails({ review }: { review: Review | null }) {
   const [isOpenComment, setIsOpenComment] = useState(false);
   const navigate = useNavigate();
@@ -22,37 +21,31 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
           <div className="main-content">
             <div className="w-100 text-md-start text-center">
               <div
-                className="card-container row mt-4 align-items-center p-5"
+                className={`card-container mt-4 align-items-center p-5 ${isOpenComment ? "flex-column" : "row flex-row"}`}
                 style={{ maxHeight: "80vh" }}
               >
                 {isImgLoaded && review.imageUrl && (
-                  <div className={`w-50 text-center`}>
+                  <div className="w-50 text-center">
                     <img
                       src={review.imageUrl}
                       alt={"review" + review.id}
                       className={`rounded img-fluid d-${review.imageUrl ? "" : "none"}`}
                       onError={() => setIsImgLoaded(false)}
-                      style={
-                        !isOpenComment
-                          ? {
-                              maxHeight: "65vh",
-                              minWidth: "35vw",
-                              objectFit: "contain",
-                            }
-                          : {
-                              maxHeight: "65vh",
-                            }
-                      }
+                      style={{
+                        maxHeight: "65vh",
+                        minWidth: "35vw",
+                        objectFit: isOpenComment ? "contain" : undefined,
+                      }}
                     />
                   </div>
                 )}
 
                 <div
-                  className={`w-${review.imageUrl && isImgLoaded ? "50" : "100"} d-flex flex-column justify-content-between`}
+                  className={`w-${review.imageUrl && !isOpenComment && isImgLoaded ? "50" : "100"} d-flex flex-column justify-content-between`}
                   style={{ height: "40vh" }}
                 >
                   <div
-                    className="author-box mb-3"
+                    className="author-box mb-3 mt-3"
                     onClick={() => {
                       navigate(`/profile?user=${review.author}`);
                     }}
@@ -64,12 +57,14 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
                   <div className="review-content-box mt-3 mb-3">
                     <p>{review.content}</p>
                   </div>
+
                   <div className="flex d-flex justify-content-end">
                     <button
                       className="w-20"
                       onClick={() => setIsOpenComment(!isOpenComment)}
                     >
                       <i className="fas fa-comment-dots"></i>
+                      <span className="ms-2">Comment</span>
                     </button>
                   </div>
                 </div>
@@ -83,6 +78,7 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
               </div>
             </div>
           </div>
+
           {isOpenComment && (
             <div className="comment-forum-container">
               <CommentForum review={review} setIsOpenComment={isCloseComment} />

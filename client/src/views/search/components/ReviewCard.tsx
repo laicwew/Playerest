@@ -65,18 +65,20 @@ export function ReviewCard({
 
   return (
     <Card
-      className="text-white position-relative d-flex justify-content-center custom-card"
+      className="custom-card text-white position-relative d-flex justify-content-center align-items-center"
       style={{
-        width: "21rem",
-        height: `${imageUrl && title && !isImageError ? "" : "8rem"}`,
+        width: "100%",
+        minWidth: "16rem",
+        maxWidth: "22rem",
+        height: imageUrl && title && !isImageError ? "auto" : "12rem",
         cursor: "pointer",
+        borderRadius: "1rem",
+        boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
       }}
       onMouseEnter={() => setShowBtn(true)}
       onMouseLeave={() => setShowBtn(false)}
-      key={id}
-      onClick={() => {
-        navigate(`/detail/${id}`);
-      }}
+      onClick={() => navigate(`/detail/${id}`)}
     >
       {isLoading && imageUrl && !isImageError && (
         <Placeholder
@@ -85,17 +87,21 @@ export function ReviewCard({
           xs={10}
           style={{
             height: "10rem",
-            borderRadius: "5%",
-            backgroundColor: "rgb(0,0,0,0.2)",
+            borderRadius: "1rem",
+            backgroundColor: "rgba(0,0,0,0.2)",
           }}
         />
       )}
+
       {imageUrl && !isImageError ? (
         <Card.Img
           style={{
             display: isLoading ? "none" : "block",
-            minHeight: "9rem",
+            height: "auto",
+            maxHeight: "12rem",
             borderRadius: "0.8rem",
+            objectFit: "cover",
+            transition: "transform 0.3s ease",
           }}
           src={imageUrl}
           alt={title}
@@ -103,20 +109,42 @@ export function ReviewCard({
           onError={() => setIsImageError(true)}
         />
       ) : (
-        <CardTitle style={{ color: "black" }}>{title}</CardTitle>
+        <CardTitle
+          style={{
+            color: "black",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            textAlign: "center",
+          }}
+        >
+          {title || "Untitled"}
+        </CardTitle>
       )}
+
       {showBtn && (
         <Card.ImgOverlay
+          className="d-flex flex-column justify-content-between"
           style={{
-            background: "rgba(0, 0, 0, .5) ",
+            background: "rgba(0, 0, 0, 0.5)",
             borderRadius: "0.8rem",
+            transition: "opacity 0.3s ease",
           }}
         >
           {review.rate && (
-            <div className="rank-score position-absolute top-2">
+            <div
+              className="rank-score position-absolute top-2"
+              style={{
+                backgroundColor: "#ffcc00",
+                borderRadius: "50%",
+                padding: "0.5rem",
+                fontSize: "1rem",
+                fontWeight: "bold",
+              }}
+            >
               {review.rate}
             </div>
           )}
+
           <BtnGrupp
             isDeletable={isDeletable}
             saved={saved}
@@ -124,10 +152,10 @@ export function ReviewCard({
             handleSaved={handleClickSaved}
             className="position-absolute top-2 end-0 mx-3"
           />
-          <CardBody className="position-absolute bottom-0 start-0 text-start">
-            {imageUrl && title && !isImageError ? `${title}` : ""}
-            <br></br>
-            By {author}
+
+          <CardBody className="text-start position-absolute bottom-0 start-0 p-2">
+            <p style={{ margin: 0, fontWeight: "bold" }}>{title}</p>
+            <small>By {author}</small>
           </CardBody>
         </Card.ImgOverlay>
       )}

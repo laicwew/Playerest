@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import defaultPic from "../../../assets/defaultImage.png";
 import FormField from "../../components/FormField";
 import { useContext, useEffect, useState } from "react";
 import { addComment, getReviewComments } from "../../../helpers/hooks/api/api";
@@ -10,7 +11,6 @@ interface CommentForumProps {
 }
 
 const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
-  const [updatedReview, setUpdatedReview] = useState(review);
   const [comments, setComments] = useState([] as Comment[]);
 
   const { isAuthenticated, userName } = useContext(AuthContext);
@@ -40,15 +40,8 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
         author: userName,
         content: values.comment,
       } as Comment;
-      const response = await addComment(newComment);
+      await addComment(newComment);
 
-      if (response) {
-        const newComments = [...(comments || []), newComment];
-        setUpdatedReview((prevReview) => ({
-          ...prevReview,
-          comments: newComments,
-        }));
-      }
       formik.resetForm();
     },
   });
@@ -65,7 +58,7 @@ const CommentForum = ({ review, setIsOpenComment }: CommentForumProps) => {
               <div className="comment-card__img-container">
                 <img
                   className="comment-card__img-container--img"
-                  src={updatedReview.imageUrl}
+                  src={defaultPic}
                   alt="profile"
                 />
               </div>

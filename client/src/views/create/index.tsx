@@ -178,7 +178,7 @@ export function Create() {
               handleSaveDraft({
                 id: draftList.length + 1,
                 imageUrl: /* formik.values.reviewPic || */ defaultImage,
-                author: "CurrentUser",
+                author: userName || "",
                 title: formik.values.reviewTitle,
                 content: formik.values.reviewText,
               })

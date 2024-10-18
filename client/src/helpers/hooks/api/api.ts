@@ -204,7 +204,7 @@ export const uploadImageFile = async (selectedFile: File) => {
     if (response.status !== 200) {
       throw new Error("Failed to upload image");
     }
-    console.log("Image upload success")
+    console.log("Image upload success");
     return response.data.imageUrl;
   } catch (error) {
     console.error("Error uploading image:", error);
@@ -221,9 +221,7 @@ export const getReviewByAuthor = async (author: string) => {
       body: JSON.stringify({ author }),
     });
 
-    if (response.status === 200) {
-      console.log("Reviews retrieved successfully:");
-    } else {
+    if (response.status !== 200) {
       throw new Error("Failed to retrieve reviews");
     }
     const responseData = (await response.json()) as Review[];
@@ -358,6 +356,28 @@ export const saveReviewById = async (
 ) => {
   try {
     const response = await fetch(`${ROOT_URL}/api/users/save`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, reviewId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to save review");
+    }
+  } catch (error) {
+    console.error("Error save review:", error);
+  }
+};
+
+export const unSaveReviewById = async (
+  access_token: string,
+  username: string,
+  reviewId: number
+) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/unsave`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${access_token}`,

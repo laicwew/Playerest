@@ -36,7 +36,12 @@ export function SearchResults() {
           }}
         >
           {reviews.map((review) => (
-            <ReviewCard isDeletable={false} handleDelete={()=>{}} review={review} />
+            <ReviewCard
+              key={review.id}
+              isDeletable={false}
+              handleDelete={() => {}}
+              review={review}
+            />
           ))}
         </Masonry>
       ) : (

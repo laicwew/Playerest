@@ -6,11 +6,15 @@ import {
   Placeholder,
 } from "react-bootstrap";
 import BtnGrupp from "../../components/BtnGroup";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Review } from "../../../model/review";
 import { AuthContext } from "../../../helpers/AuthContext";
-import { saveReviewById } from "../../../helpers/hooks/api/api";
+import {
+  saveReviewById,
+  unSaveReviewById,
+} from "../../../helpers/hooks/api/api";
+import { useIsReviewSaved } from "../../../helpers/hooks/useIsReviewSaved";
 
 export function ReviewCard({
   review,
@@ -21,19 +25,30 @@ export function ReviewCard({
   isDeletable: boolean;
   handleDelete: () => void;
 }) {
+  const { isSaved } = useIsReviewSaved(review.id);
+  const [saved, setSaved] = useState<boolean>(isSaved);
   const [showBtn, setShowBtn] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, accessToken, userName } = useContext(AuthContext);
 
-  const [saved, setSaved] = useState(false);
-
-  const handleSaved = () => {
+  useEffect(() => {
+    setSaved(isSaved);
+  }, [isSaved]);
+  const handleClickSaved = () => {
     if (isAuthenticated && accessToken && userName) {
       const saveReview = async () => {
         await saveReviewById(accessToken, userName, review.id ?? 0);
       };
-      saveReview();
-      setSaved((prevState) => !prevState);
+      const unSaveReview = async () => {
+        await unSaveReviewById(accessToken, userName, review.id ?? 0);
+      };
+      if (isSaved) {
+        unSaveReview();
+        setSaved(false);
+      } else {
+        saveReview();
+        setSaved(true);
+      }
     } else {
       alert("Please login first!");
     }
@@ -45,7 +60,7 @@ export function ReviewCard({
   const title = review?.title ?? "No title";
   const author = review?.author ?? "Unknown author";
 
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isImageError, setIsImageError] = useState(false);
 
   return (
@@ -84,7 +99,7 @@ export function ReviewCard({
           }}
           src={imageUrl}
           alt={title}
-          onLoad={() => setIsloading(false)}
+          onLoad={() => setIsLoading(false)}
           onError={() => setIsImageError(true)}
         />
       ) : (
@@ -106,7 +121,7 @@ export function ReviewCard({
             isDeletable={isDeletable}
             saved={saved}
             handleDelete={handleDelete}
-            handleSaved={handleSaved}
+            handleSaved={handleClickSaved}
             className="position-absolute top-2 end-0 mx-3"
           />
           <CardBody className="position-absolute bottom-0 start-0 text-start">

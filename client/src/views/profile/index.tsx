@@ -12,21 +12,20 @@ export function Profile() {
   const [savedPosts, setSavedPosts] = useState<Review[]>([]); // User's saved posts
 
   const queryParams = new URLSearchParams(location.search);
-  const user = queryParams.get("user") || "unknown User";
+  const user = queryParams.get("user") ?? "unknown User";
+  // Fetch user's reviews
+  const fetchUserReviews = async () => {
+    const reviews = await profilePresenter.fetchUserReviews(user);
+    setPosts(reviews);
+  };
+  const fetchSavedReviews = async (token: string, user: string) => {
+    const reviews = await profilePresenter.fetchSavedReviews(token, user);
+    const ids = reviews.map((review) => review.id);
+    localStorage.setItem("savedReviewsIds", JSON.stringify(ids));
+    setSavedPosts(reviews);
+  };
 
   useEffect(() => {
-    // Fetch user's reviews
-    const fetchUserReviews = async () => {
-      const reviews = await profilePresenter.fetchUserReviews(user);
-      setPosts(reviews);
-    };
-    const fetchSavedReviews = async (token: string, user: string) => {
-      const reviews = await profilePresenter.fetchSavedReviews(token, user);
-      const ids = reviews.map((review) => review.id);
-      localStorage.setItem("savedReviewsIds", JSON.stringify(ids));
-      setSavedPosts(reviews);
-    };
-
     fetchUserReviews();
     // If logged in user matches the profile being viewed, fetch saved posts
     if (userName && userName === user && accessToken) {
@@ -34,10 +33,18 @@ export function Profile() {
     }
   }, [user, userName, accessToken]);
 
-  const handleDelete = (reviewId: number | undefined) => {
+  const handleDelete = async (reviewId: number | undefined) => {
     if (isAuthenticated && reviewId) {
-      profilePresenter.deleteReview(reviewId);
-      posts.filter((review) => review.id !== reviewId);
+      try {
+        await profilePresenter.deleteReview(reviewId); // Wait for the delete request to finish
+        // Filter out the deleted review from the posts array
+        setPosts((prevPosts) =>
+          prevPosts.filter((review) => review.id !== reviewId)
+        );
+      } catch (error) {
+        console.error("Error deleting review:", error);
+        alert("Failed to delete the review. Please try again.");
+      }
     } else {
       alert("Please login first!");
     }

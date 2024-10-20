@@ -5,6 +5,7 @@ import Masonry from "react-layout-masonry";
 import { ReviewCard } from "../search/components/ReviewCard";
 import { AuthContext } from "../../helpers/AuthContext";
 import { profilePresenter } from "../../presenter/ProfilePresenter";
+
 export function Profile() {
   const { isAuthenticated, accessToken, userName } = useContext(AuthContext);
   const [tabContent, setTabContent] = useState(0);
@@ -57,15 +58,22 @@ export function Profile() {
       </div>
       <div className="profile__folder">
         <div className="profile__folder_tab">
-          <button className="btn--create" onClick={() => setTabContent(0)}>
+          <button
+            className="profile__folder_tab btn--create"
+            onClick={() => setTabContent(0)}
+          >
             Created
           </button>
           {user === userName && (
-            <button className="btn--save" onClick={() => setTabContent(1)}>
+            <button
+              className="profile__folder_tab btn--save"
+              onClick={() => setTabContent(1)}
+            >
               Saved
             </button>
           )}
         </div>
+        <hr className="profile__folder_line" />
         <div className="profile__folder_files">
           {tabContent === 0 ? (
             <div className="profile__files--created">

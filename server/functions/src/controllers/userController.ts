@@ -49,7 +49,6 @@ export const getUserSavedReviewsHandler = async (req: Request, res: Response) =>
   try {
     const reviewIds = await getUserSavedReviews(username);
     const reviews = await Promise.all(reviewIds.map((id: number) => getReviewById(id)));
-    console.log(reviews);
     res.status(200).json(reviews);
   } catch (error) {
     res.status(500).json({error: "Unable to get user saved reviews."});

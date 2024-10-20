@@ -60,7 +60,6 @@ export const getUserSavedReviews = async (username: string) => {
     },
     ProjectionExpression: "saved", // Specify that we only want the 'saved' attribute
   };
-  console.log(username);
   try {
     const data = await dynamoDB.get(params).promise();
     if (!data.Item) {

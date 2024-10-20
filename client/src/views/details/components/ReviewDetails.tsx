@@ -22,7 +22,6 @@ export default function ReviewDetails({ review }: { review: Review | null }) {
             <div className="w-100 text-md-start text-center">
               <div
                 className={`card-container mt-4 align-items-center p-5 ${isOpenComment ? "flex-column" : "row flex-row"}`}
-                style={{ maxHeight: "80vh" }}
               >
                 {isImgLoaded && review.imageUrl && (
                   <div className="w-50 text-center">

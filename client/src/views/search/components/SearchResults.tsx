@@ -45,7 +45,7 @@ export function SearchResults() {
           ))}
         </Masonry>
       ) : (
-        <h1>No Relevant Results</h1>
+        <h2>No Relevant Results</h2>
       )}
     </div>
   );

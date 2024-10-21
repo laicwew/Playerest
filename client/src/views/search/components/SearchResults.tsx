@@ -23,7 +23,7 @@ export function SearchResults() {
   return (
     <div>
       {/* Render the search results based on the searchTerm */}
-      {reviews ? (
+      {reviews && reviews.length > 0 ? (
         <Masonry
           columns={{ 240: 1, 768: 2, 1024: 3, 1280: 4, 1680: 5 }}
           gap={20}
@@ -45,7 +45,7 @@ export function SearchResults() {
           ))}
         </Masonry>
       ) : (
-        <div>No Results</div>
+        <h2>No Relevant Results</h2>
       )}
     </div>
   );
